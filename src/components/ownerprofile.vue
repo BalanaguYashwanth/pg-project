@@ -227,6 +227,7 @@ export default {
     signout:function(){
       this.$store.dispatch('signout')
       this.$router.push('/login')
+      
     },
 
     deletephoto:function(){
@@ -320,11 +321,16 @@ export default {
         console.log('not enter to post secondary data')
       }
 
+      setTimeout(() => {
+            location.reload();
+          }, 5000);
+        
+
       },
 
-      getcurrentuser:function(){
+      getcurrentuser:  function(){
         let allusers=[]
-        allusers=this.$store.state.mainuserprofile
+        allusers= this.$store.state.mainuserprofile
         for(let key in allusers)
         {
             if( allusers[key].userid == localStorage.getItem('uid') )
@@ -341,9 +347,13 @@ export default {
 
   },
 
-  created(){
+  async created() {
+        if(localStorage.getItem('uid'))
+    {
+    await this.$store.dispatch('getuseraction')
+    await this.$store.dispatch('profileaction')
+    }
     
-
     fb.auth().onAuthStateChanged(function(user){
         if(user)
         {
@@ -361,11 +371,7 @@ export default {
         }
     })
 
-    if(localStorage.getItem('uid'))
-    {
-    this.$store.dispatch('getuseraction')
-    this.$store.dispatch('profileaction')
-    }
+
 
   }
 

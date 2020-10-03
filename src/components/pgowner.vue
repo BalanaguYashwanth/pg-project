@@ -70,11 +70,11 @@
             <img :src="all.img" class="card-img-top rounded" alt="nature" />
             <div class="card-body">
               <p class="card-text">
-                {{ all.text }}
+                {{ all.text }} 
               </p>
               <button
                 type="button"
-                v-on:click="deleting(all.id)"
+                v-on:click="deleting(all.id) "
                 class="btn btn-secondary"
               >
                 Delete
@@ -168,7 +168,7 @@ export default {
 
     modified: function () {
       let mainprofile = [];
-      mainprofile = this.$store.state.mainuserprofile;
+      mainprofile =  this.$store.state.mainuserprofile;
       for (let obj in mainprofile) {
         if (mainprofile[obj].userid == localStorage.getItem("uid")) {
           this.pgname = mainprofile[obj].pg_name;
@@ -180,7 +180,7 @@ export default {
     deleting: function (id) {
       alert("deleting the post");
       axios
-        .delete("https://pg-app-fd8a7.firebaseio.com/posts.json" + id)
+        .delete("https://pg-app-fd8a7.firebaseio.com/posts/"+ id+".json")
         .then((res) => {
           console.log(res);
           location.reload();
@@ -189,16 +189,21 @@ export default {
     },
   },
 
-  created() {
+  async created() {
+
+    await this.$store.dispatch("getuseraction");
+
+    await this.$store.dispatch("profileaction");
+    
     fb.auth().onAuthStateChanged(function (user) {
       if (user) {
         var email = user.email;
       }
       console.log(email);
     });
-
+  
     if (localStorage.getItem("uid")) {
-      axios
+      await axios
         .get("https://pg-app-fd8a7.firebaseio.com/posts.json")
         .then((res) => {
           console.log(res);
@@ -217,7 +222,6 @@ export default {
           this.alldata.push(blogs[obj])
         }
       }
-
         })
       .catch((err) => console.log(err));
     }
@@ -225,10 +229,10 @@ export default {
       console.log("user not  authenticated");
     }
 
-    this.$store.dispatch("getuseraction");
-
-    this.$store.dispatch("profileaction");
+    
   },
+
+
 };
 </script>
 

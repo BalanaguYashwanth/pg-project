@@ -6,6 +6,8 @@ import customerregister from './components/customerregister'
 import customerlogin from './components/customerlogin'
 import customerprofile from './components/customerprofile'
 import cremainder from './components/cremainder'
+import schedules from './components/schedules'
+import ownerschedule from './components/ownerschedule.vue'
 
 export default[
     {path:'/pgowner',component:pgowner},
@@ -15,6 +17,8 @@ export default[
     {path:'/customerlogin',component:customerlogin},
     {path:'/customerregister',component:customerregister},
     {path:'/customerprofile',component:customerprofile},
-    {path:'/cremainder',component:cremainder}
+    {path:'/cremainder',component:cremainder},
+    {path:'/schedules',component:schedules},
+    {path:'/ownerschedule',component:ownerschedule}
 ]
 

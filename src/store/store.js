@@ -10,7 +10,8 @@ export const store = new Vuex.Store({
         email:[],
         photourl:[],
         displayName:[],
-        mainuserprofile:[]
+        mainuserprofile:[],
+        scheduledata:[],
     },
     getters:{
 
@@ -29,12 +30,16 @@ export const store = new Vuex.Store({
         },
         profile:function(state,mprofile){
             state.mainuserprofile=mprofile
+        },
+
+        schedule:function(state,data){
+            state.scheduledata=data
         }
     },
 
     actions:{
-        getuseraction:function(context){
-            fb.auth().onAuthStateChanged(function(user){
+        getuseraction: async function(context){
+           await fb.auth().onAuthStateChanged(function(user){
                 if(user)
                 {
                 var email=user.email
@@ -55,9 +60,25 @@ export const store = new Vuex.Store({
            
         },
 
+        scheduleaction:function(context){
+
+            axios.get('https://pg-app-fd8a7.firebaseio.com/cschedule.json')
+            .then(res=>{
+                console.log(res)
+                let alldata=[]
+                let datas = res.data
+                for(let key in datas)
+                {
+                    datas[key].id=key
+                    alldata.push(datas[key])
+                }
+                context.commit('schedule',alldata)
+            })
+            .catch(err=>console.log(err))
+
+        },
+
         signout:function(){
-           
-               
                 console.log(fb.auth().signOut())
                 
                 fb.auth().signOut()
@@ -71,9 +92,9 @@ export const store = new Vuex.Store({
         },
 
 
-        profileaction:function(context){
+        profileaction:async function(context){
             var mainprofiledata=[]
-            axios.get('https://pg-app-fd8a7.firebaseio.com/user.json')
+           await axios.get('https://pg-app-fd8a7.firebaseio.com/user.json')
             .then(res=>{
                 let data=res.data
                 for(let key in data)

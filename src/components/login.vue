@@ -46,8 +46,10 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(
           function () {
-            alert("successfully loggedIn");
+           
             self.$router.push('pgowner');
+            location.reload()
+            location.reload()
           },
           function (err) {
             alert(err.message);

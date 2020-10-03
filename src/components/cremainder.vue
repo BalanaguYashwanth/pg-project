@@ -31,13 +31,6 @@
               <p class="card-text">
                 {{ all.text }}
               </p>
-              <button
-                type="button"
-                v-on:click="deleting(all.id)"
-                class="btn btn-secondary"
-              >
-                Delete
-              </button>
             </div>
           </div>
 
@@ -118,7 +111,10 @@ export default {
   },
 
 
-  created() {
+  async created() {
+
+    await this.$store.dispatch('getuseraction')
+    await this.$store.dispatch('profileaction')
 
    fb.auth().onAuthStateChanged(function(user){
       if(user)
@@ -130,7 +126,7 @@ export default {
 
     if(localStorage.getItem('uid'))
     {
-      axios
+     await axios
       .get("https://pg-app-fd8a7.firebaseio.com/posts.json")
       .then((res) => {
         var data = res.data;
@@ -156,9 +152,7 @@ export default {
     }else{
       console.log('user not  authenticated')
     }
-      this.$store.dispatch('getuseraction')
-      this.$store.dispatch('profileaction')
-
+     
 
   },
 };
