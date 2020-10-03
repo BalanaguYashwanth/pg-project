@@ -241,7 +241,9 @@ export default {
 
     deleting(){
       axios.delete('https://pg-app-fd8a7.firebaseio.com/user/'+ this.pk_id +'.json')
-      .then(res=>console.log(res))
+      .then(res=>{console.log(res)
+      location.reload()
+      })
       .catch(err=>console.log(err))
     },
 
@@ -288,8 +290,6 @@ export default {
               .catch(err=>console.log(err))
                console.log('not restrict')
               
-
-              
             });
         }
       );
@@ -312,7 +312,9 @@ export default {
           age:this.age,
           gender:this.gender,
         })
-        .then(res=>console.log(res))
+        .then(res=>{console.log(res)
+       
+        })
         .catch(err=>console.log(err.reponse.data))
       }else{
         console.log('not enter to post secondary data')

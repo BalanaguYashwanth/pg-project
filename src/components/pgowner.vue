@@ -156,6 +156,7 @@ export default {
                   .then((res) => {
                     console.log('succes')
                     console.log('done',res.statusText);
+                    location.reload()
                   })
                   .catch((err) => console.log('err',err));
 

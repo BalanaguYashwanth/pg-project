@@ -48,6 +48,7 @@ export default {
           function () {
             alert("successfully loggedIn");
             self.$router.push('cremainder');
+            location.reload()
           },
           function (err) {
             alert(err.message);
