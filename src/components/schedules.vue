@@ -98,13 +98,10 @@ export default {
             {
                if(datas[obj].userid==localStorage.getItem('uid'))
                {
-
                     this.username = datas[obj].username
-                    this.phonenumber = datas[obj].phonenumbr
+                    this.phonenumber = datas[obj].phonenumber
                     this.pg_name = datas[obj].pg_name
                     this.userid = datas[obj].userid
-
-                
                }
             }
 

@@ -1,36 +1,94 @@
 <template>
-    <div class="container">
+    <div >
         <div class="title display-2"> Users schedule</div>
-        {{getschedule()}}
-        
-  
+        <table class="table table-bordered" style="table-layout: auto width: 100%; " >
+            <thead>
+                <tr>
+                    <th> id  </th>
+                    <th> pgname  </th>
+                    <th> username  </th>
+                    <th> phonenumber  </th>
+                    <th> cleaning  </th>
+                    <th> laundry  </th>
+                    <th> queries </th>
+                    <th> operation </th>
+                </tr>
+            </thead>
+            <tbody  v-for="(each,index) in  getschedule()" v-bind:key="index" >
+                <th> {{index}}  </th>
 
+                <td> {{each.pgname}} </td>
+                <td> {{each.username}} </td>
+                <td> {{each.phonenumber}} </td>
+                <td> {{each.cleaning}} </td>
+                <td> {{each.laundry}} </td>
+                <td> {{each.queries}} </td>
+                <td> <button class="btn btn-secondary"  v-on:click=deleting(each.id) > delete </button> </td>
+
+            </tbody>
+
+        </table>
+
+       
     </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     data(){
         return{
-
-
+            userpg:'',
+            maindata:[],
         }
     },
-    methods:{
-            getschedule:function(){
-        let scheduledata=[]
-        scheduledata=this.$store.state.scheduledata
-        
-        console.log(scheduledata)
-        return scheduledata
+
+
+    computed:{
+        profile:function(){
+        let profiledata=[]
+        var userpg=''
+        profiledata=this.$store.state.mainuserprofile
+        for(let obj in profiledata)
+        {
+            if(profiledata[obj].userid==localStorage.getItem('uid'))
+            {
+                userpg=profiledata[obj].pg_name
+            }
+        }
+        return userpg
 
     },
+    },
 
+    methods:{
+
+        deleting:function(id){
+            axios.delete('https://pg-app-fd8a7.firebaseio.com/cschedule/'+id+'.json')
+            .then(res=>console.log(res))
+            .catch(err=>console.log(err))
+
+        },
+
+    getschedule:function(){
+        let scheduledata=[]
+        let schedule=[]
+        scheduledata=this.$store.state.scheduledata
+        
+        for(let obj in scheduledata)
+        {
+            if(scheduledata[obj].pgname==this.profile)
+            {
+               schedule.push( scheduledata[obj])
+            }
+        }
+        return schedule
+    },
 
     },
 
     created(){
-        
+        this.$store.dispatch('profileaction') 
         this.$store.dispatch('scheduleaction')
     }
 
