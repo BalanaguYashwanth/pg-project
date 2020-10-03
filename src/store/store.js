@@ -12,6 +12,7 @@ export const store = new Vuex.Store({
         displayName:[],
         mainuserprofile:[],
         scheduledata:[],
+        alluserregisters:[]
     },
     getters:{
 
@@ -34,7 +35,11 @@ export const store = new Vuex.Store({
 
         schedule:function(state,data){
             state.scheduledata=data
-        }
+        },
+
+        userregister:function(state,users){
+            state.alluserregisters=users
+        },
     },
 
     actions:{
@@ -73,9 +78,25 @@ export const store = new Vuex.Store({
                     alldata.push(datas[key])
                 }
                 context.commit('schedule',alldata)
+            
             })
             .catch(err=>console.log(err))
+        },
 
+        userregisters:function(context){
+            axios.get('https://pg-app-fd8a7.firebaseio.com/userregisters.json')
+            .then(res =>{
+                console.log('users',res)
+                let users=[]
+                let register=res.data
+                for(let key in register)
+                {
+                    register[key].id=key
+                    users.push(register[key])
+                }
+                context.commit('userregister',users)
+            })
+            .catch(err=>console.log(err))
         },
 
         signout:function(){
@@ -101,7 +122,9 @@ export const store = new Vuex.Store({
                 {
                     data[key].id=key
                     mainprofiledata.push(data[key])
-                }               
+                } 
+                                
+
                 context.commit("profile",mainprofiledata)
             })
             .catch(err=>console.log(err))

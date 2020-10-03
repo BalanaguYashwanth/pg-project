@@ -8,6 +8,8 @@ import customerprofile from './components/customerprofile'
 import cremainder from './components/cremainder'
 import schedules from './components/schedules'
 import ownerschedule from './components/ownerschedule.vue'
+import ownerdesk from './components/ownerdesk'
+import ownerdeskdetails from './components/ownerdeskdetails'
 
 export default[
     {path:'/pgowner',component:pgowner},
@@ -19,6 +21,8 @@ export default[
     {path:'/customerprofile',component:customerprofile},
     {path:'/cremainder',component:cremainder},
     {path:'/schedules',component:schedules},
-    {path:'/ownerschedule',component:ownerschedule}
+    {path:'/ownerschedule',component:ownerschedule},
+    {path:'/ownerdesk',component:ownerdesk},
+    {path:'/ownerdeskdetails',component:ownerdeskdetails},
 ]
 

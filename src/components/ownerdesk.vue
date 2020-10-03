@@ -1,0 +1,188 @@
+<template>
+  <div>
+    <div class="container">
+      <p class="display-2" id="title">Owner desk</p>
+      <form>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Name</label>
+            <input
+              type="text"
+              v-model="name"
+              placeholder="enter your  name"
+              class="form-control"
+              required
+            />
+          </div>
+
+          <div class="form-group col-md-6">
+            <label>phone number</label>
+            <input
+              type="text"
+              v-model="phonenumber"
+              placeholder="enter your phonenumber"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Start Date</label>
+            <input
+              type="datetime-local"
+              v-model="startdate"
+              class="form-control"
+              required
+            />
+          </div>
+
+          <div class="form-group col-md-6">
+            <label>End date</label>
+            <input
+              type="datetime-local"
+              v-model="enddate"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label> choose the category </label>
+            <select class="form-control" v-model="category" required>
+              <option disabled value>Choose the category</option>
+              <option>Working professoinal</option>
+              <option>Student</option>
+              <option>other</option>
+            </select>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label>email</label>
+            <input
+              type="email"
+              v-model="email"
+              placeholder="enter your email"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>gender</label>
+            <select class="form-control" v-model="gender" required>
+              <option disabled value> choose the gender</option>
+              <option>Men</option>
+              <option>Women</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label>Age</label>
+            <input
+              type="number"
+              v-model="age"
+              placeholder="enter your age"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+
+        <button v-on:click.prevent="posted" class="btn btn-secondary">Submit</button>
+      </form>
+      <h1> {{feedback}} </h1>
+    
+    </div>
+  </div>
+</template>
+
+
+<script >
+import axios from 'axios';
+export default {
+  data(){
+    return{
+      name:'',
+      phonenumber:'',
+      startdate:'',
+      enddate:'',
+      gender:'',
+      category:'',
+      email:'',
+      age:'',
+      feedback:'',
+    }
+  },
+
+    computed:{
+        profile:function(){
+        let profiledata=[]
+        var userpg=''
+        profiledata=this.$store.state.mainuserprofile
+        for(let obj in profiledata)
+        {
+            if(profiledata[obj].userid==localStorage.getItem('uid'))
+            {
+                userpg=profiledata[obj].pg_name
+            }
+        }
+        return userpg
+    },
+    },
+
+methods:{
+  posted:function(){
+    if(this.name!='' && this.phonenumber!='' && this.startdate!='' &&  this.enddate!='' && this.gender!='' && this.category!='' && this.email!='' && this.age!='' )
+    {
+    axios.post('https://pg-app-fd8a7.firebaseio.com/userregisters.json',{
+      name:this.name,
+      phonenumber:this.phonenumber,
+      startdate:this.startdate,
+      enddate:this.enddate,
+      email:this.email,
+      gender:this.gender,
+      age:this.age,
+      category:this.category,
+      ownername: this.$store.state.displayName,
+      pgname:this.profile,
+    })
+    .then(res=>{
+      console.log(res)
+      this.feedback="successfully submitted";
+      })
+    .catch(err=>console.log(err))
+    }
+    else{
+      this.feedback="please fill up all inputs"
+    }
+  }
+},
+
+created(){
+    this.$store.dispatch('getuseraction')
+    this.$store.dispatch('profileaction') 
+}
+
+};
+</script>
+
+<style scoped >
+#title {
+  margin-top: 120px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.container{
+    text-transform: capitalize;
+}
+</style>
