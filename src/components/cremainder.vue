@@ -3,7 +3,7 @@
       {{modifiedprofile()}}
      
     <div v-if="this.$store.state.photourl" style="text-align:right" >  
-      <router-link  to="/ownerprofile">
+      <router-link  to="/customerprofile">
       <img  id="profile" :src=this.$store.state.photourl class="img-centered" style="height:auto; width:60px" alt="">
       </router-link>
     </div>
