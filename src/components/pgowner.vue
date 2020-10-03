@@ -1,20 +1,29 @@
 <template>
   <div>
-      {{modified()}}
+    {{ modified() }}
+    
+    <div v-if="this.$store.state.photourl" style="text-align: right">
+      <router-link to="/ownerprofile">
+        <img
+          id="profile"
+          :src="this.$store.state.photourl"
+          class="img-centered"
+          style="height: auto; width: 60px"
+          alt=""
+        />
+      </router-link>
+    </div>
 
-    <div v-if="this.$store.state.photourl" style="text-align:right" >  
-      <router-link  to="/ownerprofile">
-      <img  id="profile" :src=this.$store.state.photourl class="img-centered" style="height:auto; width:60px" alt="">
+    <div v-else style="text-align: right">
+      <router-link to="/ownerprofile">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ54iLC-JopSr54OnaoTHcMculZnCMyweBC9w&usqp=CAU"
+          style="height: auto; width: 60px"
+          alt=""
+        />
       </router-link>
     </div>
-    
-   
-    <div v-else style="text-align:right" >  
-      <router-link  to="/ownerprofile">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ54iLC-JopSr54OnaoTHcMculZnCMyweBC9w&usqp=CAU"  style="height:auto; width:60px" alt="">
-      </router-link>
-    </div>
-    
+
     <button style="float: right" class="btn btn-secondary" v-on:click="logout">
       signout
     </button>
@@ -49,7 +58,7 @@
 
           <button
             type="button"
-            v-on:click="fileurl(textdata,pgname,username)"
+            v-on:click="fileurl(textdata, pgname, username)"
             class="btn btn-secondary m-1"
           >
             Submit
@@ -58,7 +67,7 @@
 
         <div v-for="(all, index) in alldata" v-bind:key="index">
           <div class="card mx-auto m-5" style="width: 35rem">
-            <img :src="all.img"  class="card-img-top rounded" alt="nature" />
+            <img :src="all.img" class="card-img-top rounded" alt="nature" />
             <div class="card-body">
               <p class="card-text">
                 {{ all.text }}
@@ -84,42 +93,41 @@ import { fb } from "../firebase";
 export default {
   data() {
     return {
-      alldata: "",
-      textdata: '',
+      alldata: [],
+      textdata: "",
       image: "",
       selectfile: "",
       info: "",
       uploadValue: "",
       imageurl: null,
-      email:'',
-      uid:'',
-      pgname:'',
-      username:'',
+      email: "",
+      uid: "",
+      pgname: "",
+      username: "",
     };
   },
 
   methods: {
+    logout: function () {
+      let self = this;
+      console.log(fb.auth().signOut());
 
-    logout:function(){
-      let self=this
-      console.log(fb.auth().signOut())
-      
-      fb.auth().signOut()
-      .then(() => {
-        alert('sucessfully logout')
-        self.$router.push('/login')        
+      fb.auth()
+        .signOut()
+        .then(() => {
+          alert("sucessfully logout");
+          self.$router.push("/login");
         })
-      .catch( err => alert(err.message) )
-      localStorage.removeItem('uid')
+        .catch((err) => alert(err.message));
+      localStorage.removeItem("uid");
     },
-
 
     onfileselect: function (event) {
       this.selectfile = event.target.files[0];
       // this.imageurl=this.fileurl()
     },
 
-    fileurl: function (text,pgname,username) {
+    fileurl: function (text, pgname, username) {
       var storageRef = fb.storage().ref("images/" + this.selectfile.name);
       let uploadedTask = storageRef.put(this.selectfile);
       uploadedTask.on(
@@ -137,46 +145,35 @@ export default {
             .then(function (downloadURL) {
               console.log(downloadURL);
 
-
-         
-
               setTimeout(() => {
                 axios
-                .post("https://pg-app-fd8a7.firebaseio.com/posts.json", {
-                  text:text,
-                  img: downloadURL,
-                  pgname:pgname,
-                  username:username,
-                })
-                .then((res) => {
-                  this.info=res.statusText
-                  console.log(res)
+                  .post("https://pg-app-fd8a7.firebaseio.com/posts.json", {
+                    text: text,
+                    img: downloadURL,
+                    pgname: pgname,
+                    username: username,
                   })
-                .catch((err) => console.log(err.response));
+                  .then((res) => {
+                    console.log('succes')
+                    console.log('done',res.statusText);
+                  })
+                  .catch((err) => console.log('err',err));
+
               }, 3000);
-
-
             });
         }
       );
     },
 
     modified: function () {
-        console.log('run')
-        let mainprofile= this.$store.state.mainuserprofile
-        for(let obj in  mainprofile)
-        {
-          let profiles= mainprofile[obj]
-          
-          for(let obj1 in profiles)
-          {
-            if(profiles[obj1].userid == localStorage.getItem('uid') )
-            {
-              this.pgname=profiles[obj1].pg_name
-              this.username=profiles[obj1].username
-            }
-          }
+      let mainprofile = [];
+      mainprofile = this.$store.state.mainuserprofile;
+      for (let obj in mainprofile) {
+        if (mainprofile[obj].userid == localStorage.getItem("uid")) {
+          this.pgname = mainprofile[obj].pg_name;
+          this.username = mainprofile[obj].username;
         }
+      }
     },
 
     deleting: function (id) {
@@ -191,37 +188,45 @@ export default {
     },
   },
 
-
   created() {
-
-   
-
-    
-   fb.auth().onAuthStateChanged(function(user){
-      if(user)
-      {
-        var email= user.email;
+    fb.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        var email = user.email;
       }
-      console.log(email)
-    })
+      console.log(email);
+    });
 
-     if(localStorage.getItem('uid'))
-    {
+    if (localStorage.getItem("uid")) {
       axios
-      .get("https://pg-app-fd8a7.firebaseio.com/posts.json")
-      .then((res) => {
-        console.log(res);
-        this.alldata = res.data;
-      })
-      .catch((err) => console.log(err.response.data));
-    }else{
-      console.log('user not  authenticated')
+        .get("https://pg-app-fd8a7.firebaseio.com/posts.json")
+        .then((res) => {
+          console.log(res);
+          var data = res.data;
+         var blogs=[]
+        for(let key in data)
+        { 
+          data[key].id=key
+          blogs.push(data[key])
+        }
+
+      for(let obj in blogs)
+      {
+        if(blogs[obj].pgname == this.pgname)
+        {
+          this.alldata.push(blogs[obj])
+        }
+      }
+
+        })
+      .catch((err) => console.log(err));
+    }
+     else {
+      console.log("user not  authenticated");
     }
 
+    this.$store.dispatch("getuseraction");
 
-      this.$store.dispatch('getuseraction')
-
-      this.$store.dispatch('profileaction')
+    this.$store.dispatch("profileaction");
   },
 };
 </script>
@@ -232,10 +237,9 @@ textarea {
   height: auto;
 }
 
-#profile{
+#profile {
   width: 200px;
-  border-radius: 50%; 
+  border-radius: 50%;
 }
-
 </style>
 

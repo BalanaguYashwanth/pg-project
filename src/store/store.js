@@ -79,7 +79,7 @@ export const store = new Vuex.Store({
                 for(let key in data)
                 {
                     data[key].id=key
-                    mainprofiledata.push(data)
+                    mainprofiledata.push(data[key])
                 }               
                 context.commit("profile",mainprofiledata)
             })

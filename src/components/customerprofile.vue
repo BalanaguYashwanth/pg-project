@@ -7,7 +7,7 @@
     
     {{getcurrentuser()}}
   <div class="container">
-    <div class="title display-2">Owner Profile</div>
+    <div class="title display-2">Customer Profile</div>
     <form>
         <div class="text-center m-3">
          
@@ -226,7 +226,7 @@ export default {
 
     signout:function(){
       this.$store.dispatch('signout')
-      this.$router.push('/login')
+      this.$router.push('/customerlogin')
     },
 
     deletephoto:function(){
