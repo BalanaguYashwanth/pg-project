@@ -3,7 +3,9 @@ import App from './App.vue'
 import Vuerouters from 'vue-router'
 import Routers from './routers'
 import {store} from './store/store'
+import Slider from '@jeremyhamm/vue-slider'
 
+Vue.use(Slider)
 Vue.use(Vuerouters)
 
 Vue.config.productionTip = false

@@ -1,5 +1,6 @@
 <template>
     <div >
+        <slot name="title" >  </slot>
         <div class="title display-2"> Registered Users </div>
         <table class="table table-bordered" style="table-layout: auto width: 100%; " >
             <thead>

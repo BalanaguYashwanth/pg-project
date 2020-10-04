@@ -1,7 +1,7 @@
 <template>
   <div>
     {{ modified() }}
-    
+    <slot name="title" >  </slot>
     <div v-if="this.$store.state.photourl" style="text-align: right">
       <router-link to="/ownerprofile">
         <img
@@ -90,7 +90,10 @@
 <script>
 import axios from "axios";
 import { fb } from "../firebase";
+
 export default {
+
+  
   data() {
     return {
       alldata: [],

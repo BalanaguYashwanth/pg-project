@@ -1,5 +1,6 @@
 <template>
     <div>
+        <slot name="customer" > </slot>
         <div class='container'>
          <div class="title display-2">Quick remainders</div>
             {{ currentuser()}}
@@ -129,8 +130,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   margin-left: auto;
   color: #2c3e50;
-  margin-top: 110px;
-  margin-bottom: 20px;
+  
+  margin-bottom: 50px;
   text-transform: capitalize;
 }
 

@@ -1,5 +1,6 @@
 <template>
   <div>
+     <slot name="title" >  </slot>
     <div class="container">
       <p class="display-2" id="title">Owner desk</p>
       <form>
