@@ -316,7 +316,7 @@ export default {
         })
         .then(res=>{
           console.log(res)
-          
+         // this.$router.push('/cremainder')
           })
         .catch(err=>console.log(err.reponse.data))
       }else{

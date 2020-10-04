@@ -1,6 +1,6 @@
 <template>
     <div>
-      
+       <slot name="title" > </slot>
      <button style="float: right" v-on:click="signout" class="btn btn-secondary">
          signout
     </button>

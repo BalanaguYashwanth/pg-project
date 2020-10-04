@@ -48,8 +48,9 @@
 
             
         *Note :- Any one member should update the shedule for a room contains more than 1 member
+         <h1> {{info}} </h1>
         </div>
-        
+       
     </div>
 </template>
 
@@ -66,6 +67,7 @@ export default {
             cleaning:'',
             laundry:'',
             queries:'',
+            info:'',
         }
 
     },
@@ -84,7 +86,10 @@ export default {
             queries:this.queries,
 
             })
-            .then(res=>console.log(res))
+            .then(res=>{
+                console.log(res)
+                this.info="successfully submitted"
+                })
             .catch(err=>console.log(err))
 
         },

@@ -46,7 +46,7 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(
           function () {
-            self.$router.push('cremainder');
+            self.$router.push('customerprofile');
             location.reload()
             location.reload()
           },

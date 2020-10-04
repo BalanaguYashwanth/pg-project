@@ -46,8 +46,7 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(
           function () {
-           
-            self.$router.push('pgowner');
+            self.$router.push('ownerprofile');
             location.reload()
             location.reload()
           },
