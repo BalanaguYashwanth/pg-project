@@ -236,6 +236,7 @@ export default {
         photoURL: null
         }).then(function() {
         console.log('deleted photo Successfully');
+        location.reload()
         });
     },
 

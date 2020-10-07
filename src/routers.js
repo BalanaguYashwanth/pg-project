@@ -10,6 +10,9 @@ import schedules from './components/schedules'
 import ownerschedule from './components/ownerschedule.vue'
 import ownerdesk from './components/ownerdesk'
 import ownerdeskdetails from './components/ownerdeskdetails'
+import hireprofiles from './components/hireprofiles'
+import careerprofiles from './components/careerprofiles'
+
 
 export default[
     {path:'/pgowner',component:pgowner},
@@ -24,5 +27,7 @@ export default[
     {path:'/ownerschedule',component:ownerschedule},
     {path:'/ownerdesk',component:ownerdesk},
     {path:'/ownerdeskdetails',component:ownerdeskdetails},
+    {path:'/hireprofiles',component:hireprofiles},
+    {path:'/careerprofiles',component:careerprofiles},
 ]
 
