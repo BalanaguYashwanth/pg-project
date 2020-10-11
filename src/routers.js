@@ -12,7 +12,8 @@ import ownerdesk from './components/ownerdesk'
 import ownerdeskdetails from './components/ownerdeskdetails'
 import hireprofiles from './components/hireprofiles'
 import careerprofiles from './components/careerprofiles'
-
+import pgregister from './components/pgregister'
+import pghome from './components/pghome'
 
 export default[
     {path:'/pgowner',component:pgowner},
@@ -29,5 +30,8 @@ export default[
     {path:'/ownerdeskdetails',component:ownerdeskdetails},
     {path:'/hireprofiles',component:hireprofiles},
     {path:'/careerprofiles',component:careerprofiles},
+    {path:'/pgregister',component:pgregister},
+    {path:'/pghome',component:pghome},
+
 ]
 

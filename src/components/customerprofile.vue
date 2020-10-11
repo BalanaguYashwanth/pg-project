@@ -125,13 +125,12 @@
           />
           </div>
           <div v-else >  
-            
-          <input
-            type="text"
-            class="form-control"
-            placeholder="select the pg hostel"
-            v-model="pgname"
-          />
+           <select  class="custom-select"  v-model="pgname">
+                <option value="sunshine"> sunshine </option>
+                <option value="roxpg"> roxpg </option>
+                <option value="nextpg"> nextpg </option>
+                <option value="other"> other </option>
+            </select>
            </div>
         </div>
 
@@ -241,7 +240,7 @@ export default {
     },
 
     deleting(){
-      axios.delete('https://pg-app-fd8a7.firebaseio.com/user/'+ this.pk_id +'.json')
+      axios.delete('http://127.0.0.1:5000/delete/user/'+ this.pk_id )
       .then(res=>{console.log(res)
       location.reload()
       })
@@ -306,7 +305,7 @@ export default {
       }
         if( this.phonenumber1 == '' && this.pgname1 == '' && this.age1 == '' && this.gender1 == '')    
        {
-          axios.post('https://pg-app-fd8a7.firebaseio.com/user.json',{
+          axios.post('http://127.0.0.1:5000/post/user',{
           userid:localStorage.getItem('uid'),
           username:this.username,
           email:this.$store.state.email,

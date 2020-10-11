@@ -73,7 +73,7 @@ export default {
 
     methods:{
         deleting:function(id){
-            axios.delete('https://pg-app-fd8a7.firebaseio.com/userregisters/'+id+'.json')
+            axios.delete('http://127.0.0.1:5000/delete/userregisters/'+id)
             .then(res=>{
                 console.log(res)
                 location.reload()

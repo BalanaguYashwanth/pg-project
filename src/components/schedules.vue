@@ -75,8 +75,7 @@ export default {
     methods:{
 
         posting:function(){
-
-            axios.post('https://pg-app-fd8a7.firebaseio.com/cschedule.json',{
+            axios.post('http://127.0.0.1:5000/post/customerschedule',{
             username:this.username,
             phonenumber:this.phonenumber,
             pgname:this.pg_name,
@@ -121,6 +120,9 @@ export default {
     created(){
        
         this.$store.dispatch('profileaction')
+
+        axios.get('http://127.0.0.1:5000/get/customerschedule')
+        .then(res => console.log(res))
     }
     
 }

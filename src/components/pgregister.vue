@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class="container">
-      <p class="display-2" id="title">Careers in Pg Hostels</p>
+      <p class="display-2" id="title"> Pg Hostels Registration</p>
       <form>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label>Name</label>
+            <label> PG Name</label>
             <input
               type="text"
               v-model="name"
-              placeholder="enter your  name"
+              placeholder="enter your pg name"
               class="form-control"
               required
             />
@@ -26,20 +26,9 @@
             />
           </div>
         </div>
-
         <div class="form-row">
-          <div class="form-group col-md-6">
-            <label>email</label>
-            <input
-              type="email"
-              v-model="email"
-              placeholder="enter your email"
-              class="form-control"
-              required
-            />
-          </div>
-
-          <div class="form-group col-md-6">
+          
+        <div class="form-group col-md-6">
             <label> State/City </label>
             <input
               type="text"
@@ -49,25 +38,41 @@
               required
             />
           </div>
+          
+        <div class="form-group col-md-6">
+            <label>Address</label>
+            <input
+              type="text"
+              v-model="address"
+              placeholder="enter your address"
+              class="form-control"
+              required
+            />
+          </div>
+        
+
+
         </div>
 
         <div class="form-row">
+            
           <div class="form-group col-md-6">
-            <label>gender</label>
-            <select class="form-control" v-model="gender" required>
-              <option disabled value>choose the gender</option>
-              <option>Men</option>
-              <option>Women</option>
-              <option>Other</option>
-            </select>
+            <label>Landmark</label>
+            <input
+              type="text"
+              v-model="landmark"
+              placeholder="enter your landmark"
+              class="form-control"
+              required
+            />
           </div>
 
           <div class="form-group col-md-6">
-            <label>Age</label>
+            <label>Pin code</label>
             <input
               type="number"
-              v-model="age"
-              placeholder="enter your age"
+              v-model="pincode"
+              placeholder="enter your pincode"
               class="form-control"
               required
             />
@@ -75,26 +80,24 @@
         </div>
 
         <div class="form-group">
-          <label> Updated your Profile pic </label>
+          <label> Updated your Pg image </label>
           <input type="file" class="form-control-file" @change="fileselect" />
         </div>
         {{ imgurl }}
-       
+
         <button
           v-on:click.prevent="
             filesubmit(
               name,
               phonenumber,
-              email,
-              gender,
-              age,
+              landmark,
+              address,
+              pincode,
               city,
-            
             )
           "
           class="btn btn-secondary"
         >
-
           Submit
         </button>
       </form>
@@ -111,15 +114,14 @@ export default {
     return {
       name: "",
       phonenumber: "",
-      gender: "",
-      email: "",
-      age: "",
+      landmark: "",
+      address: "",
+      pincode: "",
       feedback: "",
       city: "",
       file: "",
       imgurl: "",
       imgurl1: "",
-      info:'',
     };
   },
 
@@ -128,7 +130,7 @@ export default {
       this.file = event.target.files[0];
     },
 
-    filesubmit: function (name, phonenumber, email, gender, age, city) {
+    filesubmit: function (name, phonenumber, landmark, address, pincode, city) {
       var storageRef = fb.storage().ref("userprofile/" + this.file.name);
       let uploadedTask = storageRef.put(this.file);
       uploadedTask.on(
@@ -148,14 +150,14 @@ export default {
               await console.log(downloadURL);
 
               axios
-                .post("http://127.0.0.1:5000/post/careers", {
+                .post("http://127.0.0.1:5000/post/pgregisters", {
                   name: name,
                   phonenumber: phonenumber,
-                  email: email,
-                  gender: gender,
-                  age: age,
+                  landmark: landmark,
+                  address: address,
+                  pincode: pincode,
                   city: city,
-                  profile: downloadURL,
+                  pgimage: downloadURL,
                 })
                 .then((res) => {
                   console.log(res);
@@ -167,34 +169,6 @@ export default {
       );
     },
 
-    // posted: function () {
-    //   if (
-    //     this.name != "" &&
-    //     this.phonenumber != "" &&
-    //     this.gender != "" &&
-    //     this.city != "" &&
-    //     this.email != "" &&
-    //     this.age != ""
-    //   ) {
-    //     axios
-    //       .post("http://127.0.0.1:5000/post/careers", {
-    //         name: this.name,
-    //         phonenumber: this.phonenumber,
-    //         email: this.email,
-    //         gender: this.gender,
-    //         age: this.age,
-    //         city: this.city,
-    //         profile: this.imgurl,
-    //       })
-    //       .then((res) => {
-    //         console.log(res);
-    //         this.feedback = "successfully submitted";
-    //       })
-    //       .catch((err) => console.log(err));
-    //   } else {
-    //     this.feedback = "please fill up all inputs";
-    //   }
-    // },
   },
 };
 </script>

@@ -150,7 +150,7 @@ export default {
 
               setTimeout(() => {
                 axios
-                  .post("https://pg-app-fd8a7.firebaseio.com/posts.json", {
+                  .post("http://127.0.0.1:5000/post/posts", {
                     text: text,
                     img: downloadURL,
                     pgname: pgname,
@@ -183,7 +183,7 @@ export default {
     deleting: function (id) {
       alert("deleting the post");
       axios
-        .delete("https://pg-app-fd8a7.firebaseio.com/posts/"+ id+".json")
+        .delete("http://127.0.0.1:5000/delete/posts/"+ id)
         .then((res) => {
           console.log(res);
           location.reload();
@@ -207,7 +207,7 @@ export default {
   
     if (localStorage.getItem("uid")) {
       await axios
-        .get("https://pg-app-fd8a7.firebaseio.com/posts.json")
+        .get("http://127.0.0.1:5000/get/posts")
         .then((res) => {
           console.log(res);
           var data = res.data;

@@ -64,13 +64,13 @@ export default {
 
     methods:{
         deleting:function(id){
-            axios.delete('https://pg-app-fd8a7.firebaseio.com/cschedule/'+id+'.json')
+            alert(id)
+            axios.delete('http://127.0.0.1:5000/delete/customerschedule/'+id)
             .then(res=>{
                 console.log(res)
                 location.reload()
                 })
             .catch(err=>console.log(err))
-
         },
 
     getschedule:function(){

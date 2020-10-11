@@ -144,7 +144,7 @@ methods:{
   posted:function(){
     if(this.name!='' && this.phonenumber!='' && this.startdate!='' &&  this.enddate!='' && this.gender!='' && this.category!='' && this.email!='' && this.age!='' )
     {
-    axios.post('https://pg-app-fd8a7.firebaseio.com/userregisters.json',{
+    axios.post('http://127.0.0.1:5000/post/userregisters',{
       name:this.name,
       phonenumber:this.phonenumber,
       startdate:this.startdate,

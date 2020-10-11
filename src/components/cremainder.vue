@@ -101,7 +101,7 @@ export default {
     deleting: function (id) {
       alert("deleting the post");
       axios
-        .delete("https://pg-app-fd8a7.firebaseio.com/posts.json" + id)
+        .delete("http://127.0.0.1:5000/delete/posts" + id)
         .then((res) => {
           console.log(res);
           location.reload();
@@ -127,7 +127,7 @@ export default {
     if(localStorage.getItem('uid'))
     {
      await axios
-      .get("https://pg-app-fd8a7.firebaseio.com/posts.json")
+      .get("http://127.0.0.1:5000/get/posts")
       .then((res) => {
         var data = res.data;
          var blogs=[]
@@ -143,9 +143,7 @@ export default {
         {
           this.alldata.push(blogs[obj])
         }
-      }
-       
-       
+      }       
 
       })
       .catch((err) => console.log(err.response.data));

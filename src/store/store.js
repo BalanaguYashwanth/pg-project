@@ -66,8 +66,7 @@ export const store = new Vuex.Store({
         },
 
         scheduleaction:function(context){
-
-            axios.get('https://pg-app-fd8a7.firebaseio.com/cschedule.json')
+            axios.get('http://127.0.0.1:5000/get/customerschedule')
             .then(res=>{
                 console.log(res)
                 let alldata=[]
@@ -84,7 +83,7 @@ export const store = new Vuex.Store({
         },
 
         userregisters:function(context){
-            axios.get('https://pg-app-fd8a7.firebaseio.com/userregisters.json')
+            axios.get('http://127.0.0.1:5000/get/userregisters')
             .then(res =>{
                 console.log('users',res)
                 let users=[]
@@ -115,7 +114,7 @@ export const store = new Vuex.Store({
 
         profileaction:async function(context){
             var mainprofiledata=[]
-           await axios.get('https://pg-app-fd8a7.firebaseio.com/user.json')
+           await axios.get('http://127.0.0.1:5000/get/user')
             .then(res=>{
                 let data=res.data
                 for(let key in data)
