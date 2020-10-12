@@ -227,7 +227,6 @@ export default {
     signout:function(){
       this.$store.dispatch('signout')
       this.$router.push('/login')
-      
     },
 
     deletephoto:function(){
@@ -254,14 +253,12 @@ export default {
     },
 
       posting:function(username){
-
         if(this.$store.state.displayName)
         {
           username=this.$store.state.displayName
         }else{
           console.log("username is manually entered")
         }
-
       if(this.$store.state.displayName == null || this.$store.state.photourl == null )
       {
       var storageRef = fb.storage().ref("userprofile/" + this.mainselectfile.name);
@@ -281,15 +278,24 @@ export default {
             .getDownloadURL()
             .then(function (downloadURL) {
               console.log(downloadURL);
-
-              
-                var user=fb.auth().currentUser
-                user.updateProfile({
-                displayName:username,
-                photoURL:downloadURL,
-              }).then(()=>console.log('success'))
+              //   var user=fb.auth().currentUser
+              //   user.updateProfile({
+              //   displayName:username,
+              //  // photoURL:downloadURL,
+              // }).then(()=>console.log('success'))
+              // .catch(err=>console.log(err))
+              // console.log('not restrict')
+              console.log(username)
+              axios.post('http://127.0.0.1:5000/updateuser',{
+                uid:localStorage.getItem('localid'),
+                displayname:'yashwanth',
+                photourl:'https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823__340.jpg'
+              }).then(res=>{console.log('done',res)
+                    console.log('yesdone')
+              })
               .catch(err=>console.log(err))
-               console.log('not restrict')
+
+
               
             });
         }
@@ -305,7 +311,7 @@ export default {
         if( this.phonenumber1 == '' && this.pgname1 == '' && this.age1 == '' && this.gender1 == '')    
        {
           axios.post('http://127.0.0.1:5000/post/user',{
-          userid:localStorage.getItem('uid'),
+          userid:localStorage.getItem('localid'),
           username:this.username,
           email:this.$store.state.email,
           phonenumber:this.phonenumber,
@@ -324,8 +330,6 @@ export default {
       setTimeout(() => {
             location.reload();
           }, 5000);
-        
-
       },
 
       getcurrentuser:  function(){
@@ -333,7 +337,7 @@ export default {
         allusers= this.$store.state.mainuserprofile
         for(let key in allusers)
         {
-            if( allusers[key].userid == localStorage.getItem('uid') )
+            if( allusers[key].userid == localStorage.getItem('localid') )
             {
               this.phonenumber1=allusers[key].phonenumber
               this.pgname1=allusers[key].pg_name
@@ -348,31 +352,43 @@ export default {
   },
 
   async created() {
-        if(localStorage.getItem('uid'))
+    if(localStorage.getItem('localid'))
     {
     await this.$store.dispatch('getuseraction')
     await this.$store.dispatch('profileaction')
     }
-    
-    fb.auth().onAuthStateChanged(function(user){
-        if(user)
+
+   
+
+    axios.post('http://127.0.0.1:5000/getcurrentuser',{
+        uid:localStorage.getItem('localid'),
+      }).then(res=>{
+        console.log(res.data)
+        if(!res)
         {
-        var email=user.email
-        var userid=user.uid
-        var phonenumber=user.phoneNumber
-        var photoURL=user.photoURL
-        var displayName=user.displayName
-        console.log('email',email,displayName,photoURL,phonenumber)
-        localStorage.setItem('uid',userid)
-        
-        } 
-        else{
-            console.log('user: error in user or user not signin')
+          console.log('user: error in user or user not signin')
         }
-    })
 
-
-
+        })
+      .catch(err=>console.log(err))
+    
+    
+    // fb.auth().onAuthStateChanged(function(user){
+    //     if(user)
+    //     {
+    //     var email=user.email
+    //     var userid=user.uid
+    //     var phonenumber=user.phoneNumber
+    //     var photoURL=user.photoURL
+    //     var displayName=user.displayName
+    //     console.log('email',email,displayName,photoURL,phonenumber)
+    //     localStorage.setItem('uid',userid)
+        
+    //     } 
+    //     else{
+    //         //console.log('user: error in user or user not signin')
+    //     }
+    // })
   }
 
 };

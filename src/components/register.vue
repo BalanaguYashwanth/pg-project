@@ -29,7 +29,8 @@
 </template>
 
 <script>
-import {fb} from "../firebase";
+//import {fb} from "../firebase";
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -40,21 +41,36 @@ export default {
 
   methods: {
     posting: function () {
-        let self=this
-      fb
-        .auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
-        .then(
-          function () {
-            alert("sucessfully registered");
-            self.$router.push('login')
-          },
-          function (err) {
-            alert(err.message);
-          }
-        );
+      //   let self=this
+      // fb
+      //   .auth()
+      //   .createUserWithEmailAndPassword(this.email, this.password)
+      //   .then(
+      //     function () {
+      //       alert("sucessfully registered");
+      //       self.$router.push('login')
+      //     },
+      //     function (err) {
+      //       alert(err.message);
+      //     }
+      //   );
+
+      axios.post('http://127.0.0.1:5000/signup',{
+        email:this.email,
+        password:this.password
+      })
+      .then(res=>console.log(res))
+      .catch(err=>console.log(err))
+
+
+
+
+
     },
   },
+
+
+
 };
 </script>
 

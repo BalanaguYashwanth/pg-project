@@ -61,7 +61,7 @@ export default {
         profiledata=this.$store.state.mainuserprofile
         for(let obj in profiledata)
         {
-            if(profiledata[obj].userid==localStorage.getItem('uid'))
+            if(profiledata[obj].userid==localStorage.getItem('localid'))
             {
                 userpg=profiledata[obj].pg_name
             }
@@ -102,8 +102,6 @@ export default {
     created(){
         this.$store.dispatch('profileaction') 
         this.$store.dispatch('userregisters')
-
-        
     }
 
 

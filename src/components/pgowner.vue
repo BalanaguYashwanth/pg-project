@@ -122,7 +122,9 @@ export default {
           self.$router.push("/login");
         })
         .catch((err) => alert(err.message));
-      localStorage.removeItem("uid");
+      localStorage.removeItem("localid");
+      localStorage.removeItem("idtoken");
+      localStorage.removeItem("refreshtoken");
     },
 
     onfileselect: function (event) {
@@ -198,14 +200,14 @@ export default {
 
     await this.$store.dispatch("profileaction");
     
-    fb.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        var email = user.email;
-      }
-      console.log(email);
-    });
+    // fb.auth().onAuthStateChanged(function (user) {
+    //   if (user) {
+    //     var email = user.email;
+    //   }
+    //   console.log('db',email);
+    // });
   
-    if (localStorage.getItem("uid")) {
+    if (localStorage.getItem("localid")) {
       await axios
         .get("http://127.0.0.1:5000/get/posts")
         .then((res) => {

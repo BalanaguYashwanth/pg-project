@@ -12,13 +12,19 @@ export const store = new Vuex.Store({
         displayName:[],
         mainuserprofile:[],
         scheduledata:[],
-        alluserregisters:[]
+        alluserregisters:[],
+        owner:[]
     },
     getters:{
 
     },
 
     mutations:{
+
+        getowner:function(state,owner){
+            state.owner=owner
+        },
+
         getuser:function(state,email){
             state.email=email
         },
@@ -44,25 +50,44 @@ export const store = new Vuex.Store({
 
     actions:{
         getuseraction: async function(context){
-           await fb.auth().onAuthStateChanged(function(user){
-                if(user)
+        //    await fb.auth().onAuthStateChanged(function(user){
+        //         if(user)
+        //         {
+        //         var email=user.email
+        //         var userid=user.uid
+               
+        //         var photoURL=user.photoURL
+        //         var displayName=user.displayName
+        //         context.commit('getuser',email,displayName,photoURL)     
+        //         context.commit('getname',displayName)     
+        //         context.commit('getphoto',photoURL)  
+        //         console.log(user)
+        //         localStorage.setItem('uid',userid)
+        //         }
+        //         else{
+        //             //console.log('user: error in user or user not signin')
+        //         }
+        //     })
+
+            axios.post('http://127.0.0.1:5000/getcurrentuser',{
+                uid:localStorage.getItem('localid'),
+              }).then(res=>{
+                if(res)
                 {
-                var email=user.email
-                var userid=user.uid
-               
-                var photoURL=user.photoURL
-                var displayName=user.displayName
-                context.commit('getuser',email,displayName,photoURL)     
-                context.commit('getname',displayName)     
-                context.commit('getphoto',photoURL)  
-               
-                localStorage.setItem('uid',userid)
+                console.log('owner:',res.data.owner)
+                context.commit('getname',res.data.display_name)
+                context.commit('getuser',res.data.email)
+                context.commit('getphoto',res.data.photo_url)
+                context.commit('getowner',res.data.owner)
                 }
                 else{
                     console.log('user: error in user or user not signin')
                 }
-            })
-           
+                })
+              .catch(err=>console.log(err))
+
+
+
         },
 
         scheduleaction:function(context){
