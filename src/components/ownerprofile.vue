@@ -1,396 +1,434 @@
 <template>
-    <div>
-       <slot name="title" > </slot>
-     <button style="float: right" v-on:click="signout" class="btn btn-secondary">
-         signout
+  <div>
+    <slot name="title"> </slot>
+    <button style="float: right" v-on:click="signout" class="btn btn-secondary">
+      signout
     </button>
-    
-    {{getcurrentuser()}}
-  <div class="container">
-    <div class="title display-2">Owner Profile</div>
-    <form>
-        <div class="text-center m-3">
-         
-          <div v-if="this.$store.state.photourl">
-            <img
-            :src=this.$store.state.photourl
-            id="img"
-           
-            alt="profile pic"
-          />
-          
-          </div>
-          
-          <div v-else  >  
-          <img
-            src="https://info-ted.eu/wp-content/uploads/2019/12/profile-photo.png"
-            class="rounded"
-            alt="profile pic"
-          />
-          </div>
-
-            <div v-if="this.$store.state.photourl">
-              <button style="border:none;float:botton " v-on:click.prevent="deletephoto" > X </button>
-            </div>
-          
-          
-        </div>
-        
-      <div class="form-row" >
       
-        <div class="form-group col-md-6 ">
-          <label> username </label>
-          <div v-if="this.$store.state.displayName" >  
-          <input
-          disabled
-            type="text"
-            class="form-control"
-            placeholder="enter your username"
-           :value='this.$store.state.displayName'
-          />
+     
+     <FlashMessage :position="'right top'"/>
+
+
+    <div class="container">
+      <div class="title display-2">Owner Profile</div>
+      <form>
+        <div class="text-center m-3">
+          <div v-if="this.$store.state.photourl">
+            <img :src="this.$store.state.photourl" id="img" alt="profile pic" />
           </div>
-          <div v-else >
-            <input
-            type="text"
-            class="form-control"
-            placeholder="enter your username"
-            v-model="username"
-          />
+
+          <div v-else>
+            <img
+              src="https://info-ted.eu/wp-content/uploads/2019/12/profile-photo.png"
+              class="rounded"
+              alt="profile pic"
+            />
+          </div>
+          <div v-if="this.$store.state.photourl">
+            <button
+              style="border: none; float: botton"
+              v-on:click.prevent="deletephoto"
+            >
+              X
+            </button>
           </div>
         </div>
 
-        <div  class="form-group col-md-6"  >
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label> username </label>
+            <div v-if="this.$store.state.displayName">
+              <input
+                disabled
+                type="text"
+                class="form-control"
+                placeholder="enter your username"
+                :value="this.$store.state.displayName"
+              />
+            </div>
+            <div v-else>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="enter your username"
+                v-model="username"
+              />
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
             <label> Phone number </label>
 
-            <div v-if="phonenumber1">
-            <input
-            disabled
-            type="text"
-            class="form-control"
-            placeholder="enter your phone number"
-            v-model="phonenumber1"
-          />
+            <div v-if="this.$store.state.phonenumber">
+              <input
+                disabled
+                type="text"
+                class="form-control"
+                placeholder="enter your phone number"
+                v-model="this.$store.state.phonenumber"
+              />
             </div>
 
-          <div v-else >  
-          <input
-            type="text"
-            class="form-control"
-            placeholder="enter your phone number"
-            v-model="phonenumber"
-          />
+            <div v-else>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="enter your phone number"
+                v-model="phonenumber"
+              />
+            </div>
           </div>
-
-        </div>
-      </div>
-
-        <div class="form-row" >
- 
-        <div class="form-group col-md-6 ">
-          <label> email </label>
-          <div v-if="this.$store.state.email" >  
-          <input
-            disabled
-            type="text"
-            class="form-control"
-            placeholder="enter your email"
-           :value="this.$store.state.email"
-          />
-          </div>
-          
-          <div v-else > 
-            <input
-            type="text"
-            class="form-control"
-            placeholder="enter your email"
-            v-model="email"
-          />
-          </div>
-
-          
-           
-
         </div>
 
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label> email </label>
+            <div v-if="this.$store.state.email">
+              <input
+                disabled
+                type="text"
+                class="form-control"
+                placeholder="enter your email"
+                :value="this.$store.state.email"
+              />
+            </div>
 
-        <div class="form-group col-md-6 ">
-          <label> select pg hostel  </label>
-          <div  v-if="pgname1" >
-          <input
-            disabled
-            type="text"
-            class="form-control"
-            placeholder="select the pg hostel"
-            v-model="pgname1"
-          />
+            <div v-else>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="enter your email"
+                v-model="email"
+              />
+            </div>
           </div>
-          <div v-else >  
-            
-          <input
-            type="text"
-            class="form-control"
-            placeholder="select the pg hostel"
-            v-model="pgname"
-          />
-           </div>
+
+          <div class="form-group col-md-6">
+            <label> select pg hostel </label>
+            <div v-if="this.$store.state.pgname">
+              <input
+                disabled
+                type="text"
+                class="form-control"
+                placeholder="select the pg hostel"
+                v-model="this.$store.state.pgname"
+              />
+            </div>
+            <div v-else>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="select the pg hostel"
+                v-model="pgname"
+              />
+            </div>
+          </div>
         </div>
 
-      </div>
-    
-    <div class="form-row">  
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label> age </label>
 
-         <div class="form-group col-md-6">
-          <label> age  </label>
-          
-          <div v-if="age1" > 
-            <input
-            type="text"
-            disabled
-            class="form-control"
-            placeholder="select the age"
-            v-model="age1"
-          />
+            <div v-if="this.$store.state.age">
+              <input
+                type="text"
+                disabled
+                class="form-control"
+                placeholder="select the age"
+                v-model="this.$store.state.age"
+              />
+            </div>
+            <div v-else>
+              <input
+                type=number
+                class="form-control"
+                placeholder="select the age"
+                v-model="age"
+              />
+            </div>
           </div>
-          <div v-else >  <input
-            type="text"
-            class="form-control"
-            placeholder="select the age"
-            v-model="age"
-          /> </div>
-         
 
+          <div class="form-group col-md-6">
+            <label> select gender </label>
 
+            <div v-if="this.$store.state.gender">
+              <select
+                class="custom-select"
+                disabled
+                v-model="this.$store.state.gender"
+              >
+                <option value="men">Men</option>
+                <option value="women">Woman</option>
+                <option value="other">other</option>
+              </select>
+            </div>
+
+            <div v-else>
+              <select class="custom-select" v-model="gender">
+                <option value="men">Men</option>
+                <option value="women">Woman</option>
+                <option value="other">other</option>
+              </select>
+            </div>
+          </div>
         </div>
 
-        <div class="form-group col-md-6">
-          <label> select gender </label>
+        <div class="form-group">
+          <label> Update your Profile :- </label>
+          <input type="file" class="form-control-file" @change="file" />
+        </div>
+        <p  v-show=" uploadValue">
+          uploading photo:{{ uploadValue }}%  
+        </p>
         
-          <div  v-if="gender1" >  
-           <select  class="custom-select" disabled  v-model="gender1">
-                <option value="men"> Men </option>
-                <option value="women"> Woman </option>
-                <option value="other"> other </option>
-            </select>
-          </div>
 
-          <div v-else > 
-            <select  class="custom-select"  v-model="gender">
-                <option value="men"> Men </option>
-                <option value="women"> Woman </option>
-                <option value="other"> other </option>
-            </select>
-          </div>
-        </div>
+        <button
+          id="submit"
+          class="btn btn-secondary btn-md btn-block"
+          v-on:click.prevent="
+            posting(username, phonenumber, pgname, gender, age, email, owner)
+          "
+        >
+          submit
+        </button>
+        <button
+          id="submit"
+          class="btn btn-secondary btn-md btn-block"
+          v-on:click.prevent="deleting"
+        >
+          delete
+        </button>
+      </form>
     </div>
-
-        <div  class="form-group">
-        <label> Update your Profile  :-  </label>
-          <input type="file" class="form-control-file"   @change="file" />
-        </div>
-        {{uploadValue}}
-
-        <button id="submit" class="btn btn-secondary btn-md btn-block" v-on:click.prevent=posting(username) >   submit </button>
-        <button id="submit" class="btn btn-secondary btn-md btn-block" v-on:click.prevent="deleting" >  delete </button>
-     
-    </form>
-  </div>
   </div>
 </template>
 
 <script>
-import {fb} from '../firebase';
-import axios from 'axios'
+import { fb } from "../firebase";
+import axios from "axios";
+
 export default {
   data() {
     return {
+     
+      owner: "",
       username: "",
       phonenumber: "",
       phonenumber1: "",
-      isAdmin:false,
-      email:'',
-      pgname:'',
-      pgname1:'',
-      imageurl:'',
-      gender:'',
-      age:'',
-      gender1:'',
-      age1:'',
-      mainselectfile:'',
-      uploadValue:'',
-      allusers:'',
-      pk_id:'',
+      isAdmin: false,
+      email: "",
+      pgname: "",
+      pgname1: "",
+      imageurl: "",
+      gender: "",
+      age: "",
+      gender1: "",
+      age1: "",
+      mainselectfile: "",
+      uploadValue: "",
+      allusers: "",
+      pk_id: "",
     };
   },
 
   methods: {
-
-    signout:function(){
-      this.$store.dispatch('signout')
-      this.$router.push('/login')
+   
+    signout: function () {
+      this.$store.dispatch("signout");
+      this.$router.push("/login");
     },
 
-    deletephoto:function(){
-        
-        var user = fb.auth().currentUser;
-        user.updateProfile({       
-        photoURL: null
-        }).then(function() {
-        console.log('deleted photo Successfully');
-        });
+    deletephoto: function () {
+      axios
+        .post("http://127.0.0.1:5000/deletephoto/user", {
+          uid: localStorage.getItem("localid"),
+          id: this.$store.state.id,
+          photourl: null,
+        })
+        .then((res) => {
+          console.log(res.data)
+          location.reload()
+          })
+        .catch((err) => console.log(err));
     },
 
-    deleting(){
-      axios.delete('http://127.0.0.1:5000/delete/user/'+ this.pk_id)
-      .then(res=>{console.log(res)
-      location.reload()
-      })
-      .catch(err=>console.log(err))
+    deleting() {
+      axios
+        .delete("http://127.0.0.1:5000/delete/user/" + this.$store.state.id)
+        .then((res) => {
+          console.log(res);
+          location.reload();
+        })
+        .catch((err) => console.log(err));
     },
 
-    file:function(event){
-      this.mainselectfile = event.target.files[0]
+    file: function (event) {
+      this.mainselectfile = event.target.files[0];
       //console.log(this.mainselectfile)
     },
 
-      posting:function(username){
-        if(this.$store.state.displayName)
-        {
-          username=this.$store.state.displayName
-        }else{
-          console.log("username is manually entered")
-        }
-      if(this.$store.state.displayName == null || this.$store.state.photourl == null )
-      {
-      var storageRef = fb.storage().ref("userprofile/" + this.mainselectfile.name);
-      let uploadedTask = storageRef.put(this.mainselectfile);
-      uploadedTask.on(
-        "state_changed",
-        (snapshot) => {
-          this.uploadValue =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        },
-        function (err) {
-          console.log(err);
-        },
 
-        function () {
-          uploadedTask.snapshot.ref
-            .getDownloadURL()
-            .then(function (downloadURL) {
-              console.log(downloadURL);
-              //   var user=fb.auth().currentUser
-              //   user.updateProfile({
-              //   displayName:username,
-              //  // photoURL:downloadURL,
-              // }).then(()=>console.log('success'))
-              // .catch(err=>console.log(err))
-              // console.log('not restrict')
-              console.log(username)
-              axios.post('http://127.0.0.1:5000/updateuser',{
-                uid:localStorage.getItem('localid'),
-                displayname:'yashwanth',
-                photourl:'https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823__340.jpg'
-              }).then(res=>{console.log('done',res)
-                    console.log('yesdone')
-              })
-              .catch(err=>console.log(err))
-
-
-              
-            });
-        }
-      );
-      }else{
-        console.log('not allow to post primary data')
-      }
-
-      if(this.$store.state.displayName)
-      {
-        this.username=this.$store.state.displayName
-      }
-        if( this.phonenumber1 == '' && this.pgname1 == '' && this.age1 == '' && this.gender1 == '')    
-       {
-          axios.post('http://127.0.0.1:5000/post/user',{
-          userid:localStorage.getItem('localid'),
-          username:this.username,
-          email:this.$store.state.email,
-          phonenumber:this.phonenumber,
-          pg_name:this.pgname,
-          age:this.age,
-          gender:this.gender,
-        })
-        .then(res=>{console.log(res)
-       
-        })
-        .catch(err=>console.log(err.reponse.data))
-      }else{
-        console.log('not enter to post secondary data')
-      }
-
-      setTimeout(() => {
-            location.reload();
-          }, 5000);
-      },
-
-      getcurrentuser:  function(){
-        let allusers=[]
-        allusers= this.$store.state.mainuserprofile
-        for(let key in allusers)
-        {
-            if( allusers[key].userid == localStorage.getItem('localid') )
-            {
-              this.phonenumber1=allusers[key].phonenumber
-              this.pgname1=allusers[key].pg_name
-              this.gender1=allusers[key].gender
-              this.age1=allusers[key].age
-              this.pk_id=allusers[key].id
-            }
+    posting: function (
+      username,
+      phonenumber,
+      pgname,
+      gender,
+      age,
+      email,
+      owner
+    ) {
+        
+      email = this.$store.state.email;
+      owner = this.$store.state.owner;
+      if (
+        this.$store.state.displayName == "" &&
+        this.$store.state.pgname == "" &&
+        this.$store.state.phonenumber =="" &&
+        this.$store.state.gender=="" 
+      ) {
           
-        }
-      }
+        if(username!="" &&  phonenumber.length==10 && pgname!="" && gender!="" && age!="" )
+        {
+          this.flashMessage.setStrategy('single');
+          this.flashMessage.success({
+          message: 'successfully registered',
+          time: 3000,
+          blockClass: 'custom-block-class'
+          });
+          console.log('please enter valid data')
+        }else{
+          this.flashMessage.setStrategy('single');
+          this.flashMessage.error({
+          message: 'please enter all input datas',
+          time: 3000,
+          blockClass: 'custom-block-class'
+          });
+          console.log('please enter valid data')
 
+          if(phonenumber.length==10)
+          {
+          this.flashMessage.setStrategy('single');
+          this.flashMessage.error({
+          message: 'phone number must be 10 digits',
+          time: 3000,
+          blockClass: 'custom-block-class'
+          });
+          console.log('please enter valid data')
+          }
+        }
+
+
+        var storageRef = fb
+          .storage()
+          .ref("userprofile/" + this.mainselectfile.name);
+        let uploadedTask = storageRef.put(this.mainselectfile);
+        uploadedTask.on(
+          "state_changed",
+          (snapshot) => {
+            this.uploadValue =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          },
+          function (err) {
+            console.log(err);
+          },
+
+          function () {
+            uploadedTask.snapshot.ref
+              .getDownloadURL()
+              .then(async function (downloadURL) {
+                await console.log(downloadURL);
+
+                console.log('primary')
+              if(username!="" &&  phonenumber.length==10 && pgname!="" && gender!="" && age!="" )
+              {  
+                axios
+                  .post("http://127.0.0.1:5000/post/user", {
+                    uid: localStorage.getItem("localid"),
+                    username: username,
+                    email: email,
+                    phonenumber: phonenumber,
+                    pgname: pgname,
+                    gender: gender,
+                    age: age,
+                    owner: owner,
+                    profilepic: downloadURL,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    //location.reload();
+                  })
+                  .catch((err) => console.log(err));
+              }
+              });
+          }
+        );
+      } else if(this.mainselectfile!="") {
+        var storageRef1 = fb
+          .storage()
+          .ref("userprofile/" + this.mainselectfile.name);
+        let uploadedTask = storageRef1.put(this.mainselectfile);
+        uploadedTask.on(
+          "state_changed",
+          (snapshot) => {
+            this.uploadValue =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          },
+          function (err) {
+            console.log(err);
+          },
+
+          function () {
+            uploadedTask.snapshot.ref
+              .getDownloadURL()
+              .then(async function (downloadURL) {
+                await console.log(downloadURL);
+
+                axios
+                  .post("http://127.0.0.1:5000/deletephoto/user", {
+                    uid:localStorage.getItem('localid'),
+                    id: localStorage.getItem('id'),
+                    photourl: downloadURL,
+                  })
+                  .then((res) => {
+                    console.log(res);
+                    location.reload()
+                    console.log("updated the photo");
+                  })
+                  .catch((err) => console.log(err));
+              });
+          }
+        );
+      }
+      else{
+        this.flashMessage.setStrategy('single');
+        this.flashMessage.info({
+        message: 'please enter all input datas',
+        time: 3000,
+        blockClass: 'custom-block-class'
+      });
+        console.log('please enter valid data')
+      }
+    },
   },
 
   async created() {
-    if(localStorage.getItem('localid'))
-    {
-    await this.$store.dispatch('getuseraction')
-    await this.$store.dispatch('profileaction')
+    if (localStorage.getItem("localid")) {
+      await this.$store.dispatch("getuseraction");
+      await this.$store.dispatch("profileaction");
     }
 
-   
-
-    axios.post('http://127.0.0.1:5000/getcurrentuser',{
-        uid:localStorage.getItem('localid'),
-      }).then(res=>{
-        console.log(res.data)
-        if(!res)
-        {
-          console.log('user: error in user or user not signin')
+    axios
+      .post("http://127.0.0.1:5000/getcurrentuser", {
+        uid: localStorage.getItem("localid"),
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (!res) {
+          console.log("user: error in user or user not signin");
         }
-
-        })
-      .catch(err=>console.log(err))
-    
-    
-    // fb.auth().onAuthStateChanged(function(user){
-    //     if(user)
-    //     {
-    //     var email=user.email
-    //     var userid=user.uid
-    //     var phonenumber=user.phoneNumber
-    //     var photoURL=user.photoURL
-    //     var displayName=user.displayName
-    //     console.log('email',email,displayName,photoURL,phonenumber)
-    //     localStorage.setItem('uid',userid)
-        
-    //     } 
-    //     else{
-    //         //console.log('user: error in user or user not signin')
-    //     }
-    // })
-  }
-
+      })
+      .catch((err) => console.log(err));
+  },
 };
 </script>
 
@@ -402,13 +440,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   margin-left: auto;
   color: #2c3e50;
- 
+
   text-transform: capitalize;
 }
 
-#submit{
-    margin: auto;
-    margin-bottom: 20px;
+#submit {
+  margin: auto;
+  margin-bottom: 20px;
 }
 
 #img {

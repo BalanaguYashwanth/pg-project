@@ -4,22 +4,48 @@ import axios from 'axios'
 import {fb} from '../firebase'
 Vue.use(Vuex)
 
+
 export const store = new Vuex.Store({
     strict:true,
     state:{
         email:[],
-        photourl:[],
-        displayName:[],
+        photourl:"",
+        displayName:"",
         mainuserprofile:[],
         scheduledata:[],
         alluserregisters:[],
-        owner:[]
+        owner:[],
+        phonenumber:"",
+        age:"",
+        pgname:"",
+        gender:"",
+        id:[]
     },
     getters:{
 
     },
 
     mutations:{
+
+        getid:function(state,id){
+            state.id=id
+        },
+
+        getgender:function(state,gender){
+            state.gender=gender
+        },
+
+        getphonenumber:function(state,phonenumber){
+            state.phonenumber=phonenumber
+        },
+
+        getage:function(state,age){
+            state.age=age
+        },
+
+        getpgname:function(state,pgname){
+            state.pgname=pgname
+        },
 
         getowner:function(state,owner){
             state.owner=owner
@@ -50,34 +76,13 @@ export const store = new Vuex.Store({
 
     actions:{
         getuseraction: async function(context){
-        //    await fb.auth().onAuthStateChanged(function(user){
-        //         if(user)
-        //         {
-        //         var email=user.email
-        //         var userid=user.uid
-               
-        //         var photoURL=user.photoURL
-        //         var displayName=user.displayName
-        //         context.commit('getuser',email,displayName,photoURL)     
-        //         context.commit('getname',displayName)     
-        //         context.commit('getphoto',photoURL)  
-        //         console.log(user)
-        //         localStorage.setItem('uid',userid)
-        //         }
-        //         else{
-        //             //console.log('user: error in user or user not signin')
-        //         }
-        //     })
 
             axios.post('http://127.0.0.1:5000/getcurrentuser',{
                 uid:localStorage.getItem('localid'),
               }).then(res=>{
                 if(res)
                 {
-                console.log('owner:',res.data.owner)
-                context.commit('getname',res.data.display_name)
                 context.commit('getuser',res.data.email)
-                context.commit('getphoto',res.data.photo_url)
                 context.commit('getowner',res.data.owner)
                 }
                 else{
@@ -85,9 +90,39 @@ export const store = new Vuex.Store({
                 }
                 })
               .catch(err=>console.log(err))
+            
+            axios.get('http://127.0.0.1:5000/get/user')
+            .then(res=>{
+                let datas=res.data
+                let maindatas=[]
+                for(let obj1 in datas)
+                {
+                   datas[obj1].id=obj1
+                   maindatas.push(datas[obj1])
+                }
+               
 
+               let data=maindatas
+                
 
-
+                for(let obj in data)
+                {
+                    if( localStorage.getItem('localid') == data[obj].uid  )
+                    {
+                        console.log( data[obj])
+                        context.commit('getid',data[obj].id)
+                        context.commit('getname',data[obj].username)
+                        context.commit('getphoto',data[obj].profilepic)
+                        context.commit('getphonenumber',data[obj].phonenumber)
+                        context.commit('getage',data[obj].age)
+                        context.commit('getpgname',data[obj].pgname)
+                        context.commit('getgender',data[obj].gender)
+                        localStorage.setItem('id',data[obj].id)
+                    }
+                }
+            
+            })
+            .catch(err=>console.log(err))
         },
 
         scheduleaction:function(context){

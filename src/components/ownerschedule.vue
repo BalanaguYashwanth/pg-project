@@ -45,23 +45,7 @@ export default {
     },
 
 
-    computed:{
-        profile:function(){
-        let profiledata=[]
-        var userpg=''
-        profiledata=this.$store.state.mainuserprofile
-        for(let obj in profiledata)
-        {
-            if(profiledata[obj].userid==localStorage.getItem('uid'))
-            {
-                userpg=profiledata[obj].pg_name
-            }
-        }
-        return userpg
-
-    },
-    },
-
+    
     methods:{
         deleting:function(id){
             alert(id)
@@ -80,7 +64,7 @@ export default {
         
         for(let obj in scheduledata)
         {
-            if(scheduledata[obj].pgname==this.profile)
+            if(scheduledata[obj].pgname==this.$store.state.pgname  && scheduledata[obj].pgname!="")
             {
                schedule.push( scheduledata[obj])
             }
@@ -93,6 +77,7 @@ export default {
     created(){
         this.$store.dispatch('profileaction') 
         this.$store.dispatch('scheduleaction')
+        this.$store.dispatch('getuseraction')
     }
 
 

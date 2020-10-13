@@ -54,23 +54,7 @@ export default {
     },
 
 
-    computed:{
-        profile:function(){
-        let profiledata=[]
-        var userpg=''
-        profiledata=this.$store.state.mainuserprofile
-        for(let obj in profiledata)
-        {
-            if(profiledata[obj].userid==localStorage.getItem('localid'))
-            {
-                userpg=profiledata[obj].pg_name
-            }
-        }
-        return userpg
-
-    },
-    },
-
+   
     methods:{
         deleting:function(id){
             axios.delete('http://127.0.0.1:5000/delete/userregisters/'+id)
@@ -89,8 +73,10 @@ export default {
         
         for(let obj in rusers)
         {
-            if(rusers[obj].pgname==this.profile)
+           
+            if(rusers[obj].pgname==this.$store.state.pgname && rusers[obj].pgname!='')
             {
+              console.log('data')
                userr.push( rusers[obj])
             }
         }
@@ -102,6 +88,7 @@ export default {
     created(){
         this.$store.dispatch('profileaction') 
         this.$store.dispatch('userregisters')
+         this.$store.dispatch('getuseraction')
     }
 
 

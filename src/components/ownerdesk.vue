@@ -124,21 +124,7 @@ export default {
     }
   },
 
-    computed:{
-        profile:function(){
-        let profiledata=[]
-        var userpg=''
-        profiledata=this.$store.state.mainuserprofile
-        for(let obj in profiledata)
-        {
-            if(profiledata[obj].userid==localStorage.getItem('localid'))
-            {
-                userpg=profiledata[obj].pg_name
-            }
-        }
-        return userpg
-    },
-    },
+    
 
 methods:{
   posted:function(){
@@ -154,7 +140,7 @@ methods:{
       age:this.age,
       category:this.category,
       ownername: this.$store.state.displayName,
-      pgname:this.profile,
+      pgname:this.$store.state.pgname,
     })
     .then(res=>{
       console.log(res)

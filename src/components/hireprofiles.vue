@@ -167,34 +167,7 @@ export default {
       );
     },
 
-    // posted: function () {
-    //   if (
-    //     this.name != "" &&
-    //     this.phonenumber != "" &&
-    //     this.gender != "" &&
-    //     this.city != "" &&
-    //     this.email != "" &&
-    //     this.age != ""
-    //   ) {
-    //     axios
-    //       .post("http://127.0.0.1:5000/post/careers", {
-    //         name: this.name,
-    //         phonenumber: this.phonenumber,
-    //         email: this.email,
-    //         gender: this.gender,
-    //         age: this.age,
-    //         city: this.city,
-    //         profile: this.imgurl,
-    //       })
-    //       .then((res) => {
-    //         console.log(res);
-    //         this.feedback = "successfully submitted";
-    //       })
-    //       .catch((err) => console.log(err));
-    //   } else {
-    //     this.feedback = "please fill up all inputs";
-    //   }
-    // },
+   
   },
 };
 </script>

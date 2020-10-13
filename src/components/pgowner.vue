@@ -1,5 +1,7 @@
 <template>
   <div>
+      <FlashMessage :position="'right top'"/>
+
     {{ modified() }}
     <slot name="title" >  </slot>
     <div v-if="this.$store.state.photourl" style="text-align: right">
@@ -53,7 +55,7 @@
           </div>
           <p v-show="uploadValue" style="text-align: center">
             {{ info }}
-            uploaded file:-{{ this.uploadValue }}%
+            uploading photo:-{{ this.uploadValue }}%
           </p>
 
           <button
@@ -66,8 +68,8 @@
         </div>
 
         <div v-for="(all, index) in alldata" v-bind:key="index">
-          <div class="card mx-auto m-5" style="width: 35rem">
-            <img :src="all.img" class="card-img-top rounded" alt="nature" />
+          <div class="card mx-auto m-5" id="card" style="width: 35rem">
+            <img :src="all.img" v-show="all.img" class="card-img-top rounded" alt="nature" />
             <div class="card-body">
               <p class="card-text">
                 {{ all.text }} 
@@ -107,6 +109,7 @@ export default {
       uid: "",
       pgname: "",
       username: "",
+      info1:"",
     };
   },
 
@@ -133,6 +136,8 @@ export default {
     },
 
     fileurl: function (text, pgname, username) {
+      if(this.selectfile!=="")
+      {
       var storageRef = fb.storage().ref("images/" + this.selectfile.name);
       let uploadedTask = storageRef.put(this.selectfile);
       uploadedTask.on(
@@ -157,6 +162,7 @@ export default {
                     img: downloadURL,
                     pgname: pgname,
                     username: username,
+                    uid:localStorage.getItem('localid')
                   })
                   .then((res) => {
                     console.log('succes')
@@ -169,17 +175,37 @@ export default {
             });
         }
       );
+      }
+      else if(text!=''){
+        axios.post('http://127.0.0.1:5000/post/posts',{
+            text: text,
+            pgname: pgname,
+            username: username,
+            uid:localStorage.getItem('localid')
+        }).then(res=>{
+          console.log(res)
+          location.reload()
+        })
+        .catch(err=>console.log(err))
+        console.log('secondary')
+      }
+      else{
+        console.log('enter valid input')
+        this.flashMessage.setStrategy('single');
+        
+        this.flashMessage.error({
+        message: 'please enter input data',
+        time: 3000,
+        blockClass: 'custom-block-class'
+        });
+
+        this.info1="please enter valid input"
+      }
     },
 
     modified: function () {
-      let mainprofile = [];
-      mainprofile =  this.$store.state.mainuserprofile;
-      for (let obj in mainprofile) {
-        if (mainprofile[obj].userid == localStorage.getItem("uid")) {
-          this.pgname = mainprofile[obj].pg_name;
-          this.username = mainprofile[obj].username;
-        }
-      }
+      this.pgname = this.$store.state.pgname
+      this.username=this.$store.state.displayName
     },
 
     deleting: function (id) {
@@ -195,18 +221,8 @@ export default {
   },
 
   async created() {
-
     await this.$store.dispatch("getuseraction");
-
     await this.$store.dispatch("profileaction");
-    
-    // fb.auth().onAuthStateChanged(function (user) {
-    //   if (user) {
-    //     var email = user.email;
-    //   }
-    //   console.log('db',email);
-    // });
-  
     if (localStorage.getItem("localid")) {
       await axios
         .get("http://127.0.0.1:5000/get/posts")
@@ -233,8 +249,6 @@ export default {
      else {
       console.log("user not  authenticated");
     }
-
-    
   },
 
 
@@ -243,6 +257,11 @@ export default {
 
 
 <style>
+
+#card{
+  border: 0.1px solid grey;
+}
+
 textarea {
   height: auto;
 }

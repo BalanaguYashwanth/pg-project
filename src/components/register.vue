@@ -59,12 +59,11 @@ export default {
         email:this.email,
         password:this.password
       })
-      .then(res=>console.log(res))
+      .then(res=>{
+        console.log(res)
+        this.$router.push('login')
+        })
       .catch(err=>console.log(err))
-
-
-
-
 
     },
   },
