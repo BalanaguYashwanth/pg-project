@@ -4,10 +4,11 @@
     <button style="float: right" v-on:click="signout" class="btn btn-secondary">
       signout
     </button>
-      
+       
      
-     <FlashMessage :position="'right top'"/>
 
+
+    <FlashMessage :position="'right top'"/>
 
     <div class="container">
       <div class="title display-2">Owner Profile</div>
@@ -210,7 +211,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-     
+      date:'',
       owner: "",
       username: "",
       phonenumber: "",
@@ -234,8 +235,11 @@ export default {
   methods: {
    
     signout: function () {
+       localStorage.removeItem("localid");
+      localStorage.removeItem("idtoken");
+      localStorage.removeItem("id");
       this.$store.dispatch("signout");
-      this.$router.push("/login");
+     this.$router.push("/login");
     },
 
     deletephoto: function () {

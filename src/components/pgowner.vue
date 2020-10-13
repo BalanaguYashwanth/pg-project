@@ -127,7 +127,7 @@ export default {
         .catch((err) => alert(err.message));
       localStorage.removeItem("localid");
       localStorage.removeItem("idtoken");
-      localStorage.removeItem("refreshtoken");
+      localStorage.removeItem("id");
     },
 
     onfileselect: function (event) {

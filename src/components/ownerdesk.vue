@@ -1,5 +1,8 @@
 <template>
   <div>
+
+    
+
      <slot name="title" >  </slot>
     <div class="container">
       <p class="display-2" id="title">Owner desk</p>
@@ -32,22 +35,12 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Start Date</label>
-            <input
-              type="datetime-local"
-              v-model="startdate"
-              class="form-control"
-              required
-            />
+            <datetime type="datetime"  v-model="startdate"   class="datetime" use12-hour></datetime>
           </div>
 
           <div class="form-group col-md-6">
             <label>End date</label>
-            <input
-              type="datetime-local"
-              v-model="enddate"
-              class="form-control"
-              required
-            />
+            <datetime type="datetime"  v-model="enddate"   class="datetime" use12-hour></datetime>
           </div>
         </div>
 
@@ -112,6 +105,7 @@ import axios from 'axios';
 export default {
   data(){
     return{
+      date:'',
       name:'',
       phonenumber:'',
       startdate:'',
@@ -168,6 +162,8 @@ created(){
   margin-bottom: 30px;
   text-align: center;
 }
+
+
 
 .container{
     text-transform: capitalize;
