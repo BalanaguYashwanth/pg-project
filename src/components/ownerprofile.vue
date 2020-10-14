@@ -74,7 +74,7 @@
               <input
                 type="text"
                 class="form-control"
-                placeholder="enter your phone number"
+                placeholder="enter your phone number ex:- 9655537630"
                 v-model="phonenumber"
               />
             </div>
@@ -238,7 +238,6 @@ export default {
        localStorage.removeItem("localid");
       localStorage.removeItem("idtoken");
       localStorage.removeItem("id");
-      this.$store.dispatch("signout");
      this.$router.push("/login");
     },
 

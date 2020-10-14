@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import {fb} from '../firebase'
+//import {fb} from '../firebase'
 Vue.use(Vuex)
 
 
@@ -159,15 +159,10 @@ export const store = new Vuex.Store({
         },
 
         signout:function(){
-                console.log(fb.auth().signOut())
-                
-                fb.auth().signOut()
-                .then(() => {
-                  alert('sucessfully logout')
-                       
-                  })
-                .catch( err => alert(err.message) )
-                localStorage.removeItem('uid')
+            localStorage.removeItem("localid");
+            localStorage.removeItem("idtoken");
+            localStorage.removeItem("id");
+           this.$router.push("/login");
              
         },
 

@@ -1,7 +1,8 @@
 <template>
   <div>
 
-    
+       <FlashMessage :position="'right top'"/>
+
 
      <slot name="title" >  </slot>
     <div class="container">
@@ -25,7 +26,7 @@
             <input
               type="text"
               v-model="phonenumber"
-              placeholder="enter your phonenumber"
+              placeholder="enter your phonenumber ex:- 9655537630"
               class="form-control"
               required
             />
@@ -56,11 +57,11 @@
           </div>
 
           <div class="form-group col-md-6">
-            <label>email</label>
+            <label>rent</label>
             <input
-              type="email"
-              v-model="email"
-              placeholder="enter your email"
+              type="number"
+              v-model="rent"
+              placeholder="enter rent amount paid"
               class="form-control"
               required
             />
@@ -90,6 +91,16 @@
           </div>
         </div>
 
+          <div class="form-group">
+            <label>email</label>
+            <input
+              type="email"
+              v-model="email"
+              placeholder="enter your email"
+              class="form-control"
+              required
+            />
+          </div>
 
         <button v-on:click.prevent="posted" class="btn btn-secondary">Submit</button>
       </form>
@@ -115,6 +126,7 @@ export default {
       email:'',
       age:'',
       feedback:'',
+      rent:''
     }
   },
 
@@ -122,7 +134,7 @@ export default {
 
 methods:{
   posted:function(){
-    if(this.name!='' && this.phonenumber!='' && this.startdate!='' &&  this.enddate!='' && this.gender!='' && this.category!='' && this.email!='' && this.age!='' )
+    if(this.name!='' && this.phonenumber.length==10 && this.startdate!='' &&  this.enddate!='' && this.gender!='' && this.category!='' && this.email!='' && this.age!='' && this.rent!="")
     {
     axios.post('http://127.0.0.1:5000/post/userregisters',{
       name:this.name,
@@ -134,16 +146,37 @@ methods:{
       age:this.age,
       category:this.category,
       ownername: this.$store.state.displayName,
+      rent:this.rent,
       pgname:this.$store.state.pgname,
     })
     .then(res=>{
       console.log(res)
-      this.feedback="successfully submitted";
+
+      this.flashMessage.setStrategy('single');
+      this.flashMessage.success({
+      message: 'successfully registered',
+      time: 3000,
+      blockClass: 'custom-block-class'
+      });
+      console.log('please enter valid data')
+
+      this.feedback="successfully registered";
       })
     .catch(err=>console.log(err))
     }
     else{
-      this.feedback="please fill up all inputs"
+      if(this.phonenumber.length!=10)
+      {
+        this.flashMessage.setStrategy('single');
+        this.flashMessage.error({
+        message: 'phone number must be 10 digits',
+        time: 3000,
+        blockClass: 'custom-block-class'
+        });
+        console.log('please enter valid data')
+      }
+      
+      this.feedback="please fill up all details & enter valid inputs" 
     }
   }
 },
