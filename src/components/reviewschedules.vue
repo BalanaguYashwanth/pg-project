@@ -1,7 +1,7 @@
 <template>
     <div >
-         <slot name="title" >  </slot>
-        <div class="title display-2"> Customer schedules </div>
+         <slot name="customer" >  </slot>
+        <div class="title display-2"> Review your schedules </div>
          Note :- *Date & Time format = (yyyy-mm-dd,hh-mm-ss)
         <table class="table table-bordered" style="table-layout: auto width: 100%; " >
             <thead>
@@ -50,12 +50,11 @@ export default {
             maindata:[],
         }
     },
-
-
     
     methods:{
-
     dateformat(num){
+
+
         if(num)
         {
         let str=num.split("T")
@@ -85,11 +84,12 @@ export default {
         
         for(let obj in scheduledata)
         {
-            if(scheduledata[obj].pgname==this.$store.state.pgname  && scheduledata[obj].pgname!="")
+            if(scheduledata[obj].pgname==this.$store.state.pgname && scheduledata[obj].userid==localStorage.getItem('localid')  && scheduledata[obj].pgname!="")
             {
                schedule.push( scheduledata[obj])
             }
         }
+      
         return schedule
     },
 

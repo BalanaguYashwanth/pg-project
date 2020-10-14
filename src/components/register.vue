@@ -41,19 +41,7 @@ export default {
 
   methods: {
     posting: function () {
-      //   let self=this
-      // fb
-      //   .auth()
-      //   .createUserWithEmailAndPassword(this.email, this.password)
-      //   .then(
-      //     function () {
-      //       alert("sucessfully registered");
-      //       self.$router.push('login')
-      //     },
-      //     function (err) {
-      //       alert(err.message);
-      //     }
-      //   );
+    
 
       axios.post('http://127.0.0.1:5000/signup',{
         email:this.email,

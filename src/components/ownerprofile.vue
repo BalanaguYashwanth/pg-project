@@ -4,10 +4,6 @@
     <button style="float: right" v-on:click="signout" class="btn btn-secondary">
       signout
     </button>
-       
-     
-
-
     <FlashMessage :position="'right top'"/>
 
     <div class="container">
@@ -267,7 +263,6 @@ export default {
 
     file: function (event) {
       this.mainselectfile = event.target.files[0];
-      //console.log(this.mainselectfile)
     },
 
 
@@ -308,7 +303,7 @@ export default {
           });
           console.log('please enter valid data')
 
-          if(phonenumber.length==10)
+          if(phonenumber.length!=10)
           {
           this.flashMessage.setStrategy('single');
           this.flashMessage.error({
@@ -358,7 +353,7 @@ export default {
                   })
                   .then((res) => {
                     console.log(res);
-                    //location.reload();
+                    location.reload();
                   })
                   .catch((err) => console.log(err));
               }

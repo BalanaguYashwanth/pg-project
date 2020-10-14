@@ -2,7 +2,7 @@
     <div >
         <slot name="title" >  </slot>
         <div class="title display-2"> Registered Users </div>
-         Note :- * = (yyyy-mm-dd,hh-mm-ss)
+         Note :- *Date & Time format = (yyyy-mm-dd,hh-mm-ss)
         <table class="table table-bordered" style="table-layout: auto width: 100%; " >
             <thead>
                 <tr>
@@ -120,7 +120,7 @@ export default {
     text-align: center;
 }
 
-.container{
+thead{
      text-transform: capitalize;
 }
 

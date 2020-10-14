@@ -75,8 +75,8 @@ export const store = new Vuex.Store({
     },
 
     actions:{
+        
         getuseraction: async function(context){
-
             axios.post('http://127.0.0.1:5000/getcurrentuser',{
                 uid:localStorage.getItem('localid'),
               }).then(res=>{

@@ -24,7 +24,8 @@
             { id: 1, text: 'Home', url: 'http://localhost:8080/cremainder' },
             { id: 2, text: 'Customer Profile', url: 'http://localhost:8080/customerprofile' },
             { id: 3, text: 'Schedules', url: 'http://localhost:8080/schedules' },
-            { id: 4, text: 'Payments', url: '#' },
+            { id: 4, text: 'Review Schedules', url:'http://localhost:8080/reviewschedules'},
+            { id: 5, text: 'Payments', url: '#' },
           ]"
           format="push"
           direction="left"

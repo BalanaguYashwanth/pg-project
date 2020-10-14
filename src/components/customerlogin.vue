@@ -29,7 +29,8 @@
 </template>
 
 <script>
-import { fb } from "../firebase";
+import axios from 'axios'
+//import { fb } from "../firebase";
 export default {
   data() {
     return {
@@ -39,24 +40,24 @@ export default {
   },
 
   methods: {
-
     posting: function () {
-       let  self = this
-      fb.auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(
-          function () {
-            self.$router.push('customerprofile');
-            location.reload()
-            location.reload()
-          },
-          function (err) {
-            alert(err.message);
-          }
-        );
+      axios.post('http://127.0.0.1:5000/signin',{
+        email:this.email,
+        password:this.password
+      })
+      .then(res=>{
+        console.log(res)
+        localStorage.setItem('localid',res.data.localId)
+        localStorage.setItem('idtoken',res.data.idToken)
+          this.$router.push('customerprofile');
+          location.reload()
+          location.reload()
+      })
+      .catch(err=>console.log(err))
     },
 
   },
+
 };
 
 </script>

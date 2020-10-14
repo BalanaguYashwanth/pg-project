@@ -194,7 +194,7 @@ export default {
         this.flashMessage.setStrategy('single');
         
         this.flashMessage.error({
-        message: 'please enter input data',
+        message: 'please fullup atleast one input',
         time: 3000,
         blockClass: 'custom-block-class'
         });
@@ -227,7 +227,7 @@ export default {
       await axios
         .get("http://127.0.0.1:5000/get/posts")
         .then((res) => {
-          console.log(res);
+         
           var data = res.data;
          var blogs=[]
         for(let key in data)

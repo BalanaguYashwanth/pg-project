@@ -14,6 +14,8 @@ import hireprofiles from './components/hireprofiles'
 import careerprofiles from './components/careerprofiles'
 import pgregister from './components/pgregister'
 import pghome from './components/pghome'
+import reviewschedules from './components/reviewschedules'
+
 
 export default[
     {path:'/pgowner',component:pgowner},
@@ -32,6 +34,7 @@ export default[
     {path:'/careerprofiles',component:careerprofiles},
     {path:'/pgregister',component:pgregister},
     {path:'/pghome',component:pghome},
+    {path:'/reviewschedules',component:reviewschedules}
 
 ]
 
