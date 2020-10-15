@@ -21,7 +21,7 @@
             <h5 class="card-title">landmark:{{detail.landmark}}</h5>
            
             <h5 class="card-title">address:{{detail.address}} </h5>
-            <h5 class="card-title">city:{{detail.city}}</h5>
+            <h5 class="card-title">location:{{detail.city}}</h5>
             <h5 class="card-title">pincode:{{detail.pincode}}</h5>
            
           </div>

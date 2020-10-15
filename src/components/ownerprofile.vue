@@ -6,6 +6,8 @@
     </button>
     <FlashMessage :position="'right top'"/>
 
+    
+
     <div class="container">
       <div class="title display-2">Owner Profile</div>
       <form>
@@ -112,14 +114,15 @@
               />
             </div>
             <div v-else>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="select the pg hostel"
-                v-model="pgname"
-              />
+
+            <select class="custom-select" v-model="pgname"  >
+              <option value="" disabled> select the pg </option>
+              <option v-for="(pg,index) in this.$store.state.pgnames" v-bind:key="index" > {{pg.name}}</option>
+            </select>
+            
             </div>
           </div>
+
         </div>
 
         <div class="form-row">
@@ -161,7 +164,8 @@
             </div>
 
             <div v-else>
-              <select class="custom-select" v-model="gender">
+                <select class="custom-select" v-model="gender">
+                <option value="" disabled > select the gender </option>
                 <option value="men">Men</option>
                 <option value="women">Woman</option>
                 <option value="other">other</option>
@@ -426,7 +430,22 @@ export default {
         }
       })
       .catch((err) => console.log(err));
+
+
+      let routing=this.$store.state.owner
+      window.routing=routing
+      if(!routing)
+      {
+        this.$router.push('login')
+      }
+      console.log(this.$store.state.owner)
+
+      this.$store.dispatch('getpgnames')
+
+
   },
+
+
 };
 </script>
 

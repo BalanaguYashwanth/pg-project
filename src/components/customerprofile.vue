@@ -105,10 +105,6 @@
             v-model="email"
           />
           </div>
-
-          
-           
-
         </div>
 
 
@@ -124,12 +120,12 @@
           />
           </div>
           <div v-else >  
-           <select  class="custom-select"  v-model="pgname">
-                <option value="sunshine"> sunshine </option>
-                <option value="roxpg"> roxpg </option>
-                <option value="nextpg"> nextpg </option>
-                <option value="other"> other </option>
+            <select class="custom-select" v-model="pgname"  >
+              <option value="" > select the pg  </option>
+              <option v-for=" (pg,index)  in this.$store.state.pgnames" v-bind:key="index" > {{pg.name}}  </option>
+
             </select>
+
            </div>
         </div>
 
@@ -420,6 +416,9 @@ export default {
         }
       })
       .catch((err) => console.log(err));
+
+      this.$store.dispatch('getpgnames')
+
   },
 
 };

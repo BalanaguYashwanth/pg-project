@@ -152,13 +152,14 @@ methods:{
     .then(res=>{
       console.log(res)
 
-      this.flashMessage.setStrategy('single');
-      this.flashMessage.success({
-      message: 'successfully registered',
-      time: 3000,
-      blockClass: 'custom-block-class'
-      });
-      console.log('please enter valid data')
+    
+        this.flashMessage.setStrategy('single');
+        this.flashMessage.success({
+        message: 'successfully registered',
+        time: 3000,
+        blockClass: 'custom-block-class'
+        });
+        console.log('please enter valid data')
 
       this.feedback="successfully registered";
       })
@@ -175,6 +176,14 @@ methods:{
         });
         console.log('please enter valid data')
       }
+      
+      this.flashMessage.setStrategy('single');
+        this.flashMessage.error({
+        message: 'please fill up all details',
+        time: 3000,
+        blockClass: 'custom-block-class'
+        });
+        console.log('please enter valid data')
       
       this.feedback="please fill up all details & enter valid inputs" 
     }

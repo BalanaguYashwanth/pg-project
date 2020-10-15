@@ -1,7 +1,6 @@
 <template>
   <div>
       <FlashMessage :position="'right top'"/>
-
     {{ modified() }}
     <slot name="title" >  </slot>
     <div v-if="this.$store.state.photourl" style="text-align: right">
@@ -115,19 +114,10 @@ export default {
 
   methods: {
     logout: function () {
-      let self = this;
-      console.log(fb.auth().signOut());
-
-      fb.auth()
-        .signOut()
-        .then(() => {
-          alert("sucessfully logout");
-          self.$router.push("/login");
-        })
-        .catch((err) => alert(err.message));
       localStorage.removeItem("localid");
       localStorage.removeItem("idtoken");
       localStorage.removeItem("id");
+       this.$router.push("/login");
     },
 
     onfileselect: function (event) {
@@ -221,6 +211,9 @@ export default {
   },
 
   async created() {
+    
+   
+    
     await this.$store.dispatch("getuseraction");
     await this.$store.dispatch("profileaction");
     if (localStorage.getItem("localid")) {
@@ -249,6 +242,9 @@ export default {
      else {
       console.log("user not  authenticated");
     }
+    
+
+
   },
 
 

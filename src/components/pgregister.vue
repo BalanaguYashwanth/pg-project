@@ -2,6 +2,7 @@
   <div>
     <div class="container">
       <p class="display-2" id="title"> Pg Hostels Registration</p>
+        <FlashMessage :position="'right top'"/>
       <form>
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -80,10 +81,11 @@
         </div>
 
         <div class="form-group">
-          <label> Updated your Pg image </label>
+          <label> Upload your Pg image </label>
           <input type="file" class="form-control-file" @change="fileselect" />
+           <p v-show="uploadValue"> uploading image :- {{uploadValue}}% </p>
         </div>
-        {{ imgurl }}
+
 
         <button
           v-on:click.prevent="
@@ -122,6 +124,7 @@ export default {
       file: "",
       imgurl: "",
       imgurl1: "",
+      uploadValue:'',
     };
   },
 
@@ -131,6 +134,17 @@ export default {
     },
 
     filesubmit: function (name, phonenumber, landmark, address, pincode, city) {
+
+      if(name!="" && phonenumber!="" && landmark!="" && address!="" && pincode!="" && city!="" && this.file!="")
+      {
+
+        this.flashMessage.setStrategy('single');
+        this.flashMessage.success({
+        message: 'successfully registered',
+        time: 3000,
+        blockClass: 'custom-block-class'
+        });
+
       var storageRef = fb.storage().ref("userprofile/" + this.file.name);
       let uploadedTask = storageRef.put(this.file);
       uploadedTask.on(
@@ -148,7 +162,7 @@ export default {
             .getDownloadURL()
             .then(async function (downloadURL) {
               await console.log(downloadURL);
-
+            
               axios
                 .post("http://127.0.0.1:5000/post/pgregisters", {
                   name: name,
@@ -161,12 +175,30 @@ export default {
                 })
                 .then((res) => {
                   console.log(res);
-                  location.reload()
+
+                 
+                  
+                  setTimeout(location.reload(),3000)
+
                 })
                 .catch((err) => console.log(err));
             });
         }
       );
+
+    }
+    else{
+
+      this.flashMessage.setStrategy('single');
+      this.flashMessage.error({
+        message:'please fill up all the inputs',
+        time:3000,
+        blockClass:'custom-block-class'
+      });
+
+
+    }
+
     },
 
   },

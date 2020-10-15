@@ -19,7 +19,9 @@ export const store = new Vuex.Store({
         age:"",
         pgname:"",
         gender:"",
-        id:[]
+        id:[],
+        foodschedules:[],
+        pgnames:[],
     },
     getters:{
 
@@ -72,9 +74,25 @@ export const store = new Vuex.Store({
         userregister:function(state,users){
             state.alluserregisters=users
         },
+
+        getfood:function(state,foodusers){
+            state.foodschedules=foodusers
+        },
+
+        getpg:function(state,pg){
+            state.pgnames=pg  
+        }
     },
 
     actions:{
+        
+        getpgnames:function(context){
+            axios.get('http://127.0.0.1:5000/get/pgregisters')
+            .then(res=>{
+                context.commit('getpg',res.data)
+            })
+            .catch(err=>console.log(err))
+        },
         
         getuseraction: async function(context){
             axios.post('http://127.0.0.1:5000/getcurrentuser',{
@@ -101,9 +119,7 @@ export const store = new Vuex.Store({
                    maindatas.push(datas[obj1])
                 }
                
-
                let data=maindatas
-                
 
                 for(let obj in data)
                 {
@@ -138,6 +154,23 @@ export const store = new Vuex.Store({
                 }
                 context.commit('schedule',alldata)
             
+            })
+            .catch(err=>console.log(err))
+        },
+
+        foodaction:function(context){
+            axios.get('http://127.0.0.1:5000/get/schedulefood')
+            .then(res=>{
+                console.log(res)
+                let array=[]
+                let resdata=res.data
+                for( let obj in resdata )
+                {
+                    resdata[obj].id=obj
+                    array.push(resdata[obj])
+                }
+                context.commit('getfood',array)
+                console.log(array)
             })
             .catch(err=>console.log(err))
         },
