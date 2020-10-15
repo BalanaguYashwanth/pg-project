@@ -99,6 +99,10 @@ export default {
         this.$store.dispatch('profileaction') 
         this.$store.dispatch('scheduleaction')
         this.$store.dispatch('getuseraction')
+
+
+       
+
     }
 
 

@@ -431,20 +431,20 @@ export default {
       })
       .catch((err) => console.log(err));
 
-
-      let routing=this.$store.state.owner
-      window.routing=routing
-      if(!routing)
-      {
-        this.$router.push('login')
-      }
-      console.log(this.$store.state.owner)
+      /////// auth ///////////
+       let routing=  this.$store.state.owner
+        if(!routing)
+        {
+          this.$router.push('/login')
+          localStorage.removeItem("localid");
+          localStorage.removeItem("idtoken");
+          localStorage.removeItem("id");
+        }
+        console.log(this.$store.state.owner)
+      ////////auth////////////
 
       this.$store.dispatch('getpgnames')
-
-
   },
-
 
 };
 </script>

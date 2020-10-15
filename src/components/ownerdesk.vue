@@ -193,6 +193,9 @@ methods:{
 created(){
     this.$store.dispatch('getuseraction')
     this.$store.dispatch('profileaction') 
+
+      
+
 }
 
 };

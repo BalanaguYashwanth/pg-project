@@ -19,13 +19,13 @@ Vue.config.productionTip = false
 Vue.component('datetime', Datetime);
 
 
-const router = new Vuerouters({
-  routes:Routers,
-  mode:'history',
-})
+// const router = new Vuerouters({
+//   routes:Routers,
+//   mode:'history',
+// })
 
 new Vue({
   render: h => h(App),
-  router:router,
+  router:Routers,
   store:store,
 }).$mount('#app')

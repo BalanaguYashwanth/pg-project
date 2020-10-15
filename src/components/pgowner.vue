@@ -210,9 +210,8 @@ export default {
     },
   },
 
+
   async created() {
-    
-   
     
     await this.$store.dispatch("getuseraction");
     await this.$store.dispatch("profileaction");
@@ -243,6 +242,18 @@ export default {
       console.log("user not  authenticated");
     }
     
+          /////// auth ///////////
+       let routing=  this.$store.state.owner
+        if(!routing)
+        {
+          this.$router.push('/login')
+          localStorage.removeItem("localid");
+          localStorage.removeItem("idtoken");
+          localStorage.removeItem("id");
+        }
+        console.log(this.$store.state.owner)
+      ////////auth////////////
+
 
 
   },

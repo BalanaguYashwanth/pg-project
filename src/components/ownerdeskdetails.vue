@@ -95,7 +95,12 @@ export default {
     created(){
         this.$store.dispatch('profileaction') 
         this.$store.dispatch('userregisters')
-         this.$store.dispatch('getuseraction')
+        this.$store.dispatch('getuseraction')
+
+ 
+
+
+
     }
 
 

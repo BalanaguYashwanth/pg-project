@@ -139,6 +139,8 @@ export const store = new Vuex.Store({
             
             })
             .catch(err=>console.log(err))
+
+          
         },
 
         scheduleaction:function(context){
@@ -192,15 +194,16 @@ export const store = new Vuex.Store({
         },
 
         signout:function(){
+            this.$router.push("/login");
             localStorage.removeItem("localid");
             localStorage.removeItem("idtoken");
             localStorage.removeItem("id");
-           this.$router.push("/login");
+          
              
         },
 
 
-        profileaction:async function(context){
+        profileaction:async function(context) {
             var mainprofiledata=[]
            await axios.get('http://127.0.0.1:5000/get/user')
             .then(res=>{
@@ -210,12 +213,22 @@ export const store = new Vuex.Store({
                     data[key].id=key
                     mainprofiledata.push(data[key])
                 } 
-                                
-
                 context.commit("profile",mainprofiledata)
             })
             .catch(err=>console.log(err))
-        }    
+        },
+
+        authowner: async (state) => {
+            let routing= await state.owner
+            if(!routing)
+            {
+                
+              localStorage.removeItem("localid");
+              localStorage.removeItem("idtoken");
+              localStorage.removeItem("id");
+            }
+            console.log(state.owner)
+        }
 
     },
 

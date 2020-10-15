@@ -1,6 +1,8 @@
 <template>
   <div class="container">
     <div class="title display-2">Owner Login</div>
+    <FlashMessage :position="'right top'"/>
+
     <form>
       <div>
         <div class="form-group">
@@ -69,7 +71,19 @@ export default {
           location.reload()
           location.reload()
       })
-      .catch(err=>console.log(err))
+      .catch(err=>{
+        console.log(err.response.data.message)
+        
+          this.flashMessage.setStrategy('single');
+          this.flashMessage.error({
+          message: err.response.data.message,
+          time: 3000,
+          blockClass: 'custom-block-class'
+          });
+          console.log('please enter valid data')
+
+
+        })
 
     },
 

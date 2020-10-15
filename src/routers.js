@@ -18,28 +18,62 @@ import reviewschedules from './components/reviewschedules'
 import schedulefood from './components/schedulefood'
 import foodhistory from './components/foodhistory'
 import cfoodhistory from './components/cfoodhistory'
+import Vue from 'vue'
+import Vuerouters from 'vue-router'
 
+Vue.use(Vuerouters)
 
-export default[
-    {path:'/pgowner',component:pgowner},
-    {path:'/register',component:register},
-    {path:'/login',component:login},
-    {path:'/ownerprofile',component:ownerprofile},
-    {path:'/customerlogin',component:customerlogin},
-    {path:'/customerregister',component:customerregister},
-    {path:'/customerprofile',component:customerprofile},
-    {path:'/cremainder',component:cremainder},
-    {path:'/schedules',component:schedules},
-    {path:'/ownerschedule',component:ownerschedule},
-    {path:'/ownerdesk',component:ownerdesk},
-    {path:'/ownerdeskdetails',component:ownerdeskdetails},
-    {path:'/hireprofiles',component:hireprofiles},
-    {path:'/careerprofiles',component:careerprofiles},
-    {path:'/pgregister',component:pgregister},
-    {path:'/pghome',component:pghome},
-    {path:'/reviewschedules',component:reviewschedules},
-    {path:'/schedulefood',component:schedulefood},
-    {path:'/foodhistory',component:foodhistory},
-    {path:'/cfoodhistory',component:cfoodhistory}
+const router = new Vuerouters({
+ mode:'history',
+ routes:[
+    {path:'/pgowner',name:'pgowner',component:pgowner},
+    {path:'/register',name:'register',component:register},
+    {path:'/login',name:'login',component:login},
+    {path:'/ownerprofile',name:'ownerprofile',component:ownerprofile},
+    {path:'/customerlogin',name:'customerlogin',component:customerlogin},
+    {path:'/customerregister',name:'customerregister',component:customerregister},
+    {path:'/customerprofile',name:'customerprofile',component:customerprofile},
+    {path:'/cremainder',name:'cremainder',component:cremainder},
+    {path:'/schedules',name:'schedules',component:schedules},
+    {path:'/ownerschedule',name:'ownerschedule',component:ownerschedule},
+    {path:'/ownerdesk',name:'ownerdesk',component:ownerdesk},
+    {path:'/ownerdeskdetails',name:'ownerdeskdetails',component:ownerdeskdetails},
+    {path:'/hireprofiles',name:'hireprofiles',component:hireprofiles},
+    {path:'/careerprofiles',name:'careerprofiles',component:careerprofiles},
+    {path:'/pgregister',name:'pgregister',component:pgregister},
+    {path:'/pghome',name:'pghome',component:pghome},
+    {path:'/reviewschedules',name:'reviewschedules',component:reviewschedules},
+    {path:'/schedulefood',name:'schedulefood',component:schedulefood},
+    {path:'/foodhistory',name:'foodhistory',component:foodhistory},
+    {path:'/cfoodhistory',name:'cfoodhistory',component:cfoodhistory}
 ]
+})
 
+
+
+//const owner=['pgowner','ownerprofile','ownerdesk','foodhistory','ownerschedule','ownerdeskdetails']
+
+const openRoutes=['login','register','customerlogin','customerregister',]
+
+
+router.beforeEach((to, from, next) => {
+    
+     
+    if(openRoutes.includes(to.name)){
+        next()
+    }
+
+    else if( localStorage.getItem('localid') ){
+      next()
+    }
+    
+    else{
+        next('/customerlogin')
+    }
+
+})
+
+
+
+
+export default router

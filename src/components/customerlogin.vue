@@ -41,7 +41,7 @@ export default {
 
   methods: {
     posting: function () {
-      axios.post('http://127.0.0.1:5000/signin',{
+      axios.post('http://127.0.0.1:5000/csignin',{
         email:this.email,
         password:this.password
       })
@@ -53,7 +53,7 @@ export default {
           location.reload()
           location.reload()
       })
-      .catch(err=>console.log(err))
+      .catch(err=>console.log(err.reponse))
     },
 
   },
