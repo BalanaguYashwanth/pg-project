@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    <div class="title display-2">Customer Login</div>
-      <FlashMessage :position="'right top'"/>
-
+    <div class="title display-2">admin registration</div>
     <form>
       <div>
         <div class="form-group">
@@ -20,7 +18,7 @@
           <input
             type="password"
             class="form-control"
-            placeholder="enter your password"
+            placeholder="enter your name"
             v-model="password"
           />
         </div>
@@ -32,7 +30,7 @@
 
 <script>
 import axios from 'axios'
-//import { fb } from "../firebase";
+//import {fb} from "../firebase";
 export default {
   data() {
     return {
@@ -43,36 +41,20 @@ export default {
 
   methods: {
     posting: function () {
-      axios.post('http://127.0.0.1:5000/csignin',{
+       
+      axios.post('http://127.0.0.1:5000/asignup',{
         email:this.email,
         password:this.password
       })
       .then(res=>{
         console.log(res)
-        localStorage.setItem('localid',res.data.localId)
-        localStorage.setItem('idtoken',res.data.idToken)
-          this.$router.push('customerprofile');
-          location.reload()
-          location.reload()
-      })
-      .catch(err=>{
-        console.log(err.response)
-        
-        this.flashMessage.setStrategy('single');
-        this.flashMessage.error({
-        message: err.response.data.message,
-        time: 3000,
-        blockClass: 'custom-block-class'
-        });
-        
-        
+        this.$router.push('adminlogin')
         })
+      .catch(err=>console.log(err))
+
     },
-
   },
-
 };
-
 </script>
 
 <style scoped >

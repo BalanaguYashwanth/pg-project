@@ -94,7 +94,6 @@ import { fb } from "../firebase";
 
 export default {
 
-  
   data() {
     return {
       alldata: [],
@@ -253,9 +252,6 @@ export default {
         }
         console.log(this.$store.state.owner)
       ////////auth////////////
-
-
-
   },
 
 

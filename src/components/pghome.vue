@@ -1,7 +1,8 @@
 <template>
   <div>
+    
     <div id="btns">
-      <button  v-on:click="logout"  v-if="valid" class="btn btn-secondary">Hey, {{this.bookedname}} logout  </button>
+      <button  v-on:click="logout" v-show="this.$store.state.admin "  class="btn btn-secondary"> logout  </button>
     </div>
     <div class="container">
       <h1 id="title" class="display-3"> Home </h1>
@@ -15,19 +16,20 @@
             alt="profile pic"
             style=" border: 5px solid black;"
           />
-          <div class="card-body mx-auto">
+          <div class="card-body mx-3">
             <h5 class="card-title">Name:{{detail.name}}</h5>
             <h5 class="card-title">phonenumber:{{detail.phonenumber}}</h5>
             <h5 class="card-title">landmark:{{detail.landmark}}</h5>
            
             <h5 class="card-title">address:{{detail.address}} </h5>
             <h5 class="card-title">location:{{detail.city}}</h5>
-            <h5 class="card-title">pincode:{{detail.pincode}}</h5>
-           
+            <h5 class="card-title">pincode:{{detail.pincode}} </h5>
+            <div v-show="authadmin()" >
+              <h5  class="card-title">  <button v-on:click=deleting(detail.id)  class="btn btn-secondary" > delete </button> </h5>
+            </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -40,28 +42,51 @@ export default {
       alldetails: "",
       bookedname: "",
       bookedphonenumber: "",
-      valid:localStorage.getItem('user-token'),
     };
   },
 
-  method:function(){
-    
-    
+  methods:{
 
+    authadmin:function(){
+      return this.$store.state.admin
+    },
+    
+    logout:function(){
+      this.$router.push("/adminlogin");
+      localStorage.removeItem("localid");
+      localStorage.removeItem("idtoken");
+      localStorage.removeItem("id");
+    },
 
+    deleting:function(id){
+      axios.delete('http://127.0.0.1:5000/delete/pgregisters/'+id)
+      .then(res=>{
+        console.log(res)
+        location.reload()
+        })
+      .catch(err=>console.log(err))
+    }
 
   },
 
-  created(){
 
-      axios.get('http://127.0.0.1:5000/get/pgregisters')
-      .then(res=>{
-          console.log(res.data)
-          this.alldetails=res.data
-          })
-      .catch(err=>console.log(err))
+async created(){
+    await this.$store.dispatch('getuseraction')
 
+    axios.get('http://127.0.0.1:5000/get/pgregisters')
+    .then(res=>{
+        console.log(res.data)
 
+        let datas=res.data
+
+        for(let obj in datas)
+        {
+          datas[obj].id=obj
+        }
+        this.alldetails=datas
+
+        })
+    .catch(err=>console.log(err))
   }
  
 };

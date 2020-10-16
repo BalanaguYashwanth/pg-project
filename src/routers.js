@@ -18,6 +18,8 @@ import reviewschedules from './components/reviewschedules'
 import schedulefood from './components/schedulefood'
 import foodhistory from './components/foodhistory'
 import cfoodhistory from './components/cfoodhistory'
+import adminlogin from './components/adminlogin'
+import adminregister from './components/adminregister'
 import Vue from 'vue'
 import Vuerouters from 'vue-router'
 
@@ -45,15 +47,16 @@ const router = new Vuerouters({
     {path:'/reviewschedules',name:'reviewschedules',component:reviewschedules},
     {path:'/schedulefood',name:'schedulefood',component:schedulefood},
     {path:'/foodhistory',name:'foodhistory',component:foodhistory},
-    {path:'/cfoodhistory',name:'cfoodhistory',component:cfoodhistory}
+    {path:'/cfoodhistory',name:'cfoodhistory',component:cfoodhistory},
+    {path:'/adminlogin',name:'adminlogin',component:adminlogin},
+    {path:'/adminregister',name:'adminregister',component:adminregister},
 ]
 })
 
 
-
 //const owner=['pgowner','ownerprofile','ownerdesk','foodhistory','ownerschedule','ownerdeskdetails']
 
-const openRoutes=['login','register','customerlogin','customerregister',]
+const openRoutes=['login','register','customerlogin','customerregister','adminlogin','adminregister','pghome','careerprofiles']
 
 
 router.beforeEach((to, from, next) => {

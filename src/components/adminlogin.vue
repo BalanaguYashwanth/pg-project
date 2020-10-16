@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="title display-2">Customer Login</div>
+    <div class="title display-2">Admin Login</div>
       <FlashMessage :position="'right top'"/>
 
     <form>
@@ -43,7 +43,7 @@ export default {
 
   methods: {
     posting: function () {
-      axios.post('http://127.0.0.1:5000/csignin',{
+      axios.post('http://127.0.0.1:5000/asignin',{
         email:this.email,
         password:this.password
       })
@@ -51,7 +51,7 @@ export default {
         console.log(res)
         localStorage.setItem('localid',res.data.localId)
         localStorage.setItem('idtoken',res.data.idToken)
-          this.$router.push('customerprofile');
+          this.$router.push('pghome');
           location.reload()
           location.reload()
       })

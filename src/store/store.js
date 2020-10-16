@@ -22,6 +22,7 @@ export const store = new Vuex.Store({
         id:[],
         foodschedules:[],
         pgnames:[],
+        admin:"",
     },
     getters:{
 
@@ -81,6 +82,13 @@ export const store = new Vuex.Store({
 
         getpg:function(state,pg){
             state.pgnames=pg  
+        },
+
+        getadmin:function(state,admin){
+            
+            state.admin=admin
+            
+            
         }
     },
 
@@ -98,16 +106,21 @@ export const store = new Vuex.Store({
             axios.post('http://127.0.0.1:5000/getcurrentuser',{
                 uid:localStorage.getItem('localid'),
               }).then(res=>{
+                  console.log(res.data)
                 if(res)
                 {
                 context.commit('getuser',res.data.email)
                 context.commit('getowner',res.data.owner)
+                context.commit('getadmin',res.data.admin)
                 }
                 else{
                     console.log('user: error in user or user not signin')
                 }
                 })
-              .catch(err=>console.log(err))
+              .catch(err=>{
+                  console.log(err.response.data.message)
+                
+                })
             
             axios.get('http://127.0.0.1:5000/get/user')
             .then(res=>{
@@ -125,7 +138,7 @@ export const store = new Vuex.Store({
                 {
                     if( localStorage.getItem('localid') == data[obj].uid  )
                     {
-                        console.log( data[obj])
+                        //console.log( data[obj])
                         context.commit('getid',data[obj].id)
                         context.commit('getname',data[obj].username)
                         context.commit('getphoto',data[obj].profilepic)
@@ -133,12 +146,13 @@ export const store = new Vuex.Store({
                         context.commit('getage',data[obj].age)
                         context.commit('getpgname',data[obj].pgname)
                         context.commit('getgender',data[obj].gender)
+                       
                         localStorage.setItem('id',data[obj].id)
                     }
                 }
             
             })
-            .catch(err=>console.log(err))
+            .catch(err=>console.log(err.response))
 
           
         },
@@ -198,8 +212,6 @@ export const store = new Vuex.Store({
             localStorage.removeItem("localid");
             localStorage.removeItem("idtoken");
             localStorage.removeItem("id");
-          
-             
         },
 
 
