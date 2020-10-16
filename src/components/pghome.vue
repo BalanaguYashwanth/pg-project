@@ -4,6 +4,14 @@
     <div id="btns">
       <button  v-on:click="logout" v-show="this.$store.state.admin "  class="btn btn-secondary"> logout  </button>
     </div>
+
+    
+     <div v-show="this.$store.state.admin" >
+      <slot  name="admin" >   </slot>
+    </div>
+     
+      
+
     <div class="container">
       <h1 id="title" class="display-3"> Home </h1>
 
@@ -75,7 +83,7 @@ async created(){
 
     axios.get('http://127.0.0.1:5000/get/pgregisters')
     .then(res=>{
-        console.log(res.data)
+      
 
         let datas=res.data
 

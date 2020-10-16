@@ -20,6 +20,7 @@ import foodhistory from './components/foodhistory'
 import cfoodhistory from './components/cfoodhistory'
 import adminlogin from './components/adminlogin'
 import adminregister from './components/adminregister'
+import resetpassword from './components/resetpassword'
 import Vue from 'vue'
 import Vuerouters from 'vue-router'
 
@@ -50,13 +51,14 @@ const router = new Vuerouters({
     {path:'/cfoodhistory',name:'cfoodhistory',component:cfoodhistory},
     {path:'/adminlogin',name:'adminlogin',component:adminlogin},
     {path:'/adminregister',name:'adminregister',component:adminregister},
+    {path:'/resetpassword',name:'resetpassword',component:resetpassword},
 ]
 })
 
 
 //const owner=['pgowner','ownerprofile','ownerdesk','foodhistory','ownerschedule','ownerdeskdetails']
 
-const openRoutes=['login','register','customerlogin','customerregister','adminlogin','adminregister','pghome','careerprofiles']
+const openRoutes=['login','register','customerlogin','customerregister','adminlogin','adminregister','pghome','careerprofiles','resetpassword']
 
 
 router.beforeEach((to, from, next) => {

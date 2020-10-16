@@ -1,5 +1,10 @@
 <template>
   <div>
+
+  <div v-show="this.$store.state.admin" >
+    <slot  name="admin" >   </slot>
+  </div>
+
     <div class="container">
       <p class="display-2" id="title"> Pg Hostels Registration</p>
         <FlashMessage :position="'right top'"/>
@@ -202,6 +207,11 @@ export default {
     },
 
   },
+
+  created(){
+    this.$store.dispatch('getuseraction')
+  }
+
 };
 </script>
 

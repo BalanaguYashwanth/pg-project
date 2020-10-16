@@ -35,6 +35,25 @@
           :opacity="0.15"
         ></slider>
       </div>
+
+        <div slot="admin">
+        <slider
+          :width="300"
+          :links="[
+            { id: 1, text: 'PGs', url: 'http://localhost:8080/pghome' },
+            { id: 2, text: 'Careers', url: 'http://localhost:8080/careerprofiles' },
+            { id: 3, text: 'PG/Hostel Registration', url: 'http://localhost:8080/pgregister' },
+            { id: 4, text: 'Career Registration', url: 'http://localhost:8080/hireprofiles' },
+            { id: 5, text: 'Customer Feedback', url: '#' },
+            { id: 6, text: 'Owner Feedback', url:'#'},
+          ]"
+          format="push"
+          direction="left"
+          :opacity="0.15"
+        ></slider>
+      </div>
+
+
     </router-view>
   </div>
 </template>

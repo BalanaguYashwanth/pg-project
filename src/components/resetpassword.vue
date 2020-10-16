@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="title display-2">Customer Login</div>
+    <div class="title display-3">Enter Your email Id</div>
       <FlashMessage :position="'right top'"/>
 
     <form>
@@ -10,63 +10,50 @@
           <input
             type="email"
             class="form-control"
-            placeholder="enter your email"
+            placeholder="enter your valid email to reset your password"
             v-model="email"
           />
         </div>
 
-        <div class="form-group">
-          <label> Password </label>
-          <input
-            type="password"
-            class="form-control"
-            placeholder="enter your password"
-            v-model="password"
-          />
-        </div>
+     
       </div>
-      <button class="btn btn-secondary" v-on:click.prevent="posting">submit</button>
-      <router-link  style="float:right" to="/resetpassword"> forgot password ? </router-link>
+      <button  id="button" class=" col-md-4 mx-auto d-block btn btn-secondary" v-on:click.prevent="posting">submit</button>
+     
     </form>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-//import { fb } from "../firebase";
 export default {
   data() {
     return {
       email: "",
-      password: "",
     };
   },
 
   methods: {
     posting: function () {
-      axios.post('http://127.0.0.1:5000/csignin',{
+      axios.post('http://127.0.0.1:5000/resetpassword',{
         email:this.email,
-        password:this.password
       })
       .then(res=>{
         console.log(res)
-        localStorage.setItem('localid',res.data.localId)
-        localStorage.setItem('idtoken',res.data.idToken)
-          this.$router.push('customerprofile');
-          location.reload()
-          location.reload()
+         this.flashMessage.setStrategy('single');
+        this.flashMessage.error({
+        message: 'successfully reset once check your mail',
+        time: 3000,
+        blockClass: 'custom-block-class'
+        });
       })
       .catch(err=>{
         console.log(err.response)
-        
         this.flashMessage.setStrategy('single');
         this.flashMessage.error({
         message: err.response.data.message,
         time: 3000,
         blockClass: 'custom-block-class'
-        });
-        
-        
+        }); 
         })
     },
 

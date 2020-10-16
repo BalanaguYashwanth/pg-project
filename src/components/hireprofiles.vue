@@ -1,5 +1,11 @@
 <template>
   <div>
+
+    <div v-show="this.$store.state.admin" >
+      <slot  name="admin" >   </slot>
+    </div>
+
+
     <div class="container">
       <p class="display-2" id="title">Careers in Pg Hostels</p>
       <form>
@@ -169,6 +175,10 @@ export default {
 
    
   },
+
+  async created(){
+    await this.$store.dispatch('getuseraction')
+  }
 };
 </script>
 

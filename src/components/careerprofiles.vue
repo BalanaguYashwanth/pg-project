@@ -1,8 +1,14 @@
 <template>
   <div>
-    <div id="btns">
-      <button  v-on:click="logout"  v-if="valid" class="btn btn-secondary">Hey, {{this.bookedname}} logout  </button>
+    <div v-show="this.$store.state.admin" >
+      <slot  name="admin" >   </slot>
     </div>
+    
+    
+    <div id="btns">
+      <button v-on:click="logout" v-show="this.$store.state.admin" class="btn btn-secondary"> logout  </button>
+    </div>
+
     <div class="container">
       <h1 id="title" class="display-3"> Careers </h1>
 
@@ -23,15 +29,13 @@
             <h5 class="card-title">age:{{detail.age}} </h5>
             <h5 class="card-title">city:{{detail.city}}</h5>
             <h5 class="card-title">Gender:{{detail.gender}}</h5>
-           
+            <h5 class="card-title" > <button v-show="authadmin()"  class="btn btn-secondary" v-on:click=deleting(detail.id) > delete  </button>  </h5>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
-
 <script>
 import axios from 'axios'
 export default {
@@ -40,26 +44,48 @@ export default {
       alldetails: "",
       bookedname: "",
       bookedphonenumber: "",
-      valid:localStorage.getItem('user-token'),
+    
     };
   },
 
-  method:function(){
+  methods:{
+    authadmin:function(){
+      return this.$store.state.admin
+    },
+
+    deleting:function(id){
+       axios.delete('http://127.0.0.1:5000/delete/careers/'+id)
+      .then(res=>{
+        console.log(res)
+        location.reload()
+        })
+      .catch(err=>console.log(err))
+    },
     
+    logout:function(){
+      this.$router.push("/adminlogin");
+      localStorage.removeItem("localid");
+      localStorage.removeItem("idtoken");
+      localStorage.removeItem("id");
+    },
     
-
-
-
   },
   
-  created(){
 
+  
+  created(){
       axios.get('http://127.0.0.1:5000/get/careers')
       .then(res=>{
-          console.log(res.data)
-          this.alldetails=res.data
+          let resdata=res.data
+          for(let key in resdata)
+          {
+            resdata[key].id=key
+          }
+          this.alldetails=resdata
           })
       .catch(err=>console.log(err))
+
+      this.$store.dispatch('getuseraction')
 
 
   }

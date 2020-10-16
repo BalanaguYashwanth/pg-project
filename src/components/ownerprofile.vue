@@ -5,9 +5,7 @@
       signout
     </button>
     <FlashMessage :position="'right top'"/>
-
     
-
     <div class="container">
       <div class="title display-2">Owner Profile</div>
       <form>
