@@ -11,6 +11,8 @@
             { id: 4, text: 'Customer Food ', url: 'http://localhost:8080/foodhistory' },
             { id: 5, text: 'Customer Schedules', url: 'http://localhost:8080/ownerschedule' },
             { id: 6, text: 'Customer Registrations', url: 'http://localhost:8080/ownerdeskdetails' },
+            { id: 7, text: 'Feedback', url: 'http://localhost:8080/feedback' },
+            { id: 8, text: 'SignOut', url:'http://localhost:8080/signout'},
           ]"
           format="push"
           direction="left"
@@ -29,6 +31,8 @@
             { id: 5, text: 'Other Schedules', url: 'http://localhost:8080/schedules' },
             { id: 6, text: 'Schedules History', url:'http://localhost:8080/reviewschedules'},
             { id: 7, text: 'Payments', url: '#' },
+            { id: 8, text: 'Feedback', url: 'http://localhost:8080/feedback' },
+            { id: 9, text: 'SignOut', url:'http://localhost:8080/signout'},
           ]"
           format="push"
           direction="left"
@@ -44,8 +48,8 @@
             { id: 2, text: 'Careers', url: 'http://localhost:8080/careerprofiles' },
             { id: 3, text: 'PG/Hostel Registration', url: 'http://localhost:8080/pgregister' },
             { id: 4, text: 'Career Registration', url: 'http://localhost:8080/hireprofiles' },
-            { id: 5, text: 'Customer Feedback', url: '#' },
-            { id: 6, text: 'Owner Feedback', url:'#'},
+            { id: 5, text: 'Feedback & Issues', url: 'http://localhost:8080/reviewfeedback' },
+            { id: 6, text: 'SignOut', url:'http://localhost:8080/signout'},
           ]"
           format="push"
           direction="left"

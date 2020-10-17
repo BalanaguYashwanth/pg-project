@@ -26,6 +26,8 @@
         </div>
       </div>
       <button class="btn btn-secondary" v-on:click.prevent="posting">submit</button>
+      <router-link  style="float:right" to="/resetpassword"> forgot password ? </router-link>
+
     </form>
   </div>
 </template>

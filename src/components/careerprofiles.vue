@@ -5,9 +5,9 @@
     </div>
     
     
-    <div id="btns">
+    <!-- <div id="btns">
       <button v-on:click="logout" v-show="this.$store.state.admin" class="btn btn-secondary"> logout  </button>
-    </div>
+    </div> -->
 
     <div class="container">
       <h1 id="title" class="display-3"> Careers </h1>

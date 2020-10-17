@@ -25,9 +25,9 @@
       </router-link>
     </div>
 
-    <button style="float: right" class="btn btn-secondary" v-on:click="logout">
+    <!-- <button style="float: right" class="btn btn-secondary" v-on:click="logout">
       signout
-    </button>
+    </button> -->
     <div class="container">
       <form>
         <div class="card mx-auto" style="width: 50rem">

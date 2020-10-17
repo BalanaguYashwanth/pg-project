@@ -14,9 +14,9 @@
       </router-link>
     </div>
     
-    <button style="float: right" class="btn btn-secondary" v-on:click="logout">
+    <!-- <button style="float: right" class="btn btn-secondary" v-on:click="logout">
       signout
-    </button>
+    </button> -->
     <div class="container">
         <p style="text-align:center"  class="display-2 mx-auto"> Remainders  </p>
       <form>

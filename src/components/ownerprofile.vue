@@ -1,9 +1,9 @@
 <template>
   <div>
     <slot name="title"> </slot>
-    <button style="float: right" v-on:click="signout" class="btn btn-secondary">
+    <!-- <button style="float: right" v-on:click="signout" class="btn btn-secondary">
       signout
-    </button>
+    </button> -->
     <FlashMessage :position="'right top'"/>
     
     <div class="container">
