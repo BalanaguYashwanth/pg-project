@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+          <FlashMessage :position="'right top'"/>
     <div class="title display-2">admin registration</div>
     <form>
       <div>
@@ -50,7 +51,19 @@ export default {
         console.log(res)
         this.$router.push('adminlogin')
         })
-      .catch(err=>console.log(err))
+      .catch(err=>{
+        console.log(err.response)
+        
+        this.flashMessage.setStrategy('single');
+        this.flashMessage.error({
+        message: err.response.data.message,
+        time: 3000,
+        blockClass: 'custom-block-class'
+
+        });
+
+        
+        })
 
     },
   },
