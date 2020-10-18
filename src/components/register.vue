@@ -42,13 +42,26 @@ export default {
 
   methods: {
     posting: function () {
+
+    if(this.password.length>=6 && this.password!="")
+      {
       axios.post('http://127.0.0.1:5000/signup',{
         email:this.email,
         password:this.password
       })
       .then(res=>{
         console.log(res)
-        this.$router.push('login')
+
+           
+        this.flashMessage.setStrategy('single');
+        this.flashMessage.success({
+        message: res.data.message,
+        time: 5000,
+        blockClass: 'custom-block-class'
+        });
+
+       setTimeout(this.$router.push('login'),3000)
+
         })
       .catch(err=>{
         console.log(err.response)
@@ -59,9 +72,16 @@ export default {
         time: 3000,
         blockClass: 'custom-block-class'
         });
-      
-        
         })
+      }
+    else{
+         this.flashMessage.setStrategy('single');
+        this.flashMessage.error({
+        message: 'password must be more than 6 characters',
+        time: 3000,
+        blockClass: 'custom-block-class'
+        })  
+    }
     },
   },
 

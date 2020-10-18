@@ -287,7 +287,7 @@ export default {
         this.$store.state.gender=="" 
       ) {
           
-        if(username!="" &&  phonenumber.length==10 && pgname!="" && gender!="" && age!="" )
+        if(username!="" &&  phonenumber.length==10 && pgname!="" && gender!="" && age!="" && this.mainselectfile!="")
         {
           this.flashMessage.setStrategy('single');
           this.flashMessage.success({
@@ -299,7 +299,7 @@ export default {
         }else{
           this.flashMessage.setStrategy('single');
           this.flashMessage.error({
-          message: 'please enter all input datas',
+          message: 'please complete all details',
           time: 3000,
           blockClass: 'custom-block-class'
           });
@@ -309,7 +309,7 @@ export default {
           {
           this.flashMessage.setStrategy('single');
           this.flashMessage.error({
-          message: 'phone number must be 10 digits',
+          message: 'phone number must be 10 digits ex:- 9655537630',
           time: 3000,
           blockClass: 'custom-block-class'
           });

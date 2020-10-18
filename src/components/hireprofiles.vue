@@ -7,6 +7,7 @@
 
 
     <div class="container">
+              <FlashMessage :position="'right top'"/>
       <p class="display-2" id="title">Careers in Pg Hostels</p>
       <form>
         <div class="form-row">
@@ -131,11 +132,16 @@ export default {
 
   methods: {
     fileselect:  function (event) {
+      this.file=""
       this.file = event.target.files[0];
     },
 
     filesubmit: function (name, phonenumber, email, gender, age, city) {
-      var storageRef = fb.storage().ref("userprofile/" + this.file.name);
+      
+      if(name!="" && phonenumber!="" && email!="" && gender!="" && age!="" && city!="" && this.file!="")
+    {
+      var storageRef=""
+      storageRef = fb.storage().ref("userprofile/" + this.file.name);
       let uploadedTask = storageRef.put(this.file);
       uploadedTask.on(
         "state_changed",
@@ -171,6 +177,19 @@ export default {
             });
         }
       );
+
+    }
+    else{
+
+      this.flashMessage.setStrategy('single');
+      this.flashMessage.error({
+        message:'please fill up all the inputs',
+        time:3000,
+        blockClass:'custom-block-class'
+      });
+
+
+    }
     },
 
    

@@ -179,7 +179,7 @@ methods:{
       
       this.flashMessage.setStrategy('single');
         this.flashMessage.error({
-        message: 'please fill up all details',
+        message: 'please fill up with valid details',
         time: 3000,
         blockClass: 'custom-block-class'
         });

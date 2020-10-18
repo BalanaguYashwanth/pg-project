@@ -21,7 +21,7 @@
                     <th> delete </th>
                 </tr>
             </thead>
-            <tbody  v-for="(each,index) in    this.$store.state.foodschedules" v-bind:key="index" >
+            <tbody  v-for="(each,index) in  getschedule()" v-bind:key="index" >
                 <th> {{index}}  </th>
 
                 <td> {{each.pgname}} </td>
@@ -67,7 +67,6 @@ export default {
         }
     },
 
-
     deleting:function(id){
         alert("deleting the selected data")
         axios.delete('http://127.0.0.1:5000/delete/schedulefood/'+id)
@@ -81,31 +80,24 @@ export default {
     getschedule:function(){
         let scheduledata=[]
         let schedule=[]
-        scheduledata=this.$store.state.scheduledata
+        scheduledata=this.$store.state.foodschedules
         
         for(let obj in scheduledata)
         {
-            if(scheduledata[obj].pgname==this.$store.state.pgname && scheduledata[obj].userid==localStorage.getItem('localid')  && scheduledata[obj].pgname!="")
+            if(scheduledata[obj].pgname==this.$store.state.pgname  && scheduledata[obj].pgname!="")
             {
                schedule.push( scheduledata[obj])
             }
         }
-      
         return schedule
     },
-
     },
 
     created(){
-
         this.$store.dispatch('profileaction') 
         this.$store.dispatch('scheduleaction')
         this.$store.dispatch('getuseraction')
         this.$store.dispatch('foodaction')
-
-    
-       
-
     }
 
 
