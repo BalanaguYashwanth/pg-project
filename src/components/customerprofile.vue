@@ -185,7 +185,7 @@
 
         <button id="submit" class="btn btn-secondary btn-md btn-block" v-on:click.prevent= posting(username,phonenumber,pgname,gender,age,email,owner) >   submit </button>
         <button id="submit" class="btn btn-secondary btn-md btn-block" v-on:click.prevent="deleting" >  delete </button>
-     
+        <button id="submit" class="btn btn-secondary btn-md btn-block" v-on:click.prevent="deletingaccount" >  delete account </button>
     </form>
   </div>
   </div>
@@ -225,6 +225,32 @@ export default {
       this.$router.push('/customerlogin')
     },
 
+    deletingaccount:function(){
+      axios.post('http://127.0.0.1:5000/deleteaccount/user',{
+        uid:localStorage.getItem('localid'),
+        id:this.$store.state.id
+      })
+      .then(res=>{
+        console.log(res)
+          this.flashMessage.setStrategy('single');
+          this.flashMessage.success({
+          message: res.data.message,
+          time: 3000,
+          blockClass: 'custom-block-class'
+          });
+          this.signout()
+        })
+      .catch(err=>{
+        console.log(err)
+         this.flashMessage.setStrategy('single');
+          this.flashMessage.error({
+          message: err.response.data.message,
+          time: 6000,
+          blockClass: 'custom-block-class'
+          });
+        })
+    },
+
     deletephoto:function(){
       axios
       .post("http://127.0.0.1:5000/deletephoto/user", {
@@ -252,6 +278,8 @@ export default {
     file:function(event){
       this.mainselectfile = event.target.files[0]
     },
+
+
 
 
     posting: function (
@@ -301,8 +329,6 @@ export default {
           console.log('please enter valid data')
           }
         }
-
-
         var storageRef = fb
           .storage()
           .ref("userprofile/" + this.mainselectfile.name);

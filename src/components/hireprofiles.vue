@@ -111,7 +111,7 @@
 </template>
 
 <script >
-import axios from "axios";
+import axios from 'axios'
 import { fb } from "../firebase";
 export default {
   data() {
@@ -131,8 +131,7 @@ export default {
   },
 
   methods: {
-    fileselect:  function (event) {
-      this.file=""
+    fileselect: async function (event) {
       this.file = event.target.files[0];
     },
 
@@ -171,7 +170,7 @@ export default {
                 })
                 .then((res) => {
                   console.log(res);
-                  location.reload()
+                 // location.reload()
                 })
                 .catch((err) => console.log(err));
             });
