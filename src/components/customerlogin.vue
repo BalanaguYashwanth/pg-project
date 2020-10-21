@@ -52,7 +52,7 @@ export default {
         console.log(res)
         localStorage.setItem('localid',res.data.localId)
         localStorage.setItem('idtoken',res.data.idToken)
-          this.$router.push('customerprofile');
+          this.$router.push('cremainder');
           location.reload()
           location.reload()
       })
