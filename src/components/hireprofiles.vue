@@ -83,7 +83,23 @@
 
         <div class="form-group">
           <label> Updated your Profile pic </label>
-          <input type="file" class="form-control-file" @change="fileselect" />
+           <!-- <input type="file" class="form-control-file" @change="fileselect" />  -->
+
+           <image-uploader
+            type=file
+             :preview=false
+            capture="environment"
+            :debug="1"
+            doNotResize="gif"
+            :autoRotate="true"
+            outputFormat="verbose"
+            :className="['fileinput', { 'fileinput--loaded' : hasImage }]"
+            @input="setImage"
+          >
+          </image-uploader>
+
+          
+           
         </div>
         {{ imgurl }}
        
@@ -104,6 +120,8 @@
 
           Submit
         </button>
+          <br>
+        {{this.uploadValue}}
       </form>
      
     </div>
@@ -113,12 +131,24 @@
 <script >
 import axios from 'axios'
 import { fb } from "../firebase";
+//import imageCompressor from 'vue-image-compressor'
+//import MyComponent from './MyComponent.vue';
+
 export default {
+
+  // components: {
+  //   imageCompressor,
+  // },
+
+
   data() {
     return {
+      scale:100,
+      quality:0,
+      originalSize: true,
       name: "",
       phonenumber: "",
-      gender: "",
+      gender: "",               
       email: "",
       age: "",
       feedback: "",
@@ -127,21 +157,42 @@ export default {
       imgurl: "",
       imgurl1: "",
       info:'',
+      compressed:'',
+      img:'',
+      hasImage:false,
+      name1:'',
+      uploadValue:'',
     };
+
+    
   },
 
+  
+
   methods: {
-    fileselect: async function (event) {
-      this.file = event.target.files[0];
-    },
+
+     setImage: function(obj){
+      this.hasImage = true;
+      this.img = obj.dataUrl;
+      this.name1=obj.info.name
+      console.log(this.img)
+      console.log(obj.info.name)
+      console.log('Info', obj.info)
+      console.log('Exif', obj.exif)
+      },
+
+    // fileselect: async function (event) {
+    //   this.file = event.target.files[0];
+    //   console.log(this.file)
+    // },
 
     filesubmit: function (name, phonenumber, email, gender, age, city) {
       
-      if(name!="" && phonenumber!="" && email!="" && gender!="" && age!="" && city!="" && this.file!="")
+      if(name!="" && phonenumber!="" && email!="" && gender!="" && age!="" && city!="" && this.img!="")
     {
-      var storageRef=""
-      storageRef = fb.storage().ref("userprofile/" + this.file.name);
-      let uploadedTask = storageRef.put(this.file);
+     
+      var storageRef = fb.storage().ref("userprofile/" + this.name1);
+      let uploadedTask = storageRef.putString(this.img,'data_url');
       uploadedTask.on(
         "state_changed",
         (snapshot) => {
@@ -170,7 +221,7 @@ export default {
                 })
                 .then((res) => {
                   console.log(res);
-                 // location.reload()
+                  location.reload()
                 })
                 .catch((err) => console.log(err));
             });

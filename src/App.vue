@@ -1,6 +1,12 @@
 <template>
   <div id="app" ref="app">
+
+    
+
     <router-view>
+    
+     
+    
       <div slot="title">
         <slider
           :width="300"
@@ -64,10 +70,12 @@
 
 <script>
 import Slider from "@jeremyhamm/vue-slider";
+//import imageCompressor from 'vue-image-compressor'
 export default {
   name: "App",
   components: {
     slider: Slider,
+   //imageCompressor:imageCompressor,
   },
 };
 </script>

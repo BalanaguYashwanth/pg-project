@@ -91,7 +91,11 @@
 <script>
 import axios from "axios";
 import { fb } from "../firebase";
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
+
+//import {firestore} from '../firebase'
 export default {
 
   data() {
@@ -143,15 +147,18 @@ export default {
             .getDownloadURL()
             .then(function (downloadURL) {
               console.log(downloadURL);
-
+              //console.log(fb.firestore())
               setTimeout(() => {
+             // var date = new Date();
                 axios
                   .post("http://127.0.0.1:5000/post/posts", {
                     text: text,
                     img: downloadURL,
                     pgname: pgname,
                     username: username,
-                    uid:localStorage.getItem('localid')
+                    uid:localStorage.getItem('localid'),
+                    //created:date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
+                    timestamp:firebase.firestore.Timestamp.fromDate(new Date()),
                   })
                   .then((res) => {
                     console.log('succes')
@@ -170,6 +177,7 @@ export default {
             text: text,
             pgname: pgname,
             username: username,
+            timestamp: firebase.firestore.Timestamp.fromDate(new Date()),
             uid:localStorage.getItem('localid')
         }).then(res=>{
           console.log(res)
@@ -178,6 +186,7 @@ export default {
         .catch(err=>console.log(err))
         console.log('secondary')
       }
+
       else{
         console.log('enter valid input')
         this.flashMessage.setStrategy('single');
@@ -218,7 +227,7 @@ export default {
       await axios
         .get("http://127.0.0.1:5000/get/posts")
         .then((res) => {
-         
+         console.log(res)
           var data = res.data;
          var blogs=[]
         for(let key in data)

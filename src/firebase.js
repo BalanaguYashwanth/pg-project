@@ -3,8 +3,6 @@ import 'firebase/firestore'
 import 'firebase/firebase-auth'
 import 'firebase/storage'
 
-
-
 var config = {
     apiKey: "AIzaSyCiXmndfIr6bGr1h4GjLM6moFJ6WzFKH4w",
     authDomain: "pg-app-fd8a7.firebaseapp.com",
@@ -16,7 +14,10 @@ var config = {
     measurementId: "G-3578WF0JJE"
   }
   
-  const fb= firebase.initializeApp(config)
+  const fb = firebase.initializeApp(config)
+  //Timestamp = firebase.firestore.Timestamp;
   //const db= firebase.firestore()
   
-  export{fb}
+  export{fb,}
+  
+  
