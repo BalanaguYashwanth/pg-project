@@ -103,6 +103,10 @@ export const store = new Vuex.Store({
         },
         
         getuseraction: async function(context){
+
+            document.cookie = 'cookie1=value1; SameSite=Lax';
+            document.cookie = 'cookie2=value2; SameSite=None; Secure';
+
             axios.post('http://127.0.0.1:5000/getcurrentuser',{
                 uid:localStorage.getItem('localid'),
               }).then(res=>{

@@ -45,12 +45,27 @@
           </div>
 
           <div class="card-footer text-muted">
-            <input
+            <!-- <input
               type="file"
               placeholder="Upload a photo"
               title="Choose a video please"
               @change="onfileselect"
-            />
+            /> -->
+
+            <image-uploader
+            type=file
+             :preview=false
+            capture="environment"
+            :debug="1"
+            doNotResize="gif"
+            :autoRotate="true"
+            outputFormat="verbose"
+            :className="['fileinput', { 'fileinput--loaded' : hasImage }]"
+            @input="onfileselect"
+          >
+          </image-uploader>
+
+
           </div>
           <p v-show="uploadValue" style="text-align: center">
             {{ info }}
@@ -83,6 +98,18 @@
             </div>
           </div>
         </div>
+
+        <div v-show="!this.$store.state.pgname" >
+          <div class="card mx-auto m-5" id="card" style="width: 35rem">
+            <div class="card-body">
+              <h3 class="card-text display-5 ">
+                Please complete your profile to get updates or your requests or posts will be invalid  
+              </h3>
+            </div>
+          </div>
+        </div>
+
+
       </form>
     </div>
   </div>
@@ -112,6 +139,9 @@ export default {
       pgname: "",
       username: "",
       info1:"",
+      hasImage:false,
+      name1:'',
+      img:'',
     };
   },
 
@@ -123,16 +153,17 @@ export default {
        this.$router.push("/login");
     },
 
-    onfileselect: function (event) {
-      this.selectfile = event.target.files[0];
-      // this.imageurl=this.fileurl()
+    onfileselect: function (obj) {
+      this.hasImage = true;
+      this.img = obj.dataUrl;
+      this.name1=obj.info.name
     },
 
     fileurl: function (text, pgname, username) {
-      if(this.selectfile!=="")
+      if(this.img!=="")
       {
-      var storageRef = fb.storage().ref("images/" + this.selectfile.name);
-      let uploadedTask = storageRef.put(this.selectfile);
+      var storageRef = fb.storage().ref("images/" + this.name1);
+      let uploadedTask = storageRef.putString(this.img,'data_url');
       uploadedTask.on(
         "state_changed",
         (snapshot) => {

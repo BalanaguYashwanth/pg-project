@@ -6,7 +6,7 @@
   </div>
 
     <div class="container">
-      <p class="display-2" id="title"> Pg Hostels Registration</p>
+      <p class="display-2" id="title"> PG/Hostel Registration</p>
         <FlashMessage :position="'right top'"/>
       <form>
         <div class="form-row">
@@ -87,7 +87,23 @@
 
         <div class="form-group">
           <label> Upload your Pg image </label>
-          <input type="file" class="form-control-file" @change="fileselect" />
+          <!-- <input type="file" class="form-control-file" @change="fileselect" /> -->
+
+
+            <image-uploader
+            type=file
+             :preview=false
+            capture="environment"
+            :debug="1"
+            doNotResize="gif"
+            :autoRotate="true"
+            outputFormat="verbose"
+            :className="['fileinput', { 'fileinput--loaded' : hasImage }]"
+            @input="fileselect"
+            >
+           </image-uploader>
+
+
            <p v-show="uploadValue"> uploading image :- {{uploadValue}}% </p>
         </div>
 
@@ -130,17 +146,22 @@ export default {
       imgurl: "",
       imgurl1: "",
       uploadValue:'',
+      hasImage:false,
+      name1:'',
+      img:'',
     };
   },
 
   methods: {
-    fileselect:  function (event) {
-      this.file = event.target.files[0];
+    fileselect:  function (obj) {
+      this.hasImage = true;
+      this.img = obj.dataUrl;
+      this.name1=obj.info.name
     },
 
     filesubmit: function (name, phonenumber, landmark, address, pincode, city) {
 
-      if(name!="" && phonenumber!="" && landmark!="" && address!="" && pincode!="" && city!="" && this.file!="")
+      if(name!="" && phonenumber!="" && landmark!="" && address!="" && pincode!="" && city!="" && this.img!="")
       {
 
         this.flashMessage.setStrategy('single');
@@ -150,8 +171,8 @@ export default {
         blockClass: 'custom-block-class'
         });
 
-      var storageRef = fb.storage().ref("userprofile/" + this.file.name);
-      let uploadedTask = storageRef.put(this.file);
+      var storageRef = fb.storage().ref("userprofile/" + this.name1);
+      let uploadedTask = storageRef.putString(this.img,'data_url');
       uploadedTask.on(
         "state_changed",
         (snapshot) => {
@@ -180,9 +201,6 @@ export default {
                 })
                 .then((res) => {
                   console.log(res);
-
-                 
-                  
                   setTimeout(location.reload(),3000)
 
                 })

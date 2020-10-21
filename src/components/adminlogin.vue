@@ -33,7 +33,9 @@
 
 <script>
 import axios from 'axios'
-//import { fb } from "../firebase";
+// //import { fb } from "../firebase";
+// axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"; 
+// axios.defaults.xsrfCookieName = "csrftoken";
 export default {
   data() {
     return {
@@ -65,14 +67,23 @@ export default {
         time: 3000,
         blockClass: 'custom-block-class'
         });
-        
-        
-        })
+        })  
     },
 
-  },
+   
+    
+
+  }
+
+
+
+
+  
+
+  
 
 };
+
 
 </script>
 

@@ -177,7 +177,22 @@
 
         <div  class="form-group">
         <label> Update your Profile  :-  </label>
-          <input type="file" class="form-control-file"   @change="file" />
+          <!-- <input type="file" class="form-control-file"   @change="file" /> -->
+
+
+            <image-uploader
+            type=file
+             :preview=false
+            capture="environment"
+            :debug="1"
+            doNotResize="gif"
+            :autoRotate="true"
+            outputFormat="verbose"
+            :className="['fileinput', { 'fileinput--loaded' : hasImage }]"
+            @input="file"
+          >
+        </image-uploader>
+
         </div>
 
         <p v-show="uploadValue"> uploading photo:- {{uploadValue}}% </p>
@@ -214,6 +229,9 @@ export default {
       uploadValue:'',
       allusers:'',
       pk_id:'',
+      hasImage:false,
+      name1:'',
+      img:'',
     };
   },
 
@@ -275,8 +293,10 @@ export default {
         .catch((err) => console.log(err));
     },
 
-    file:function(event){
-      this.mainselectfile = event.target.files[0]
+    file:function(obj){
+      this.hasImage = true;
+      this.img = obj.dataUrl;
+      this.name1=obj.info.name
     },
 
 
@@ -300,7 +320,7 @@ export default {
         this.$store.state.phonenumber =="" &&
         this.$store.state.gender=="" 
       ) {
-        if(username!="" &&  phonenumber.length==10 && pgname!="" && gender!="" && age!=""  && this.mainselectfile!="")
+        if(username!="" &&  phonenumber.trim().length==10 && pgname!="" && gender!="" && age!=""  && this.img!="")
         {
           this.flashMessage.setStrategy('single');
           this.flashMessage.success({
@@ -318,7 +338,7 @@ export default {
           });
           console.log('please enter valid data')
 
-          if(phonenumber.length!=10)
+          if(phonenumber.trim().length!=10)
           {
           this.flashMessage.setStrategy('single');
           this.flashMessage.error({
@@ -331,8 +351,8 @@ export default {
         }
         var storageRef = fb
           .storage()
-          .ref("userprofile/" + this.mainselectfile.name);
-        let uploadedTask = storageRef.put(this.mainselectfile);
+          .ref("userprofile/" + this.name1);
+        let uploadedTask = storageRef.putString(this.img,'data_url');
         uploadedTask.on(
           "state_changed",
           (snapshot) => {
@@ -350,7 +370,7 @@ export default {
                 await console.log(downloadURL);
 
                 console.log('primary')
-              if(username!="" &&  phonenumber.length==10 && pgname!="" && gender!="" && age!="" )
+              if(username!="" &&  phonenumber.trim().length==10 && pgname!="" && gender!="" && age!="" )
               {  
                 axios
                   .post("http://127.0.0.1:5000/post/user", {
@@ -373,11 +393,11 @@ export default {
               });
           }
         );
-      } else if(this.mainselectfile!="") {
+      } else if(this.img!="") {
         var storageRef1 = fb
           .storage()
-          .ref("userprofile/" + this.mainselectfile.name);
-        let uploadedTask = storageRef1.put(this.mainselectfile);
+          .ref("userprofile/" + this.name1);
+        let uploadedTask = storageRef1.putString(this.img,'data_url');
         uploadedTask.on(
           "state_changed",
           (snapshot) => {

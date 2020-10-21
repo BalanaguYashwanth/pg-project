@@ -9,7 +9,7 @@
     </div>
     
     <div v-else style="text-align:right" >  
-      <router-link  to="/ownerprofile">
+      <router-link  to="/customerprofile">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ54iLC-JopSr54OnaoTHcMculZnCMyweBC9w&usqp=CAU"  style="height:auto; width:60px" alt="">
       </router-link>
     </div>
@@ -32,6 +32,16 @@
             </div>
           </div>
 
+        </div>
+
+         <div v-show="!this.$store.state.pgname" >
+          <div class="card mx-auto m-5" id="card" style="width: 35rem">
+            <div class="card-body">
+              <h3 class="card-text display-5 ">
+                Please complete your profile to get updates or your requests or posts will be invalid  
+              </h3>
+            </div>
+          </div>
         </div>
 
 

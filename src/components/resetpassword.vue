@@ -24,6 +24,11 @@
 </template>
 
 <script>
+
+document.cookie = 'cookie1=value1; SameSite=Lax';
+// Set a cross-site cookie for third-party contexts
+document.cookie = 'cookie2=value2; SameSite=None; Secure';
+
 import axios from 'axios'
 export default {
   data() {
@@ -40,7 +45,7 @@ export default {
       .then(res=>{
         console.log(res)
          this.flashMessage.setStrategy('single');
-        this.flashMessage.error({
+        this.flashMessage.success({
         message: 'successfully reset once check your mail',
         time: 3000,
         blockClass: 'custom-block-class'

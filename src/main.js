@@ -9,7 +9,9 @@ import FlashMessage from '@smartweb/vue-flash-message';
 import { Datetime } from 'vue-datetime'
 import 'vue-datetime/dist/vue-datetime.css'
 import ImageUploader from 'vue-image-upload-resize'
-
+import VueCsrf from 'vue-csrf';
+ 
+Vue.use(VueCsrf);
 Vue.use(ImageUploader);
 Vue.use(Datetime)
 Vue.use(FlashMessage);

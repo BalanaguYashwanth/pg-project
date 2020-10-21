@@ -162,6 +162,9 @@ methods:{
         console.log('please enter valid data')
 
       this.feedback="successfully registered";
+
+      setTimeout(location.reload(),3000)
+
       })
     .catch(err=>console.log(err))
     }
@@ -175,14 +178,18 @@ methods:{
         blockClass: 'custom-block-class'
         });
         console.log('please enter valid data')
-      }
-      
-      this.flashMessage.setStrategy('single');
+      }else{
+
+          this.flashMessage.setStrategy('single');
         this.flashMessage.error({
         message: 'please fill up with valid details',
         time: 3000,
         blockClass: 'custom-block-class'
         });
+
+      }
+      
+    
         console.log('please enter valid data')
       
       this.feedback="please fill up all details & enter valid inputs" 

@@ -69,7 +69,7 @@ export default {
         console.log(res)
         localStorage.setItem('localid',res.data.localId)
         localStorage.setItem('idtoken',res.data.idToken)
-          this.$router.push('ownerprofile');
+          this.$router.push('pgowner');
           location.reload()
           location.reload()
       })
