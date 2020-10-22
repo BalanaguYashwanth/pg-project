@@ -26,7 +26,7 @@ import feedback from './components/feedback'
 import reviewfeedback from './components/reviewfeedback'
 import Vue from 'vue'
 import Vuerouters from 'vue-router'
-
+import template from './components/template'
 Vue.use(Vuerouters)
 
 const router = new Vuerouters({
@@ -57,14 +57,15 @@ const router = new Vuerouters({
     {path:'/resetpassword',name:'resetpassword',component:resetpassword},
     {path:'/signout',name:'signout',component:signout},
     {path:'/feedback',name:'feedback',component:feedback},
-    {path:'/reviewfeedback',name:'reviewfeedback',component:reviewfeedback}
+    {path:'/reviewfeedback',name:'reviewfeedback',component:reviewfeedback},
+    {path:'/template',name:'template',component:template}
 ]
 })
 
 
 //const owner=['pgowner','ownerprofile','ownerdesk','foodhistory','ownerschedule','ownerdeskdetails']
 
-const openRoutes=['login','register','customerlogin','customerregister','adminlogin','adminregister','pghome','careerprofiles','resetpassword','signout']
+const openRoutes=['login','register','customerlogin','customerregister','adminlogin','adminregister','pghome','careerprofiles','resetpassword','signout','template']
 
 
 router.beforeEach((to, from, next) => {

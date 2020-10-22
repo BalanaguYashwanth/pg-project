@@ -1,12 +1,7 @@
 <template>
   <div id="app" ref="app">
 
-    
-
     <router-view>
-    
-     
-    
       <div slot="title">
         <slider
           :width="300"
@@ -62,32 +57,29 @@
           :opacity="0.15"
         ></slider>
       </div>
-
-
     </router-view>
+    
   </div>
 </template>
 
 <script>
 import Slider from "@jeremyhamm/vue-slider";
-//import imageCompressor from 'vue-image-compressor'
 export default {
   name: "App",
   components: {
     slider: Slider,
-   //imageCompressor:imageCompressor,
   },
 };
 </script>
 
-<style>
+<style >
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin-left: auto;
-  color: #2c3e50;
-  margin-top: 60px;
+ 
+ 
 }
 </style>
 

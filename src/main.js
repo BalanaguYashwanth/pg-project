@@ -10,7 +10,10 @@ import { Datetime } from 'vue-datetime'
 import 'vue-datetime/dist/vue-datetime.css'
 import ImageUploader from 'vue-image-upload-resize'
 import VueCsrf from 'vue-csrf';
- 
+//import ArgonDashboard from '@/plugins/argon-dashboard'
+//import './registerServiceWorker'
+
+
 Vue.use(VueCsrf);
 Vue.use(ImageUploader);
 Vue.use(Datetime)
@@ -19,6 +22,7 @@ Vue.use(VueFlashMessage);
 Vue.use(Slider)
 Vue.use(Vuerouters)
 
+//Vue.use(ArgonDashboard);
 Vue.config.productionTip = false
 Vue.component('datetime', Datetime);
 
