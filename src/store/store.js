@@ -23,6 +23,7 @@ export const store = new Vuex.Store({
         foodschedules:[],
         pgnames:[],
         admin:"",
+        posts:[],
     },
     getters:{
 
@@ -85,11 +86,15 @@ export const store = new Vuex.Store({
         },
 
         getadmin:function(state,admin){
-            
             state.admin=admin
-            
-            
+        },
+
+        postdata:function(state,post){
+           
+            state.posts=post
+           
         }
+
     },
 
     actions:{
@@ -103,14 +108,15 @@ export const store = new Vuex.Store({
         },
         
         getuseraction: async function(context){
-
+            
+            
             document.cookie = 'cookie1=value1; SameSite=Lax';
             document.cookie = 'cookie2=value2; SameSite=None; Secure';
 
             axios.post('http://127.0.0.1:5000/getcurrentuser',{
                 uid:localStorage.getItem('localid'),
               }).then(res=>{
-                  console.log(res.data)
+                  //console.log(res.data)
                 if(res)
                 {
                 context.commit('getuser',res.data.email)
@@ -156,15 +162,63 @@ export const store = new Vuex.Store({
                 }
             
             })
-            .catch(err=>console.log(err.response))
+            .catch(err=>console.log(err.response)),
+
+
+            axios.get('http://127.0.0.1:5000/token')
+            .then(res=>{
+               // console.log(res.data.token)
+                localStorage.setItem('token',res.data.token)
+            })
+
+            .catch(err=>console.log(err))
 
           
         },
 
+        
+        postsaction: function(context){
+            
+            if (localStorage.getItem("localid")) {
+                
+                 axios
+                  .get("http://127.0.0.1:5000/get1/posts")
+                  .then((res) => {
+                 
+                    var data = res.data;
+                   var blogs=[]
+                  for(let key in data)
+                  { 
+                    data[key].id=key
+                    blogs.push(data[key])
+                  }
+
+                  context.commit('postdata',blogs)
+          
+                // for(let obj in blogs)
+                // {
+                //   if(blogs[obj].pgname == state.pgname)
+                //   {
+                //     alldata.push(blogs[obj])
+                   
+                //   }
+                // }
+               
+                  
+                  })
+                .catch((err) => console.log(err));
+              }
+               else {
+                console.log("user not  authenticated");
+              }
+        },
+
+
+
         scheduleaction:function(context){
             axios.get('http://127.0.0.1:5000/get/customerschedule')
             .then(res=>{
-                console.log(res)
+                //console.log(res)
                 let alldata=[]
                 let datas = res.data
                 for(let key in datas)
@@ -181,7 +235,7 @@ export const store = new Vuex.Store({
         foodaction:function(context){
             axios.get('http://127.0.0.1:5000/get/schedulefood')
             .then(res=>{
-                console.log(res)
+                //console.log(res)
                 let array=[]
                 let resdata=res.data
                 for( let obj in resdata )
@@ -190,7 +244,7 @@ export const store = new Vuex.Store({
                     array.push(resdata[obj])
                 }
                 context.commit('getfood',array)
-                console.log(array)
+                //console.log(array)
             })
             .catch(err=>console.log(err))
         },
@@ -198,7 +252,7 @@ export const store = new Vuex.Store({
         userregisters:function(context){
             axios.get('http://127.0.0.1:5000/get/userregisters')
             .then(res =>{
-                console.log('users',res)
+                //console.log('users',res)
                 let users=[]
                 let register=res.data
                 for(let key in register)
@@ -243,7 +297,7 @@ export const store = new Vuex.Store({
               localStorage.removeItem("idtoken");
               localStorage.removeItem("id");
             }
-            console.log(state.owner)
+            //console.log(state.owner)
         }
 
     },

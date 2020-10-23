@@ -1,12 +1,13 @@
 <template>
-    <div>
-       <slot name="customer" > </slot>
+    <div id="mainpage">
+       <slot name="customer"  > </slot>
      <!-- <button style="float: right" v-on:click="signout" class="btn btn-secondary">
          signout
     </button> -->
      <FlashMessage :position="'right top'"/>
   <div class="container">
     <div class="title display-2">Customer Profile</div>
+     <button id="submit" class="btn btn-secondary " style="float:right"  v-on:click.prevent="deleting" >  delete </button>
     <form>
         <div class="text-center m-3">
          
@@ -199,7 +200,7 @@
        
 
         <button id="submit" class="btn btn-secondary btn-md btn-block" v-on:click.prevent= posting(username,phonenumber,pgname,gender,age,email,owner) >   submit </button>
-        <button id="submit" class="btn btn-secondary btn-md btn-block" v-on:click.prevent="deleting" >  delete </button>
+       
         <button id="submit" class="btn btn-secondary btn-md btn-block" v-on:click.prevent="deletingaccount" >  delete account </button>
     </form>
   </div>
@@ -495,4 +496,11 @@ export default {
 .container {
   text-transform: capitalize;
 }
+
+
+#mainpage{
+  background-color: #F5F5F5 ;
+}
+
+
 </style>

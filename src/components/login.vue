@@ -51,7 +51,7 @@ export default {
 
     posting: function () {
     
-
+     
       axios.post('http://127.0.0.1:5000/signin',{
         email:this.email,
         password:this.password
@@ -65,11 +65,11 @@ export default {
           location.reload()
       })
       .catch(err=>{
-        console.log(err.response.data.message)
+        console.log(err.response.data)
         
           this.flashMessage.setStrategy('single');
           this.flashMessage.error({
-          message: err.response.data.message,
+          message: err.response.data,
           time: 3000,
           blockClass: 'custom-block-class'
           });

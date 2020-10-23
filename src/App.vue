@@ -1,8 +1,8 @@
 <template>
   <div id="app" ref="app">
 
-    <router-view>
-      <div slot="title">
+    <router-view >
+      <div id="slide"  slot="title">
         <slider
           :width="300"
           :links="[
@@ -15,13 +15,14 @@
             { id: 7, text: 'Feedback', url: 'http://localhost:8080/feedback' },
             { id: 8, text: 'SignOut', url:'http://localhost:8080/signout'},
           ]"
+          
           format="push"
           direction="left"
           :opacity="0.15"
         ></slider>
       </div>
 
-       <div slot="customer">
+       <div id="slide" slot="customer">
         <slider
           :width="300"
           :links="[
@@ -41,7 +42,7 @@
         ></slider>
       </div>
 
-        <div slot="admin">
+        <div id="slide" slot="admin">
         <slider
           :width="300"
           :links="[
@@ -78,8 +79,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin-left: auto;
- 
- 
+}
+
+#slide{
+  padding-top: 30px;
 }
 </style>
 

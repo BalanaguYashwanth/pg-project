@@ -1,7 +1,7 @@
 <template>
     <div>
         <slot name="customer">  </slot>
-        <div class="title display-2">  schedule Food History </div>
+        <div class="title display-2"   style="text-align:center">  schedule Food History </div>
          Note :- *Date & Time format = (yyyy-mm-dd,hh-mm-ss)
         
         <table class="table table-bordered" style="table-layout: auto width: 100%; " >

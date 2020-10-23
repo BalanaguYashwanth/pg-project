@@ -167,7 +167,6 @@ export default {
 </script>
 
 <style scoped>
-
 .title {
   text-align: center;
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -175,8 +174,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   margin-left: auto;
   color: #2c3e50;
-  
-  margin-bottom: 50px;
+  padding-top:10px;
+  margin-bottom: 90px;
   text-transform: capitalize;
 }
 
