@@ -83,6 +83,7 @@ export default {
 
 #slide{
   padding-top: 30px;
+  padding-left: 20px;
 }
 </style>
 

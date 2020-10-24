@@ -1,8 +1,8 @@
 <template>
     <div id="mainpage" >
-        <slot name="title" >  </slot>
+        <slot name="title">  </slot>
         <div class="title display-2">  Customer food schedule   </div>
-         Note :- *Date & Time format = (yyyy-mm-dd,hh-mm-ss)
+        
         
         <table class="table table-bordered mx-auto shadow-sm col-md-offset-3 bg-white rounded " style="table-layout: auto; " >
             <thead>
@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody  v-for="(each,index) in  getschedule()" v-bind:key="index" >
-                <th> {{index}}  </th>
+                <th> {{index+1}}  </th>
 
                 <td> {{each.pgname}} </td>
                 <td> {{each.name}} </td>
@@ -108,7 +108,7 @@ export default {
 
 .title {
   text-align: center;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Google Sans','Roboto',Arial,sans-serif,Helvetica;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin-left: auto;

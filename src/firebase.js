@@ -13,11 +13,16 @@ var config = {
     appId: "1:967373924042:web:60124a8491144fa4f8b633",
     measurementId: "G-3578WF0JJE"
   }
+
   
+  
+
+
   const fb = firebase.initializeApp(config)
+  var db = firebase.firestore();
   //Timestamp = firebase.firestore.Timestamp;
   //const db= firebase.firestore()
   
-  export{fb,}
+  export{fb,db}
   
   

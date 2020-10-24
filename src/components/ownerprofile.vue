@@ -513,7 +513,8 @@ export default {
 <style scoped >
 .title {
   text-align: center;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+
+  font-family: 'Google Sans','Roboto',Arial,sans-serif,Helvetica;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin-left: auto;
