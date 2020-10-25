@@ -2,7 +2,7 @@
   <div  id="mainpage">
       <FlashMessage :position="'right top'"/>
     {{ modified() }}
-  
+
     <div id="title"> 
     <slot name="title">  </slot>
     <div v-if="this.$store.state.photourl" style="text-align: right">
@@ -28,6 +28,7 @@
     </div>
   </div>
 
+   {{postdata()}}
    
     <div class="container">
       <form>
@@ -120,14 +121,10 @@
 
 <script>
 import axios from "axios";
-import { fb,db } from "../firebase";
+import { fb } from "../firebase";
 import 'firebase/firestore'
 import firebase from 'firebase/app'
-//import firebase from 'firebase';
 
-
-
-//import {firestore} from '../firebase'
 export default {
 
   data() {
@@ -162,6 +159,21 @@ export default {
           alldata.push(posts[data])
         }
       }
+
+      for(let obj in alldata)
+      {
+        let result = new Date(0);
+        result.setSeconds(alldata[obj].timestamp.seconds);
+        result.setMilliseconds(alldata[obj].timestamp.nanoseconds/1000000);
+        alldata[obj].ist=result
+      }
+
+       let sorteddata = ( alldata.sort(function(a,b){
+         console.log((b.ist).getTime())
+       return (b.ist).getTime() - (a.ist).getTime()    
+      }))
+      console.log('sorted',sorteddata)
+
       return alldata
     },
         
@@ -198,9 +210,9 @@ export default {
             .getDownloadURL()
             .then(function (downloadURL) {
               console.log(downloadURL);
-              //console.log(fb.firestore())
+             
               setTimeout(() => {
-             // var date = new Date();
+            
                 axios
                   .post("http://127.0.0.1:5000/post/posts", {
                     text: text,
@@ -224,23 +236,6 @@ export default {
       );
       }
       else if(text!=''){
-        // let timestampFromDate = Timestamp(date: Date());
-        // print(timestampFromDate)
-      console.log('working',db)
-         
-      //   db.collection("sample").add({
-      //     first: "Ada",
-      //     last: "Lovelace",
-      //     born: 1815
-      // })
-      // .then(function(docRef) {
-      //     console.log("Document written with ID: ", docRef.id);
-      // })
-      // .catch(function(error) {
-      //     console.error("Error adding document: ", error);
-      // });
-
-        //var csrf_token = "{{ csrf_token() }}";
         axios.post('http://127.0.0.1:5000/post/posts',{
             text: text,
             pgname: pgname,

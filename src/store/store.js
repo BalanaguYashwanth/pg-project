@@ -185,26 +185,14 @@ export const store = new Vuex.Store({
                   .get("http://127.0.0.1:5000/get1/posts")
                   .then((res) => {
                  
-                    var data = res.data;
-                   var blogs=[]
+                  var data = res.data;
+                  var blogs=[]
                   for(let key in data)
                   { 
                     data[key].id=key
                     blogs.push(data[key])
                   }
-
                   context.commit('postdata',blogs)
-          
-                // for(let obj in blogs)
-                // {
-                //   if(blogs[obj].pgname == state.pgname)
-                //   {
-                //     alldata.push(blogs[obj])
-                   
-                //   }
-                // }
-               
-                  
                   })
                 .catch((err) => console.log(err));
               }
