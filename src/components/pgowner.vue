@@ -101,6 +101,7 @@
         </div>
       </div>
 
+        <div class="form-group col-md-6 mx-auto">
         <div v-show="!this.$store.state.pgname" >
           <div class="card mx-auto m-5" id="card" style="width: 35rem">
             <div class="card-body">
@@ -110,7 +111,7 @@
             </div>
           </div>
         </div>
-
+        </div>
 
       </form>
     </div>

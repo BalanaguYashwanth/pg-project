@@ -1,8 +1,8 @@
 <template>
   <div id="mainpage">
 
-      <FlashMessage :position="'right top'"/>
-     <slot name="title"  >  </slot>
+    <FlashMessage :position="'right top'"/>
+    <slot name="title"  >  </slot>
     <div class="container">
     
       <p class=" display-3 mx-auto " id="title">Owner desk</p>
@@ -35,7 +35,7 @@
         </div>
 
         <div class="form-row">
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-6  ">
             <label>Start Date</label>
             <datetime type="datetime"  v-model="startdate"   class="datetime" use12-hour></datetime>
           </div>

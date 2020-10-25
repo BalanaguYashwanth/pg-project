@@ -14,12 +14,13 @@
     </div>
    
     <div class="container">
-        <p style="text-align:center"  class="display-2 mx-auto"> Remainders  </p>
+        <p style="text-align:center"  class="display-4 mx-auto"> Remainders  </p>
       <form>
-        <div >
+
+        <div class="form-group col-md-6 mx-auto" >
         <div v-for="(all, index) in alldata" v-bind:key="index">
          
-          <div id="card" class="card mx-auto m-2 shadow-sm  bg-white rounded" style="width: 35rem">
+          <div id="card" class="card mx-auto m-2 shadow-sm  bg-white rounded" style="width: 100%">
             <img :src="all.img" v-show="all.img" class="card-img-top rounded" alt="nature" />
             <div class="card-body">
               <p class="card-text">
@@ -30,6 +31,7 @@
           
         </div>
 
+        <div  >
          <div v-show="!this.$store.state.pgname" >
           <div class="card mx-auto m-2 shadow-sm  bg-white rounded" id="card" style="width: 35rem">
             <div class="card-body">
@@ -38,6 +40,7 @@
               </h3>
             </div>
           </div>
+        </div>
         </div>
         </div>
 
@@ -101,7 +104,7 @@ export default {
 
     if (localStorage.getItem("localid")) {
       await axios
-        .get("http://127.0.0.1:5000/get/posts")
+        .get("http://127.0.0.1:5000/get1/posts")
         .then((res) => {
           var data = res.data;
          var blogs=[]
@@ -112,7 +115,7 @@ export default {
         }
       for(let obj in blogs)
       {
-        if(blogs[obj].pgname == this.$store.state.pgname)
+        if(blogs[obj].pgname == this.$store.state.pgname  && blogs[obj].pgname!="")
         {
           this.alldata.push(blogs[obj])
         }
@@ -151,7 +154,7 @@ textarea {
 
 #mainpage{
   /* background-color: #F5F5F5 ; */
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+   font-family: 'Google Sans','Roboto',Arial,sans-serif,Helvetica;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;

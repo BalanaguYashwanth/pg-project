@@ -28,11 +28,11 @@
                 <td> {{each.name}} </td>
                 <td> {{each.phonenumber}} </td>
                 <td> {{each.tiffin}} </td>
-                <td> {{(each.tiffintime)}} </td>
+                <td> {{dateformat(each.tiffintime)}} </td>
                 <td> {{each.lunch}} </td>
-                <td> {{(each.lunchtime)}} </td>
+                <td> {{dateformat(each.lunchtime)}} </td>
                 <td> {{each.dinner}} </td>
-                <td> {{(each.dinnertime)}} </td>
+                <td> {{dateformat(each.dinnertime)}} </td>
                 <td> {{(each.queries)}} </td>
                 <td> <button class="btn btn-secondary" v-on:click="deleting(each.id)"  > delete </button> </td>
             </tbody>
@@ -54,6 +54,8 @@ export default {
     },
     
     methods:{
+
+    
 
     dateformat(num){
         if(num)
