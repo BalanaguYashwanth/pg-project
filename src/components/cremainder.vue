@@ -14,7 +14,7 @@
     </div>
    
     <div class="container">
-        <p style="text-align:center"  class="display-4 mx-auto"> Remainders  </p>
+        <p style="text-align:center"  class="display-4 mx-auto"> Reminders  </p>
       <form>
 
         <div class="form-group col-md-6 mx-auto" >
@@ -120,7 +120,21 @@ export default {
           this.alldata.push(blogs[obj])
         }
       }
-        })
+
+        for(let obj in this.alldata)
+      {
+        let result = new Date(0);
+        result.setSeconds(this.alldata[obj].timestamp.seconds);
+        result.setMilliseconds(this.alldata[obj].timestamp.nanoseconds/1000000);
+        this.alldata[obj].ist=result
+      }
+
+      this.alldata.sort(function(a,b){
+        //console.log((b.ist).getTime())
+        return (b.ist).getTime() - (a.ist).getTime()
+      })
+
+      })
       .catch((err) => console.log(err));
     }
      else {

@@ -1,10 +1,10 @@
 <template>
     <div id="mainpage">
         <slot name="title"  >  </slot>
+          <div class="title display-4 mx-auto"> Registered Users </div>
         <div class="form-row" >
-        <div class="title display-4 mx-auto"> Registered Users </div>
-        <div class="form-group  table-responsive" >
-        <table class=" table table-bordered  mx-auto shadow-sm bg-white rounded " style="table-layout: auto; " >
+        <div class="form-group  mx-auto col-md-11  table-responsive "  >
+        <table class=" table table-bordered  shadow-sm bg-white rounded " style="table-layout: auto; width:100% " >
             <thead>
                 <tr>
                     <th> id  </th>
@@ -128,6 +128,10 @@ thead{
     text-transform: capitalize;
 }
 
+#form-group{
+    position: relative;
+    left: -2em;
+}
 
 #mainpage{
 background-color: #e2dfe7;

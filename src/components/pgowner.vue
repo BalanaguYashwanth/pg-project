@@ -28,7 +28,7 @@
     </div>
   </div>
 
-   {{postdata()}}
+ 
    
     <div class="container">
       <form>
@@ -168,11 +168,11 @@ export default {
         alldata[obj].ist=result
       }
 
-       let sorteddata = ( alldata.sort(function(a,b){
-         console.log((b.ist).getTime())
+       alldata.sort(function(a,b){
+        //console.log((b.ist).getTime())
        return (b.ist).getTime() - (a.ist).getTime()    
-      }))
-      console.log('sorted',sorteddata)
+      })
+     
 
       return alldata
     },

@@ -162,18 +162,8 @@ export const store = new Vuex.Store({
                 }
             
             })
-            .catch(err=>console.log(err.response)),
+            .catch(err=>console.log(err.response));
 
-
-            axios.get('http://127.0.0.1:5000/token')
-            .then(res=>{
-               // console.log(res.data.token)
-                localStorage.setItem('token',res.data.token)
-            })
-
-            .catch(err=>console.log(err))
-
-          
         },
 
         

@@ -1,10 +1,10 @@
 <template>
     <div id="mainpage" >
         <slot name="title">  </slot>
-        <div class="title display-2">  Customer food schedule   </div>
-        
-        
-        <table class="table table-bordered mx-auto shadow-sm col-md-offset-3 bg-white rounded " style="table-layout: auto; " >
+        <div class="title display-4">  Customer food schedule </div>
+        <div class="form-row">
+        <div class="form-group col-md-11 mx-auto table-responsive" >
+        <table class="table table-bordered  shadow-sm bg-white rounded " style="table-layout: auto; " >
             <thead>
                 <tr>
                     <th> id  </th>
@@ -36,10 +36,10 @@
                 <td> {{(each.queries)}} </td>
                 <td> <button class="btn btn-secondary" v-on:click="deleting(each.id)"  > delete </button> </td>
             </tbody>
-
         </table>
+       </div>
+    </div>
 
-       
     </div>
 </template>
 <script>
@@ -115,8 +115,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   margin-left: auto;
   color: #2c3e50;
-  margin-top: 50px;
-  margin-bottom: 20px;
+  margin-top: 30px;
+  margin-bottom: 10px;
   text-transform: capitalize;
 }
 
