@@ -104,10 +104,11 @@
 
         <div class="form-group col-md-6 mx-auto">
         <div v-show="!this.$store.state.pgname" >
-          <div class="card mx-auto m-5" id="card" style="width: 35rem">
+          <div class="card mx-auto m-5" id="card" style="width: 100%">
             <div class="card-body">
               <h3 class="card-text display-5 ">
                 Please complete your profile to get updates or your requests or posts will be invalid  
+                <a href="http://localhost:8080/ownerprofile"> click here... </a>
               </h3>
             </div>
           </div>

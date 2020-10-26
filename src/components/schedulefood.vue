@@ -111,6 +111,8 @@
 
 <script >
 import axios from "axios";
+import 'firebase/firestore'
+import firebase from 'firebase/app'
 export default {
   data() {
     return {
@@ -154,6 +156,7 @@ export default {
             queries: this.queries,
 
             pgname: this.$store.state.pgname,
+            timestamp:firebase.firestore.Timestamp.fromDate(new Date()),
           })
           .then((res) => {
             console.log(res);

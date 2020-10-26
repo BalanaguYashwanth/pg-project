@@ -181,7 +181,7 @@
         </div>
 
         <div class="form-group">
-          <label> Update your Profile :- </label>
+          <label> Update your Profile Photo :- </label>
           <!-- <input type="file" class="form-control-file" @change="file" /> -->
         
             <image-uploader

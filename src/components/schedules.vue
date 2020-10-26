@@ -61,6 +61,8 @@
 
 <script>
 import axios from 'axios'
+import 'firebase/firestore'
+import firebase from 'firebase/app'
 export default {
 
     data(){
@@ -97,6 +99,7 @@ export default {
             repair:this.repair,
             queriestext:this.queriestext,
             queries:this.queries,
+            timestamp:firebase.firestore.Timestamp.fromDate(new Date()),
             })
             .then(res=>{
                 console.log(res)

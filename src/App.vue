@@ -12,7 +12,7 @@
             { id: 4, text: 'Customer Food ', url: 'http://localhost:8080/foodhistory' },
             { id: 5, text: 'Customer Schedules', url: 'http://localhost:8080/ownerschedule' },
             { id: 6, text: 'Customer Registrations', url: 'http://localhost:8080/ownerdeskdetails' },
-            { id: 7, text: 'Feedback', url: 'http://localhost:8080/feedback' },
+            { id: 7, text: 'Feedback & Contact Us', url: 'http://localhost:8080/feedback' },
             { id: 8, text: 'SignOut', url:'http://localhost:8080/osignout'},
           ]"
           
@@ -33,7 +33,7 @@
             { id: 5, text: 'Other Schedules', url: 'http://localhost:8080/schedules' },
             { id: 6, text: 'Schedules History', url:'http://localhost:8080/reviewschedules'},
             { id: 7, text: 'Payments', url: 'http://localhost:8080/payments' },
-            { id: 8, text: 'Feedback', url: 'http://localhost:8080/feedback' },
+            { id: 8, text: 'Feedback & Contact Us', url: 'http://localhost:8080/feedback' },
             { id: 9, text: 'SignOut', url:'http://localhost:8080/signout'},
           ]"
           format="push"

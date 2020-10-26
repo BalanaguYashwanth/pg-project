@@ -14,6 +14,13 @@
         <br>
         <button v-on:click="posting"  class="btn btn-secondary" > submit </button>
     </div>
+    <br>
+    <div class="my-5 mx-auto" style="text-align:center" >
+    <p> To know more for futhur updates...  </p>
+    <p>  Contact via phonenumber-1:- 9677069761   </p>
+    <p>  Contact via phonenumber-2:- 969975138   </p>
+    <p>  Contact via email:- balanaguyashwanth@gmail.com  </p>
+    </div>
     </div>
   
 </template>

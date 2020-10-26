@@ -114,6 +114,8 @@
 
 <script >
 import axios from 'axios';
+import 'firebase/firestore'
+import firebase from 'firebase/app'
 export default {
   data(){
     return{
@@ -149,6 +151,7 @@ methods:{
       ownername: this.$store.state.displayName,
       rent:this.rent,
       pgname:this.$store.state.pgname,
+      timestamp:firebase.firestore.Timestamp.fromDate(new Date()),
     })
     .then(res=>{
       console.log(res)
@@ -183,7 +186,7 @@ methods:{
 
           this.flashMessage.setStrategy('single');
         this.flashMessage.error({
-        message: 'please fill up with valid details',
+        message: 'please complete with all valid  details',
         time: 3000,
         blockClass: 'custom-block-class'
         });
