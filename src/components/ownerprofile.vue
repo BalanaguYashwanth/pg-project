@@ -290,7 +290,7 @@ export default {
        localStorage.removeItem("localid");
       localStorage.removeItem("idtoken");
       localStorage.removeItem("id");
-     this.$router.push("/login");
+     this.$router.push("/ownerlogin");
     },
 
     deletephoto: function () {

@@ -3,7 +3,7 @@
     <div id="container" > 
     <h2 class="display-3 "  id="container"> Successfully Sigined Out</h2>
     <h2 class="display-5 " id="container" > Thankyou for spending your valuable time </h2>
-    <a href="http://localhost:8080/customerlogin">  Back to login </a>
+    <a href="http://localhost:8080/login">  Back to login </a>
     </div>
     </div>
 </template>

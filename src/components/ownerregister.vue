@@ -1,12 +1,12 @@
 <template>
-  <div id="login">
+<div id="login">
   <div class="container">
-    <FlashMessage :position="'right top'"/>
-    <div class="title display-3"  id="title">Customer Register</div>
+      <FlashMessage :position="'right top'"/>
+    <div class="title display-3">Owner register</div>
     <form>
       <div>
         <div class="form-group">
-       
+        
           <input
             type="email"
             class="form-control"
@@ -16,7 +16,7 @@
         </div>
 
         <div class="form-group">
-          
+        
           <input
             type="password"
             class="form-control"
@@ -28,12 +28,12 @@
       <button class="btn btn-block" v-on:click.prevent="posting">submit</button>
     </form>
   </div>
-  </div>  
+  </div>
 </template>
 
 <script>
-import axios from 'axios'
 //import {fb} from "../firebase";
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -45,15 +45,16 @@ export default {
   methods: {
     posting: function () {
 
-      if(this.password.length>=6 && this.password!="")
+    if(this.password.length>=6 && this.password!="")
       {
-      axios.post('http://127.0.0.1:5000/csignup',{
+      axios.post('http://127.0.0.1:5000/signup',{
         email:this.email,
         password:this.password
       })
       .then(res=>{
-
         console.log(res)
+
+           
         this.flashMessage.setStrategy('single');
         this.flashMessage.success({
         message: res.data.message,
@@ -61,8 +62,8 @@ export default {
         blockClass: 'custom-block-class'
         });
 
-        setTimeout(this.$router.push('customerlogin'),3000)
-        
+       setTimeout(this.$router.push('ownerlogin'),3000)
+
         })
       .catch(err=>{
         console.log(err.response)
@@ -72,22 +73,38 @@ export default {
         message: err.response.data.message,
         time: 3000,
         blockClass: 'custom-block-class'
-        })
+        });
         })
       }
-      else{
-           
-        this.flashMessage.setStrategy('single');
+    else{
+         this.flashMessage.setStrategy('single');
         this.flashMessage.error({
         message: 'password must be more than 6 characters',
         time: 3000,
         blockClass: 'custom-block-class'
-        })
-      }
-
+        })  
+    }
     },
   },
+
+
+
 };
 </script>
 
-<style src='../assets/css/login.css' scoped> </style>
+
+<style  src='../assets/css/login.css' scoped> </style>
+
+<style scoped>
+
+#login{
+    background-color: rgb(66,66,66);
+    min-height: 100vh;
+}
+
+.title{
+  color:aliceblue;
+}
+
+
+</style>

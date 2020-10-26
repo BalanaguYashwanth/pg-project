@@ -235,7 +235,7 @@ export default {
       localStorage.removeItem("localid");
       localStorage.removeItem("idtoken");
       localStorage.removeItem("id");
-      this.$router.push('/customerlogin')
+      this.$router.push('/login')
     },
 
     deletingaccount:function(){

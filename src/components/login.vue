@@ -1,11 +1,14 @@
 <template>
-<div id="login" >
-  <div class="container" >
-    <FlashMessage :position="'right top'"/>
+
+  <div id="login">
+  <div class="container">
+  
+      <FlashMessage :position="'right top'"/>
+
     <form>
-      <div >  
-         <div class="  title  display-3"     id="title">Owner Login</div>
-        <div class="form-group  ">
+      <div>
+        <div class="title display-3"  id="title">Customer Login</div>
+        <div class="form-group">
           
           <input
             type="email"
@@ -15,8 +18,8 @@
           />
         </div>
 
-        <div class="form-group ">
-        
+        <div class="form-group">
+          
           <input
             type="password"
             class="form-control"
@@ -25,32 +28,27 @@
           />
         </div>
       </div>
-      <button class="btn   btn-block"    v-on:click.prevent="posting">submit</button>
-      <router-link  style="float:right;color:aliceblue" to="/resetpassword"> forgot password ? </router-link>
-
+      <button class="btn btn-block"  v-on:click.prevent="posting">submit</button>
+      <router-link  style="float:right" to="/resetpassword"> forgot password ? </router-link>
     </form>
   </div>
   </div>
 </template>
 
 <script>
-//import { fb } from "../firebase";
 import axios from 'axios'
+//import { fb } from "../firebase";
 export default {
   data() {
     return {
       email: "",
       password: "",
-   
-  };
+    };
   },
 
   methods: {
-
     posting: function () {
-    
-     
-      axios.post('http://127.0.0.1:5000/signin',{
+      axios.post('http://127.0.0.1:5000/csignin',{
         email:this.email,
         password:this.password
       })
@@ -58,43 +56,28 @@ export default {
         console.log(res)
         localStorage.setItem('localid',res.data.localId)
         localStorage.setItem('idtoken',res.data.idToken)
-          this.$router.push('pgowner');
+          this.$router.push('cremainder');
           location.reload()
           location.reload()
       })
       .catch(err=>{
-        console.log(err.response.data)
+        console.log(err.response)
         
-          this.flashMessage.setStrategy('single');
-          this.flashMessage.error({
-          message: err.response.data,
-          time: 3000,
-          blockClass: 'custom-block-class'
-          });
-          console.log('please enter valid data')
-
-
+        this.flashMessage.setStrategy('single');
+        this.flashMessage.error({
+        message: err.response.data.message,
+        time: 3000,
+        blockClass: 'custom-block-class'
+        });
+        
+        
         })
-
     },
 
   },
+
 };
+
 </script>
 
-<style  src='../assets/css/login.css' scoped> </style>
-
-
-<style scoped>
-
-#login{
-    background-color: rgb(66,66,66);
-    min-height: 100vh;
-}
-
-.title{
-  color:aliceblue;
-}
-
-
-</style>
+<style src='../assets/css/login.css' scoped> </style>

@@ -1,9 +1,9 @@
 import pgowner from './components/pgowner.vue'
-import register from './components/register.vue'
-import login from './components/login.vue'
+import ownerregister from './components/ownerregister.vue'
+import ownerlogin from './components/ownerlogin.vue'
 import ownerprofile from './components/ownerprofile'
-import customerregister from './components/customerregister'
-import customerlogin from './components/customerlogin'
+import register from './components/register'
+import login from './components/login'
 import customerprofile from './components/customerprofile'
 import cremainder from './components/cremainder'
 import schedules from './components/schedules'
@@ -35,11 +35,11 @@ const router = new Vuerouters({
  mode:'history',
  routes:[
     {path:'/pgowner',name:'pgowner',component:pgowner},
-    {path:'/register',name:'register',component:register},
-    {path:'/login',name:'login',component:login},
+    {path:'/ownerregister',name:'ownerregister',component:ownerregister},
+    {path:'/ownerlogin',name:'ownerlogin',component:ownerlogin},
     {path:'/ownerprofile',name:'ownerprofile',component:ownerprofile},
-    {path:'/customerlogin',name:'customerlogin',component:customerlogin},
-    {path:'/customerregister',name:'customerregister',component:customerregister},
+    {path:'/login',name:'login',component:login},
+    {path:'/register',name:'register',component:register},
     {path:'/customerprofile',name:'customerprofile',component:customerprofile},
     {path:'/cremainder',name:'cremainder',component:cremainder},
     {path:'/schedules',name:'schedules',component:schedules},
@@ -69,7 +69,7 @@ const router = new Vuerouters({
 
 //const owner=['pgowner','ownerprofile','ownerdesk','foodhistory','ownerschedule','ownerdeskdetails']
 
-const openRoutes=['login','register','customerlogin','customerregister','adminlogin','adminregister','pghome','careerprofiles','resetpassword','signout','template','osignout']
+const openRoutes=['ownerlogin','ownerregister','login','register','adminlogin','adminregister','pghome','careerprofiles','resetpassword','signout','template','osignout']
 
 
 router.beforeEach((to, from, next) => {
@@ -84,7 +84,7 @@ router.beforeEach((to, from, next) => {
     }
     
     else{
-        next('/customerlogin')
+        next('/login')
     }
 
 })
