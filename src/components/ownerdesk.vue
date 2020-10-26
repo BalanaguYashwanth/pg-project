@@ -5,7 +5,7 @@
     <slot name="title"  >  </slot>
     <div class="container">
     
-      <p class=" display-3 mx-auto " id="title">Owner desk</p>
+      <p class=" display-3 mx-auto font-weight-normal " id="title">Owner desk</p>
 
       <form id="mainpage2" class="shadow-sm p-3 mb-5 bg-white rounded" > 
 
@@ -224,31 +224,27 @@ created(){
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
- 
-#title{
+@media only screen and (max-width: 600px) {
+ #title{
   font-size:3em;
-   margin-top: 110px;
+  padding-top: 50px;
   margin-bottom: 30px;
   text-align: center;
    
 }
-
 }
-
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) { 
-
+@media only screen and (max-width: 768px) { 
 #title{
   font-size: 3em;
-   margin-top: 110px;
+   padding-top: 50px;
   margin-bottom: 30px;
   text-align: center;
    
 }
-
 }
+
 
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -259,7 +255,7 @@ created(){
  }
 
  #title {
-  margin-top: 120px;
+  padding-top: 50px;
   margin-bottom: 30px;
   text-align: center;
    font-size:4em;
@@ -276,7 +272,7 @@ created(){
  }
 
  #title {
-  margin-top: 120px;
+  padding-top: 50px;
   margin-bottom: 30px;
   text-align: center;
    font-size:4em;

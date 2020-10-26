@@ -1,7 +1,7 @@
 <template>
     <div id="mainpage" >
          <slot name="customer" >  </slot>
-        <div class="title display-4"> Review your schedules </div>
+        <div class="title display-4 font-weight-normal"> Review your schedules </div>
         <div class="form-row" >
         <div  class="form-group col-md-11 mx-auto table-responsive" id="form-group"  >
             <div class="col-1" >  </div>
@@ -112,8 +112,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   margin-left: auto;
   color: #2c3e50;
-  margin-top: 90px;
-  margin-bottom: 20px;
+  padding-top: 50px;
+  margin-bottom: 35px;
   text-transform: capitalize;
 }
 
@@ -131,6 +131,28 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 height:283px;
 }
 
+@media only screen and (max-width: 600px) {
+  .title {
+    padding-top: 50px;
+    margin-bottom: 35px;
+    text-align: center;
+    font-size: 2em;
+    font-family: "Google Sans", "Roboto", Arial, sans-serif, Helvetica;
+  }
 
+  
+}
+
+@media only screen and (max-width: 767px) {
+  .title {
+    padding-top: 50px;
+    margin-bottom: 35px;
+    text-align: center;
+    font-size: 2em;
+    font-family: "Google Sans", "Roboto", Arial, sans-serif, Helvetica;
+  }
+
+  
+}
 
 </style>

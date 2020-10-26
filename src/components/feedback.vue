@@ -3,7 +3,7 @@
     <div id="mainpage" >
     <div class="container">
          <FlashMessage :position="'right top'"/>
-        <h1 class="display-3" > Report & Issues </h1>
+        <h1 class="title display-3 mb-4 font-weight-normal" > Report & Issues </h1>
         <textarea 
         class="form-control"
         placeholder="Before writing about your problem or issues, please introduce your self ex:- customer (or) owner of the pg and student or working professional etc "
@@ -84,8 +84,11 @@ textarea{
 }
 
 .container{
-    padding-top: 120px;
+    padding-top: 80px;
+    
 }
+
+
 
 #mainpage{
    font-family: 'Google Sans','Roboto',Arial,sans-serif,Helvetica;
@@ -95,6 +98,25 @@ textarea{
 
 }
 
+@media only screen and (max-width: 600px) {
+  .title {
+    padding-top: 50px;
+    margin-bottom: 35px;
+    text-align: center;
+    font-size: 2em;
+    font-family: "Google Sans", "Roboto", Arial, sans-serif, Helvetica;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .title {
+    padding-top: 50px;
+    margin-bottom: 35px;
+    text-align: center;
+    font-size: 2em;
+    font-family: "Google Sans", "Roboto", Arial, sans-serif, Helvetica;
+  }
+}
 
 
 </style>

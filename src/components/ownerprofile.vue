@@ -6,7 +6,7 @@
     </button> -->
     <FlashMessage :position="'right top'"/>
     <div class="container">
-      <div class="title display-2">Owner Profile</div>
+      <div class="title display-2 font-weight-normal ">Owner Profile</div>
       <form >
            <button
           id="submit"
@@ -513,6 +513,7 @@ export default {
   margin-left: auto;
   color: #2c3e50;
   padding-top:50px;
+  margin-bottom:35px;
   text-transform: capitalize;
   font-size:3em
 }

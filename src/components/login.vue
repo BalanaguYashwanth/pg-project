@@ -1,12 +1,10 @@
 <template>
 <div id="login" >
   <div class="container" >
-   
     <FlashMessage :position="'right top'"/>
-
     <form>
       <div >  
-         <div class="  title  display-3"    id="title">Owner Login</div>
+         <div class="  title  display-3"     id="title">Owner Login</div>
         <div class="form-group  ">
           
           <input
@@ -28,7 +26,7 @@
         </div>
       </div>
       <button class="btn   btn-block"    v-on:click.prevent="posting">submit</button>
-      <router-link  style="float:right" to="/resetpassword"> forgot password ? </router-link>
+      <router-link  style="float:right;color:aliceblue" to="/resetpassword"> forgot password ? </router-link>
 
     </form>
   </div>
@@ -85,3 +83,18 @@ export default {
 </script>
 
 <style  src='../assets/css/login.css' scoped> </style>
+
+
+<style scoped>
+
+#login{
+    background-color: rgb(66,66,66);
+    min-height: 100vh;
+}
+
+.title{
+  color:aliceblue;
+}
+
+
+</style>

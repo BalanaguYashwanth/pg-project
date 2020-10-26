@@ -2,7 +2,7 @@
     <div id="mainpage">
         <slot name="customer"> </slot>
         <div class='container'>
-         <div class="title display-4">Quick Room schedules</div>
+         <div class="title display-4 font-weight-normal">Quick Room schedules</div>
             {{ currentuser()}}
             <FlashMessage :position="'right top'"/>
             <div class="form-row">
@@ -15,7 +15,7 @@
             <h6 class="card-subtitle mb-2 text-muted"> schedule your room cleaning</h6>
             <p class="card-text">               
             <input type="text"  placeholder="Room or bathroom or both " v-model="cleaningquery" class=" col-md-6 my-3 mx-auto form-control" >
-            <datetime type="datetime"  placeholder=" enter your cleaning date & time " v-model="cleaning"   class="datetime" use12-hour></datetime>
+            <datetime type="datetime"  placeholder=" Enter your cleaning date & time " v-model="cleaning"   class="datetime" use12-hour></datetime>
             </p>
             </div>
             </div>
@@ -28,7 +28,7 @@
             <h6 class="card-subtitle mb-2 text-muted">schedule your repairs in room </h6>
             <p class="card-text">
             <input type="text"  placeholder="Room or bathroom repair " v-model="repairquery" class=" col-md-6 my-3 mx-auto form-control" >
-            <datetime type="datetime"  placeholder=" enter your repair date & time " v-model="repair"   class="datetime" use12-hour></datetime>
+            <datetime type="datetime"  placeholder=" Enter your repair date & time " v-model="repair"   class="datetime" use12-hour></datetime>
             </p>
             </div>
             </div>
@@ -44,7 +44,7 @@
                 <h6 class="card-subtitle mb-2 text-muted"> schedule to meet owner to discuss any problems</h6>
                 <p class="card-text">
                 <input type="text"  placeholder=" Query is all about ..." v-model="queriestext" class=" col-md-6 my-3 mx-auto form-control" >
-                <datetime type="datetime" style="text-align:center"  v-model="queries"  placeholder="schedule your queries " class="datetime" use12-hour></datetime>
+                <datetime type="datetime" style="text-align:center"  v-model="queries"  placeholder=" Schedule your date & time " class="datetime" use12-hour></datetime>
                 </p>
                 </div>
                 </div>
@@ -186,5 +186,16 @@ input,.form-row{
     
 }
 
+@media only screen and (max-width: 600px) {
+  .title {
+    padding-top: 50px;
+    margin-bottom: 35px;
+    text-align: center;
+    font-size: 2em;
+    font-family: "Google Sans", "Roboto", Arial, sans-serif, Helvetica;
+  }
+
+  
+}
 
 </style>

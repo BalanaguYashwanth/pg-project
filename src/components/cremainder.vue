@@ -14,7 +14,7 @@
     </div>
    
     <div class="container">
-        <p style="text-align:center"  class="display-4 mx-auto"> Reminders  </p>
+        <p style="text-align:center; "  class="display-4 mx-auto mb-4 font-weight-normal"> Reminders  </p>
       <form>
 
         <div class="form-group col-md-6 mx-auto" >
@@ -31,12 +31,13 @@
           
         </div>
 
-        <div  >
+        <div>
          <div v-show="!this.$store.state.pgname" >
-          <div class="card mx-auto m-2 shadow-sm  bg-white rounded" id="card" style="width: 35rem">
+          <div class="card mx-auto m-2 shadow-sm  bg-white rounded" id="card" style="width: 100%">
             <div class="card-body">
               <h3 class="card-text display-5 ">
                 Please complete your profile to get updates or your requests or posts will be invalid  
+                <a href="http://localhost:8080/customerprofile">click here...</a>
               </h3>
             </div>
           </div>

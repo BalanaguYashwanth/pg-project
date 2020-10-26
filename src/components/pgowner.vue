@@ -33,7 +33,7 @@
     <div class="container">
       <form>
         <div  class="form-row">
-        <div class=" form-group  card mx-auto mb-3  my-3 shadow-sm  bg-white rounded" id="inputcard" style="width: 50rem">
+        <div class=" form-group  card mx-auto mb-3  my-3 shadow-sm  bg-white rounded" id="inputcard" style="width: 45rem">
           <div class="card-body" >
             <textarea
               style="border: none"

@@ -24,6 +24,8 @@ import resetpassword from './components/resetpassword'
 import signout from './components/signout'
 import feedback from './components/feedback'
 import reviewfeedback from './components/reviewfeedback'
+import osignout from './components/osignout'
+import payments from './components/payments'
 import Vue from 'vue'
 import Vuerouters from 'vue-router'
 import template from './components/template'
@@ -58,14 +60,16 @@ const router = new Vuerouters({
     {path:'/signout',name:'signout',component:signout},
     {path:'/feedback',name:'feedback',component:feedback},
     {path:'/reviewfeedback',name:'reviewfeedback',component:reviewfeedback},
-    {path:'/template',name:'template',component:template}
+    {path:'/template',name:'template',component:template},
+    {path:'/osignout',name:'osignout',component:osignout},
+    {path:'/payments',name:'payments',component:payments}
 ]
 })
 
 
 //const owner=['pgowner','ownerprofile','ownerdesk','foodhistory','ownerschedule','ownerdeskdetails']
 
-const openRoutes=['login','register','customerlogin','customerregister','adminlogin','adminregister','pghome','careerprofiles','resetpassword','signout','template']
+const openRoutes=['login','register','customerlogin','customerregister','adminlogin','adminregister','pghome','careerprofiles','resetpassword','signout','template','osignout']
 
 
 router.beforeEach((to, from, next) => {

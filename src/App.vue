@@ -4,7 +4,7 @@
     <router-view >
       <div id="slide"  slot="title">
         <slider
-          :width="300"
+          :width="360"
           :links="[
             { id: 1, text: 'Home', url: 'http://localhost:8080/pgowner' },
             { id: 2, text: 'Owner Profile', url: 'http://localhost:8080/ownerprofile' },
@@ -13,7 +13,7 @@
             { id: 5, text: 'Customer Schedules', url: 'http://localhost:8080/ownerschedule' },
             { id: 6, text: 'Customer Registrations', url: 'http://localhost:8080/ownerdeskdetails' },
             { id: 7, text: 'Feedback', url: 'http://localhost:8080/feedback' },
-            { id: 8, text: 'SignOut', url:'http://localhost:8080/signout'},
+            { id: 8, text: 'SignOut', url:'http://localhost:8080/osignout'},
           ]"
           
           format="push"
@@ -24,7 +24,7 @@
 
        <div id="slide" slot="customer">
         <slider
-          :width="300"
+          :width="360"
           :links="[
             { id: 1, text: 'Home', url: 'http://localhost:8080/cremainder' },
             { id: 2, text: 'Customer Profile', url: 'http://localhost:8080/customerprofile' },
@@ -32,7 +32,7 @@
             { id: 4, text: 'Food History', url: 'http://localhost:8080/cfoodhistory' },
             { id: 5, text: 'Other Schedules', url: 'http://localhost:8080/schedules' },
             { id: 6, text: 'Schedules History', url:'http://localhost:8080/reviewschedules'},
-            { id: 7, text: 'Payments', url: '#' },
+            { id: 7, text: 'Payments', url: 'http://localhost:8080/payments' },
             { id: 8, text: 'Feedback', url: 'http://localhost:8080/feedback' },
             { id: 9, text: 'SignOut', url:'http://localhost:8080/signout'},
           ]"
