@@ -1,7 +1,7 @@
 <template>
     <div>
     
-    <nav class="navbar navbar-expand-lg  navbar-dark" >
+    <nav  class="navbar navbar-expand-lg  navbar-dark" >
         <div class="container" >
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
                 aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,11 +35,11 @@
                     <div class="pt-3 pb-5" >
                         <div class="row" >
                             <div class="col-md-5" >
-                                <img class="w-100 img-fluid mt-4" src="../assets/image.jpg" alt="pg Management ">
+                                <img class="w-100 img-fluid mt-4"  id="pgManagement" src="../assets/image.jpg" alt="pg Management ">
                             </div>
-                            <div>
+                            <div id="maintitle" >
                                 <h1 class="text-slate font-size--64 font-weight-300 mb-1"> PG's & Hostels  </h1>
-                                <p class=" display-4">Smart Management Tool </p>
+                                <p class=" display-4" id="management" >Smart Management Tool </p>
                                 <h5 class="text-slate font-size--64 font-weight-300 mb-1" > We offers and provides better solutions for pg's and hostels to make <br>  their life smarter </h5>
                                 <br>
                                 <p class="text-slate-20 font-size--14 mt-2 mb-1">Call to get set up by  our specialist.</p>
@@ -201,7 +201,7 @@
     <br>
     
 
-    <footer style="text-align:center; color:white">
+    <footer  id="website" style="text-align:center; color:white">
         <br>
            <p>  Terms of service  Privacy policy</p>
         <p  >  © 2020 - LiveNext PG  &    Website Designed and Developed by liveNext PG </p>
@@ -353,6 +353,39 @@ footer{
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+
+@media only screen and (max-width: 600px) {
+  
+   #maintitle{
+    margin: auto;
+    text-align: center;
+    
+   }
+
+   #management{
+       font-size:2.0rem ;
+   }
+
+   #website{
+       font-size: 10px;
+   }
+  
+}
+
+
+@media only screen and (max-width: 767px) {
+  #maintitle{
+    margin: auto;
+    text-align: center;
+    
+   }
+
+   #management{
+       font-size:2.0rem ;
+   }
+  
 }
 
 
