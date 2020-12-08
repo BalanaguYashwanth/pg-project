@@ -3,30 +3,44 @@
     
     <nav  class="navbar navbar-expand-lg  navbar-dark" >
         <div class="container" >
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse"   id="navbarTogglerDemo01">
-                <div class="navbar-nav py-2 px-5   mx-5"  >
-                  <img  src="../assets/logo.jpeg" id="logo" class="rounded-circle" style="height:50%;width:25%" alt="logo" >
-                </div>
-                <div class="navbar-nav py-2 px-5 mx-4 " >
-                    <a class="nav-item nav-link active" > Home </a>
-                    <a class="nav-item nav-link" href="#features" > Features </a>
-                    <a class="nav-item nav-link"  href="#contactus"> Contact us </a>
-                    <div  class="dropdown"  >  
-                    <a class="nav-item nav-link" id="nav" > Login </a>
-                    <div class="dropdown-content">
-                        <a href="https://livenextpg.com/login">Customer login</a>
-                        <a href="https://livenextpg.com/ownerlogin">Owner login</a>
+            <a class="navbar-brand px-4"  style="font-family: 'Homemade Apple';font-size: 20px;"  href="#">liveNext</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <div>
+                        <div  class="dropdown">  
+                            <a class="nav-item nav-link" id="nav"   > Login </a>
+                            <div class="dropdown-content">
+                                <a href="https://livenextpg.com/login">Customer login</a>
+                                <a href="https://livenextpg.com/ownerlogin">Owner login</a>
+                            </div>
+                        </div>
                     </div>
+                </button>
+            
+                <div class="collapse navbar-collapse"   id="navbarTogglerDemo01">
+                    <div class="navbar-nav py-2 px-3  mx-2"  >
+                    <img  src="../assets/logo.jpeg" id="logo" class="rounded-circle" style="height:50%;width:25%" alt="logo" >
                     </div>
-                
+                    <div class="navbar-nav py-2 px-5 mx-4 " >
+                        <a class="nav-item nav-link active" > Home </a>
+                        <a class="nav-item nav-link" href="#features" > Features </a>
+                        <a class="nav-item nav-link"  href="#contactus"> Contact us </a>
+                        <div  class="dropdown"  >  
+                        <a class="nav-item nav-link" id="nav" > Login </a>
+                        <div class="dropdown-content">
+                            <a href="https://livenextpg.com/login">Customer login</a>
+                            <a href="https://livenextpg.com/ownerlogin">Owner login</a>
+                        </div>
+                        </div>
+                    
+                    </div>
                 </div>
-            </div>
         </div>
     </nav>
+
+
+      
+
+    
 
     <div class="jumbotron rounded-0 px-0 flex-header flex-background-colour py-0 bg-white" >
         <div class="container" style="margin-top: 50px;">
@@ -154,9 +168,9 @@
     </div>
     <div>
         <form>
-            <div class="container" id="contactus" >
+            <div class="container"  >
                 <br>
-                <h1  style="text-align:center"> Contact us for more info </h1>
+                <h1  style="text-align:center" id="contactus"  > Contact us for more info </h1>
                 <br>
                 
                 <div class="row">
@@ -301,6 +315,11 @@ export default {
 
     .rows{
         margin-left: auto;
+    }   
+
+
+    #logo{
+        visibility: hidden;
     }
 
 
@@ -349,6 +368,8 @@ footer{
   display: block;
 }
 
+ 
+
 .dropdown-content a:hover {background-color: #f1f1f1}
 
 .dropdown:hover .dropdown-content {
@@ -371,12 +392,30 @@ footer{
    #website{
        font-size: 10px;
    }
+
+   #contactus{
+       font-size: 30px;
+   }
+
+
+
+    .dropdown-content {
+        font-size: 11px;
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 110px;
+        box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.1);
+        z-index: 1;
+    }
+  
   
 }
 
 
 @media only screen and (max-width: 767px) {
-  #maintitle{
+
+    #maintitle{
     margin: auto;
     text-align: center;
     
@@ -384,6 +423,10 @@ footer{
 
    #management{
        font-size:2.0rem ;
+   }
+
+   #website{
+       font-size: 10px;
    }
   
 }
