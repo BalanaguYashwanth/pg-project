@@ -66,7 +66,7 @@
 
     <div class="container" >
         <div  class="row" >
-          loading:{{loading}}
+          
             <div style="margin-top:200px"  class="col-md-6 mx-auto"  >
               Unique ID:- 
               <input type="text" placeholder="enter the unique id" class="form-control" v-model="uniqueid" >
@@ -108,7 +108,7 @@ export default {
       username:'',
       userpg:'',
       uniqueid:'',
-      verify:'',
+      verify:false,
       dummyinfo:'',
       loading:false,
     };
@@ -177,20 +177,17 @@ export default {
       let datas= res.data
       for(let obj1 in datas)
       {
-        if(datas[obj1].email == this.$store.state.email && datas[obj1].uid == localStorage.getItem('localid'))
+        if( datas[obj1].uid == localStorage.getItem('localid'))
         {
-          localStorage.setItem('verify',datas[obj1].verified)
+          this.verify=datas[obj1].verified
         }
         else{
           console.log("failed try again")
         }
       }
-      this.verify=localStorage.getItem('verify')
       this.loading=false
     })
     .catch((err)=>console.log(err))
-
-
 
     await this.$store.dispatch("getpgnames");
     await this.$store.dispatch("getuseraction");
@@ -320,9 +317,9 @@ textarea {
 .spinner-grow{
   position: fixed;
   left: 0px;
-  top: 0px;
+  top: 25%;
   width: 100%;
-  height: 100%;
+  height: 50%;
   z-index: 9999;
   background: url('//upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Phi_fenomeni.gif/50px-Phi_fenomeni.gif') 
               50% 50% no-repeat rgb(249,249,249);
